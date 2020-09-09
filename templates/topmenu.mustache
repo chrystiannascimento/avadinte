@@ -1,0 +1,39 @@
+
+<a class=" nav-item nav-link {{#homepageisactive}}active{{/homepageisactive}} mx-3" href="{{{homepageurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{homepagetitle}}}" >
+    <span>{{{homepagetitle}}}</span>
+</a>
+
+<a   class=" nav-item nav-link {{#coursespageisactive}}active{{/coursespageisactive}} mx-3" href="{{{coursespageurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{coursespagetitle}}}" >
+{{{coursespagetitle}}}
+</a>
+
+<a   class=" nav-item nav-link {{#gradebookisactive}}active{{/gradebookisactive}} mx-3 " href="{{{gradebookurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{gradebooktitle}}}" >
+{{{gradebooktitle}}}
+</a>
+
+<a   class=" nav-item nav-link {{#calendarisactive}}active{{/calendarisactive}} mx-3" href="{{{calendarurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{calendartitle}}}" >
+{{{calendartitle}}}
+</a>
+
+
+<a   class=" nav-item nav-link mx-3 " href="{{{attendurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{attendtitle}}}" >
+{{{attendtitle}}}
+</a>
+
+<a   class=" nav-item nav-link mx-3 {{#privatefilesisactive}}active{{/privatefilesisactive}}" href="{{{privatefilesurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{privatefilestitle}}}" >
+{{{privatefilestitle}}}
+</a>
+
+<a  class="siteadminlink nav-item nav-link mx-3 {{#contentbankisactive}}active{{/contentbankisactive}}" href="{{{contentbankurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{contentbanktitle}}}" >
+        <span>{{{contentbanktitle}}}</span>
+        </a>
+
+
+{{#hasadminlink}}
+        <a  class="siteadminlink nav-item nav-link mx-3 {{#siteadminisactive}}active{{/siteadminisactive}}" href="{{{siteadminurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{siteadmintitle}}}" >
+        <span>{{{siteadmintitle}}}</span>
+        </a>
+        
+        
+{{/hasadminlink}}
+

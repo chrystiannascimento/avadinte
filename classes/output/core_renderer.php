@@ -78,12 +78,15 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $homepagetitle = 'Página Inicial';
         $homepageurl = new moodle_url('/?redirect=0');
         $homepageisactive =$PAGE->url->compare($homepageurl, URL_MATCH_BASE);
+        
 
         
         //Disciplinas
         $coursespagetitle='Disciplinas';
         $coursespageurl= new moodle_url('/my/');
-        $coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
+        //$coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
+        $coursepageurl = new moodle_url('/course/view.php', array('id' => $courseid));
+        $coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($coursepageurl, URL_MATCH_BASE) ? true : false ;
 
 
         //Minhas Notas
@@ -151,7 +154,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     ];
 
       
-        return $this->render_from_template('theme_photo/topmenu', $dashmenu);
+        return $this->render_from_template('theme_avadinte/topmenu', $dashmenu);
     }
 
 

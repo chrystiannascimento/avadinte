@@ -79,9 +79,9 @@ if ($ADMIN->fulltree) {
 
     // Login page background setting.                                                                                               
     // We use variables for readability.                                                                                            
-    $name = 'theme_photo/loginbackgroundimage';                                                                                     
-    $title = get_string('loginbackgroundimage', 'theme_photo');                                                                     
-    $description = get_string('loginbackgroundimage_desc', 'theme_photo');                                                          
+    $name = 'theme_avadinte/loginbackgroundimage';                                                                                     
+    $title = get_string('loginbackgroundimage', 'theme_avadinte');                                                                     
+    $description = get_string('loginbackgroundimage_desc', 'theme_avadinte');                                                          
     // This creates the new setting.                                                                                                
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'loginbackgroundimage');                             
     // This means that theme caches will automatically be cleared when this setting is changed.                                     
