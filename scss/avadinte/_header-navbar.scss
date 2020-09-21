@@ -1,0 +1,23 @@
+
+
+#page-wrapper-header {
+    max-height: 190px;
+
+}
+
+
+#page {
+    //margin-top: calc($fixed-header-y+10);
+    margin-top: 150px;
+}
+
+@media only screen and (max-width: 576px){
+    
+#page {
+    margin-top: 50px;
+    }
+}
+
+#navwrapper {
+    padding: 0px;
+}

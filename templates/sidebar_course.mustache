@@ -1,0 +1,100 @@
+
+<nav class="list-group" aria-label="">
+    <ul>
+        <li><a>aaaaa</a></li>
+    </ul>
+</nav>
+
+
+<nav class="list-group mt-1" aria-label="">
+    
+    <ul id="accordion">
+        
+        
+        {{#topics}}
+
+            {{#issectionzero}} 
+                {{#activities}}
+                    <li>
+                         {{#cmurl}}   
+                        <a class="list-group-item list-group-item-action "    href="{{{cmurl}}}"      aria-expanded="false"  data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+                            <div class="ml-">
+                                <div class="media">
+                                        
+                                    <span class="media-body ">{{{name}}}  </span>
+                                    
+                                </div>
+                            </div>
+                        </a>
+                        {{/cmurl}}   
+                    </li>
+
+                {{/activities}}
+                
+            {{/issectionzero}}
+            {{^issectionzero}}
+                <li>
+
+            <a class="list-group-item list-group-item-action dropdown-toggle"    href="#topic{{{section}}}" data-toggle="collapse" aria-expanded="false"  data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+                <div class="ml-">
+                    <div class="media">
+                            
+                        <span class="media-body ">{{{section}}}  </span>
+                        
+                    </div>
+                </div>
+            </a>
+            
+            <ul  class="collapse list-unstyled" id="topic{{{section}}}" data-parent="#accordion">
+            {{#activities}}
+                <li>
+            {{#cmurl}}
+            <a class="list-group-item list-group-item-action " href="{{{cmurl}}}" data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+                <div class="ml-">
+                    <div class="media">
+                            
+                        <span class="media-body "> {{{name}}} </span>
+                        
+                    </div>
+                </div>
+            </a>
+            {{/cmurl}}
+            </li>
+                
+
+                {{/activities}}
+
+              
+            </ul>
+            
+        </li>
+
+            {{/issectionzero}}
+            
+
+
+        
+
+
+        {{/topics}}
+
+
+
+
+     
+
+
+
+
+        <li>
+            <div class="list-group-item " data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+                <div class="ml-"">
+                    <div class="media">
+                            
+                        <span class="media-body">trexto2</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>

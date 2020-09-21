@@ -24,6 +24,9 @@
 
             <!--above navbar-->
            <nav class="navbar navbar-dark bg-ufma text-white navbar-expand moodle-has-zindex" aria-label="{{#str}}sitemenubar, admin{{/str}}">
+                 <button class="bg-ufma text-white border-0 d-inline d-sm-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
 
 
@@ -41,16 +44,18 @@
 
                
 
-                 <div id="sitetitle" class="text-white mx-auto">
-            <h1>{{{ sitename }}}</h1>
-
-        </div>
+                 <div id="sitetitle" class="text-white mx-auto d-none d-sm-inline">
+                    <h1>{{{ sitename }}}</h1>
+                   
+                </div>
+                
 
                 <ul class="navbar-nav d-none d-md-flex">
                     <!-- custom_menu -->
                     <!-- page_heading_menu -->
                     {{{ output.page_heading_menu }}}
                 </ul>
+                
                 <ul class=" nav navbar-nav ml-auto">
                     <li class="d-none d-lg-block">
                         {{{ output.search_box }}}
@@ -76,21 +81,19 @@
     
     <div class="navwrap container-fluid">
         <div class="row ">
-            <nav class=" col navbar navbar-expand-lg navbar-light bg-light text-dark"   style="position: relative;">
-                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+            <nav id="navwrapper" class=" col navbar navbar-expand-lg navbar-light bg-light text-dark"   style="position: relative;">
+
+                        <button class="navbar-toggler navbar-toggler-right d-none d-md-inline d-sm-inline d-lg-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
                         </button>
+
                         <div class="collapse navbar-collapse " id="navbarNav" style="background:white">
-                        <div class="navbar-nav" id="mainNav">
-                            <a> <div data-region="drawer-toggle" class="d-inline-block mr-3 btn-sidebar {{#drawer-open-left }}open{{/drawer-open-left }}" id="btn-sidebar">
 
-                                <button aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" class="btn nav-link float-sm-left mr-1 btn-light bg-gray" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}<span class="sr-only">{{#str}}sidepanel, core{{/str}}</span></button>
+                            <div class="nav navbar-nav" id="mainNav">
+                            
+                                {{{ output.topmenu }}}
+                            </div>
 
-                            </div></a>
-                           
-                            {{{ output.topmenu }}}
-                        
-                        </div>
                         </div>
                     </nav>
         </div>
@@ -98,7 +101,6 @@
     </div>
    
 </header>
-
 
 
 

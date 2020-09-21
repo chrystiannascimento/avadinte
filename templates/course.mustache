@@ -57,18 +57,25 @@
 
     {{{ output.standard_top_of_body_html }}}
 
+    <!--Header-->
     {{> theme_avadinte/header }}
-    <div data-region="drawer-toggle" class="d-inline-block mr-3 btn-sidebar {{#drawer-open-left }}open{{/drawer-open-left }}" id="btn-sidebar">
+      
+    {{> theme_avadinte/course-sidebar}}
 
-    <button aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" class="btn nav-link float-sm-left mr-1 btn-light bg-gray" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}<span class="sr-only">{{#str}}sidepanel, core{{/str}}</span></button>
-   {{#navdraweropen}}open{{/navdraweropen}}
-</div>
-    {{> theme_boost/nav-drawer }}
 
-    <div id="page" class="container-fluid d-print-block">
+
+
+
+   
+
+    <div id="page" class="container-fluid d-print-block ml-4" >
         {{{ output.full_header }}}
 
+
         <div id="page-content" class="row pb-3 d-print-block">
+            <div>
+            
+            </div>
             <div id="region-main-box" class="col-12">
                 {{#hasregionmainsettingsmenu}}
                 <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
@@ -106,9 +113,9 @@ require(['theme_boost/loader'], function() {
     M.util.js_complete('theme_boost/loader');
 });
 
-M.util.js_pending('theme_boost/drawer');
-require(['theme_boost/drawer'], function(drawer) {
+M.util.js_pending('theme_avadinte/drawer');
+require(['theme_avadinte/drawer'], function(drawer) {
     drawer.init();
-    M.util.js_complete('theme_boost/drawer');
+    M.util.js_complete('theme_avadinte/drawer');
 });
 {{/js}}

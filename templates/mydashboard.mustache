@@ -54,27 +54,35 @@
 {{> core/local/toast/wrapper}}
 
 <div id="page-wrapper" class="d-print-block">
-
+    
+    
     {{{ output.standard_top_of_body_html }}}
 
     {{> theme_avadinte/header }}
-    <div data-region="drawer-toggle" class="d-inline-block mr-3 btn-sidebar {{#drawer-open-left }}open{{/drawer-open-left }}" id="btn-sidebar">
-
-    <button aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" class="btn nav-link float-sm-left mr-1 btn-light bg-gray" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}<span class="sr-only">{{#str}}sidepanel, core{{/str}}</span></button>
-   {{#navdraweropen}}open{{/navdraweropen}}
-</div>
-    {{> theme_boost/nav-drawer }}
 
     <div id="page" class="container-fluid d-print-block">
-        {{{ output.full_header }}}
+        <div class="row border-bottom-1">
+                
+
+        </div> 
+        <hr>
+         {{{output.full_header}}}
+         <div class="col-12 border border-secondary"></div>
+
+        
+        
 
         <div id="page-content" class="row pb-3 d-print-block">
+         <hr>
             <div id="region-main-box" class="col-12">
+                {{{output.coursesearch}}}
                 {{#hasregionmainsettingsmenu}}
                 <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
                     <div> {{{ output.region_main_settings_menu }}} </div>
                 </div>
                 {{/hasregionmainsettingsmenu}}
+
+                
                 <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}} aria-label="{{#str}}content{{/str}}">
 
                     {{#hasregionmainsettingsmenu}}
@@ -87,7 +95,7 @@
 
                 </section>
                 {{#hasblocks}}
-                <section data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
+                <section id="blockregion" data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}" >
                     {{{ sidepreblocks }}}
                 </section>
                 {{/hasblocks}}

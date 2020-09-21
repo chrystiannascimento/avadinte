@@ -39,6 +39,19 @@ use context_system;
 use core_course_list_element;
 use context_course;
 
+use coding_exception;
+use tabobject;
+use tabtree;
+use custom_menu_item;
+use block_contents;
+use navigation_node;
+use action_link;
+use preferences_groups;
+use single_button;
+use single_select;
+use paging_bar;
+use url_select;
+
 defined('MOODLE_INTERNAL') || die;
 require_once ($CFG->dirroot . "/course/renderer.php");
 
@@ -51,7 +64,26 @@ require_once ($CFG->dirroot . "/course/renderer.php");
  */
 class core_renderer extends \theme_boost\output\core_renderer {
 
-  
+    /**
+     * Render the login signup form into a nice template for the theme.
+     *
+     * @param mform $form
+     * @return string
+     */
+    public function render_login_signup_form($form) {
+        global $SITE;
+
+        $context = $form->export_for_template($this);
+
+        $context['logourl'] = $this->get_logo();
+
+        $context['sitename'] = format_string($SITE->fullname, true,
+            ['context' => \context_course::instance(SITEID), "escape" => false]);
+
+        return $this->render_from_template('core/signup_form_layout', $context);
+    }
+
+
     public function topmenu() {
         global $PAGE, $COURSE, $CFG, $DB, $OUTPUT;
         $course = $this->page->course;
@@ -62,9 +94,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
 
 
+        
 
 
-        $siteadmintitle = 'site admin';
+        $siteadmintitle = get_string('siteadmintitle','theme_avadinte' );
         $siteadminurl = new moodle_url('/admin/search.php');
         //$hasadminlink = has_capability('moodle/site:configview', $context);
         $hasadminlink = has_capability('moodle/site:configview', \context_system::instance());
@@ -75,35 +108,24 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         //Pagina Inicial
 
-        $homepagetitle = 'Página Inicial';
+        $homepagetitle = get_string('homepagetitle', 'theme_avadinte');
         $homepageurl = new moodle_url('/?redirect=0');
         $homepageisactive =$PAGE->url->compare($homepageurl, URL_MATCH_BASE);
-        
 
         
         //Disciplinas
-        $coursespagetitle='Disciplinas';
-        $coursespageurl= new moodle_url('/my/');
-        //$coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
-        $coursepageurl = new moodle_url('/course/view.php', array('id' => $courseid));
-        $coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($coursepageurl, URL_MATCH_BASE) ? true : false ;
+        
+
+         //Disciplinas
+         $coursespagetitle=get_string('coursespagetitle','theme_avadinte' );
+         $coursespageurl= new moodle_url('/my/');
+         //$coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
+         $coursepageurl = new moodle_url('/course/view.php', array('id' => $courseid));
+         $coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($coursepageurl, URL_MATCH_BASE) ? true : false ;
 
 
-        //Minhas Notas
-        $gradestitle = get_string('gradebooksetup', 'grades');
-        $gradesurl = new moodle_url('/grade/edit/tree/index.php', array(
-            'id' => $PAGE->course->id
-        ));
-
-        $gradebooktitle = get_string('gradebook', 'grades');
-        $gradebookurl = new moodle_url('/grade/report/grader/index.php', array(
-            'id' => $PAGE->course->id
-        ));
-        $gradebookisactive =$PAGE->url->compare($gradebookurl, URL_MATCH_BASE);
-
-
-        //Calendario
-         $calendartitle = get_string('calendar', 'calendar');
+         //Calendario
+         $calendartitle = get_string('calendar','theme_avadinte' );
 
          $iscoursecalendar = $courseid != SITEID;
 
@@ -116,21 +138,22 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
 
+
         
 
         $calendarisactive =$PAGE->url->compare($calendarurl, URL_MATCH_BASE);
 
         //Central de Atendimentos 
-        $attendtitle='Central de Atendimentos';
+        $attendtitle=get_string('attendtitle','theme_avadinte' );
         $attendurl= new moodle_url('/my');
 
         //Private File
-        $privatefilestitle = 'Arquivos Privados';
+        $privatefilestitle = get_string('privatefilestitle','theme_avadinte' );
         $privatefilesurl = new moodle_url('/user/files.php');
         $privatefilesisactive = $PAGE->url->compare($privatefilesurl, URL_MATCH_BASE);
 
         //Content bank
-        $contentbanktitle = 'Banco de Conteudo';
+        $contentbanktitle = get_string('contentbanktitle','theme_avadinte' );
         $contentbankurl = new \moodle_url('/contentbank/index.php', ['contextid' => $contextid]);
         $contentbankisactive = $PAGE->url->compare($contentbankurl, URL_MATCH_BASE);
 
@@ -143,7 +166,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $dashmenu = [  'hasadminlink' => $hasadminlink, 'siteadmintitle' => $siteadmintitle, 'siteadminurl' => $siteadminurl, 'siteadminisactive' => $siteadminisactive,
                         'homepagetitle'=>$homepagetitle, 'homepageurl'=>$homepageurl, 'homepageisactive' => $homepageisactive,
                         'coursespagetitle' => $coursespagetitle, 'coursespageurl' => $coursespageurl, 'coursespageisactive' => $coursespageisactive,
-                        'gradebooktitle' => $gradebooktitle, 'gradebookurl' => $gradebookurl, 'gradebookisactive' => $gradebookisactive,
                         'calendartitle' => $calendartitle, 'calendarurl' => $calendarurl, 'calendarisactive' => $calendarisactive,
                         'attendtitle' => $attendtitle, 'attendurl' => $attendurl,
                         'privatefilestitle' => $privatefilestitle, 'privatefilesurl' => $privatefilesurl, 'privatefilesisactive' => $privatefilesisactive,
@@ -163,6 +185,160 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $logo = $OUTPUT->get_compact_logo_url();     
         return  !empty($logo);
     }
+
+    protected function generate_sections_and_activities(stdClass $course) {
+        global $CFG;
+        require_once ($CFG->dirroot . '/course/lib.php');
+        $modinfo = get_fast_modinfo($course);
+        $sections = $modinfo->get_section_info_all();
+        // For course formats using 'numsections' trim the sections list
+        $courseformatoptions = course_get_format($course)->get_format_options();
+        if (isset($courseformatoptions['numsections'])) {
+            $sections = array_slice($sections, 0, $courseformatoptions['numsections'] + 1, true);
+        }
+        $activities = array();
+        foreach ($sections as $key => $section) {
+            // Clone and unset summary to prevent $SESSION bloat (MDL-31802).
+            $sections[$key] = clone ($section);
+            unset($sections[$key]->summary);
+            $sections[$key]->hasactivites = false;
+            if (!array_key_exists($section->section, $modinfo->sections)) {
+                continue;
+            }
+            foreach ($modinfo->sections[$section->section] as $cmid) {
+                $cm = $modinfo->cms[$cmid];
+                $activity = new stdClass;
+                $activity->id = $cm->id;
+                $activity->course = $course->id;
+                $activity->section = $section->section;
+                $activity->name = $cm->name;
+                $activity->icon = $cm->icon;
+                $activity->iconcomponent = $cm->iconcomponent;
+                $activity->hidden = (!$cm->visible);
+                $activity->modname = $cm->modname;
+                $activity->nodetype = navigation_node::NODETYPE_LEAF;
+                $activity->onclick = $cm->onclick;
+                $url = $cm->url;
+                if (!$url) {
+                    $activity->url = null;
+                    $activity->display = false;
+                }
+                else {
+                    $activity->url = $url->out();
+                    $activity->display = $cm->is_visible_on_course_page() ? true : false;
+                }
+                $activities[$cmid] = $activity;
+                if ($activity->display) {
+                    $sections[$key]->hasactivites = true;
+                }
+            }
+        }
+        return array(
+            $sections,
+            $activities
+        );
+    }
+
+    public function coursenav(){
+        global $PAGE, $COURSE, $CFG, $DB, $OUTPUT;
+        $course = $this->page->course;
+        $context = context_course::instance($course->id);
+        $courseid = optional_param('course', SITEID, PARAM_INT);
+        $courseid = $course->id;
+        $data = [];
+        $items = array($this->page->navigation);
+        $course  =  $DB -> get_record ( 'course' ,  array ( 'id'  =>  $courseid ) ) ; 
+        $secandact = $this->generate_sections_and_activities($COURSE);
+        $sections = $secandact[0];
+        $activities = $secandact[1];
+      
+
+
+     
+
+        $dados=[];
+
+
+        foreach($activities as $activity) {
+            $dados[$activity->section][]=[
+                'name' => $activity->name,
+                'cmurl' => $activity->url,
+            ];
+
+        }
+
+        foreach($sections as $section){
+                $data[] = [
+                    'section'=> $section->section,
+                    'issectionzero' => $section->section ==0?true: false, 
+                    'activities' => $section->hasactivites ?$dados[$section->section]: false,
+                ];
+        }
+
+
+
+      
+        
+
+
+
+       
+
+
+        $cncontext = [
+            'topics' =>$data 
+
+        ];
+        return $this->render_from_template('theme_avadinte/sidebar_course', $cncontext);
+
+    }
+
+
+
+    public function coursesearch(){
+        global $PAGE, $COURSE, $CFG, $DB, $OUTPUT;
+        $renderer = $PAGE->get_renderer('core_course');
+        $search = optional_param('search', '', PARAM_RAW); // Search words. Shortname, fullname, idnumber and summary get searched.
+
+
+        return $renderer->search_courses('');
+
+    }
+
+    public function full_header() {
+        $pageheaders=array("mydashboard" => get_string('coursespagetitle', 'theme_avadinte'));
+
+        if ($this->page->include_region_main_settings_in_header_actions() &&
+                !$this->page->blocks->is_block_present('settings')) {
+            // Only include the region main settings if the page has requested it and it doesn't already have
+            // the settings block on it. The region main settings are included in the settings block and
+            // duplicating the content causes behat failures.
+            $this->page->add_header_action(html_writer::div(
+                $this->region_main_settings_menu(),
+                'd-print-none',
+                ['id' => 'region-main-settings-menu']
+            ));
+        }
+        $theme = theme_config::load('avadinte');
+        $pagelayout = $this->page->pagelayout;
+        $pageheader=$pageheaders[$pagelayout];
+
+        $header = new stdClass();
+        $header->pageheader = $pageheader;
+        $header->settingsmenu = $this->context_header_settings_menu();
+        $header->contextheader = $this->context_header();
+
+        
+        $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
+        $header->navbar = $this->navbar();
+        $header->pageheadingbutton = $this->page_heading_button();
+        $header->courseheader = $this->course_header();
+        $header->headeractions = $this->page->get_header_actions();
+        return $this->render_from_template('theme_avadinte/full_header', $header);
+    }
+
+
+  
 
 
 
