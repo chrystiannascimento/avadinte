@@ -107,15 +107,13 @@ $THEME->layouts = [
     // The site home page.
     'frontpage' => array(
         'file' => 'columns2.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre',
+        'regions' => array(),
         'options' => array('nonavbar' => true),
     ),
     // Server administration scripts.
     'admin' => array(
         'file' => 'columns2.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre',
+        'regions' => array(),
     ),
     // My dashboard page.
     'mydashboard' => array(

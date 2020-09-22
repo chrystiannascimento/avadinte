@@ -56,6 +56,7 @@ define(['jquery', 'core/custom_interaction_events', 'core/log', 'core/pubsub'],
             var hidden = trigger.attr('aria-expanded') == 'false';
             var side = trigger.attr('data-side');
             var body = $(SELECTORS.BODY);
+            var sidebtn = $(SELECTORS.SIDEBTN);
             var preference = trigger.attr('data-preference');
             if (small) {
                 M.util.set_user_preference(preference, 'false');
@@ -65,7 +66,9 @@ define(['jquery', 'core/custom_interaction_events', 'core/log', 'core/pubsub'],
 
             if (!hidden) {
                 body.addClass('drawer-open-' + side);
+                sidebtn.addClass('open');
                 trigger.attr('aria-expanded', 'true'); 
+
             } else {
                 trigger.attr('aria-expanded', 'false');
             }
@@ -82,12 +85,14 @@ define(['jquery', 'core/custom_interaction_events', 'core/log', 'core/pubsub'],
             var trigger = $(ele).find(SELECTORS.TOGGLE_ACTION);
             var side = trigger.attr('data-side');
             var body = $(SELECTORS.BODY);
+            var sidebtn = $(SELECTORS.SIDEBTN);
             var drawerid = trigger.attr('aria-controls');
             var drawer = $(document.getElementById(drawerid));
             var preference = trigger.attr('data-preference');
 
             trigger.attr('aria-expanded', 'false');
             body.removeClass('drawer-open-' + side);
+            sidebtn.removeClass("open");
             drawer.attr('aria-hidden', 'true');
             drawer.addClass('closed');
             if (!small) {

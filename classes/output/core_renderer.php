@@ -239,6 +239,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
         );
     }
 
+
+
+
+
     public function coursenav(){
         global $PAGE, $COURSE, $CFG, $DB, $OUTPUT;
         $course = $this->page->course;
@@ -261,8 +265,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         foreach($activities as $activity) {
             $dados[$activity->section][]=[
-                'name' => $activity->name,
-                'cmurl' => $activity->url,
+                'text' => $activity->name,
+                'action' => $activity->url,
+                'key' => $activity->id,
+                'icon' => $activity->icon,
             ];
 
         }
@@ -271,9 +277,23 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $data[] = [
                     'section'=> $section->section,
                     'issectionzero' => $section->section ==0?true: false, 
+                    'action' => 'topic' . $section->section, 
+                    'key'=> $section->id,  
+                   
                     'activities' => $section->hasactivites ?$dados[$section->section]: false,
                 ];
         }
+
+
+        $courselinks =[];
+        $courselinks[] =[
+            'key' => 'grades',
+            'action' =>  new moodle_url('/grade/report/grader/index.php', array(
+                'id' => $PAGE->course->id)),
+            'icon' => 'fa fa-table fa-fw',
+            'text' => 'Grades'
+
+            ];
 
 
 
@@ -286,6 +306,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
 
         $cncontext = [
+            'courselinks' => $courselinks,
+
             'topics' =>$data 
 
         ];
@@ -321,7 +343,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
         $theme = theme_config::load('avadinte');
         $pagelayout = $this->page->pagelayout;
-        $pageheader=$pageheaders[$pagelayout];
+        $pageheader = '';
+        if(array_key_exists($pagelayout, $pageheaders)){
+            $pageheader= $pageheaders[$pagelayout];
+
+        }
+        
 
         $header = new stdClass();
         $header->pageheader = $pageheader;

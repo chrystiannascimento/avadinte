@@ -2647,6 +2647,7 @@ $picker-emojis-per-row: 7 !default;
             }
         }
     }
+
     .nav-tabs,
     .nav-pills {
         margin: 0;
@@ -2709,4 +2710,13 @@ $picker-emojis-per-row: 7 !default;
     .input-group-append > .btn {
         border-radius: 0px 10px 10px 0px ;
     }
+}
+
+
+#page-header {
+    .card {
+        border:0;
+        border-bottom: 1px solid rgba($color: #cdced0, $alpha: 1.0);
+    }
+
 }
