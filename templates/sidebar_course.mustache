@@ -53,6 +53,8 @@
                 
             {{/issectionzero}}
             {{^issectionzero}}
+                {{#hasactivites}}
+
                 <li>
 
             <a class="list-group-item list-group-item-action dropdown-toggle"    href="#{{{action}}}" data-toggle="collapse" aria-expanded="false"  data-key="{{{key}}}" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
@@ -88,6 +90,7 @@
             </ul>
             
         </li>
+        {{/hasactivites}}
 
             {{/issectionzero}}
             
@@ -98,23 +101,5 @@
 
         {{/topics}}
 
-
-
-
-     
-
-
-
-
-        <li>
-            <div class="list-group-item " data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
-                <div class="ml-"">
-                    <div class="media">
-                            
-                        <span class="media-body">trexto2</span>
-                    </div>
-                </div>
-            </div>
-        </li>
     </ul>
 </nav>

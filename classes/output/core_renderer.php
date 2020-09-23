@@ -279,7 +279,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     'issectionzero' => $section->section ==0?true: false, 
                     'action' => 'topic' . $section->section, 
                     'key'=> $section->id,  
-                   
+                   'hasactivites' => $section->hasactivites,
                     'activities' => $section->hasactivites ?$dados[$section->section]: false,
                 ];
         }

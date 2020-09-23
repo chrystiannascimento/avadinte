@@ -7,14 +7,14 @@
 
 
 #page {
-    //margin-top: calc($fixed-header-y+10);
-    margin-top: 150px;
+    //margin-top: calc($fixed-header-y - 30px);
+    margin-top: 120px;
 }
 
 @media only screen and (max-width: 576px){
     
 #page {
-    margin-top: 50px;
+    margin-top: 60px;
     }
 }
 
