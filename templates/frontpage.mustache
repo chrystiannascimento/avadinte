@@ -54,36 +54,33 @@
 {{> core/local/toast/wrapper}}
 
 <div id="page-wrapper" class="d-print-block">
-    
-    
+
     {{{ output.standard_top_of_body_html }}}
 
     {{> theme_avadinte/header }}
+    
+    {{#hasdrawer}}
+        {{> theme_avadinte/course-sidebar}}
+    {{/hasdrawer}}
 
-    <div id="page" class="container-fluid d-print-block">
-        <div class="row border-bottom-1">
-                
+    <div id="page" class="container-fluid d-print-block row-md">
+        {{{ output.full_header }}}
 
-        </div> 
-        <hr>
-         {{{output.full_header}}}
-         <div class="col-12 border border-secondary"></div>
-
-        
-        
-
-        <div id="page-content" class="row pb-3 d-print-block content-container " >
-         <hr>
+        <div id="page-content" class="row pb-3 d-print-block col-md-10 mx-md-auto">
             <div id="region-main-box" class="col-12">
-                {{{output.coursesearch}}}
+                
                 {{#hasregionmainsettingsmenu}}
                 <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
                     <div> {{{ output.region_main_settings_menu }}} </div>
                 </div>
                 {{/hasregionmainsettingsmenu}}
-
-                
                 <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}} aria-label="{{#str}}content{{/str}}">
+                    {{#hasblocksfp}}
+                    <section id="block-region-content" class="block-region yui3-dd-drop" aria-label="{{#str}}blocks{{/str}}">
+                        {{{ frontpageblocks }}}
+                    </section>
+                {{/hasblocksfp}}
+
 
                     {{#hasregionmainsettingsmenu}}
                         <div class="region_main_settings_menu_proxy"></div>
@@ -95,7 +92,7 @@
 
                 </section>
                 {{#hasblocks}}
-                <section id="blockregion" data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}" >
+                <section data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
                     {{{ sidepreblocks }}}
                 </section>
                 {{/hasblocks}}
@@ -114,9 +111,9 @@ require(['theme_boost/loader'], function() {
     M.util.js_complete('theme_boost/loader');
 });
 
-M.util.js_pending('theme_boost/drawer');
-require(['theme_boost/drawer'], function(drawer) {
+M.util.js_pending('theme_avadinte/drawer');
+require(['theme_avadinte/drawer'], function(drawer) {
     drawer.init();
-    M.util.js_complete('theme_boost/drawer');
+    M.util.js_complete('theme_avadinte/drawer');
 });
 {{/js}}

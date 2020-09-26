@@ -106,9 +106,10 @@ $THEME->layouts = [
     ),
     // The site home page.
     'frontpage' => array(
-        'file' => 'columns2.php',
-        'regions' => array(),
-        'options' => array('nonavbar' => true),
+        'file' => 'frontpage.php',
+        'regions' => array('side-pre', 'frontpage'),
+        'defaultregion' => 'side-pre',
+        'options' => array('nonavbar' => true, 'nocontextheader' => true),
     ),
     // Server administration scripts.
     'admin' => array(
@@ -182,3 +183,5 @@ $THEME->layouts = [
         'defaultregion' => 'side-pre'
     )
 ];
+
+$THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_DEFAULT;

@@ -117,11 +117,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
         
 
          //Disciplinas
-         $coursespagetitle=get_string('coursespagetitle','theme_avadinte' );
-         $coursespageurl= new moodle_url('/my/');
+         $mycoursespagetitle=get_string('mycoursespagetitle','theme_avadinte' );
+         $mycoursespageurl= new moodle_url('/my/');
          //$coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
-         $coursepageurl = new moodle_url('/course/view.php', array('id' => $courseid));
-         $coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($coursepageurl, URL_MATCH_BASE) ? true : false ;
+         $mycoursepageurl = new moodle_url('/course/view.php', array('id' => $courseid));
+         $mycoursespageisactive = $PAGE->url->compare($mycoursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($mycoursepageurl, URL_MATCH_BASE) ? true : false ;
 
 
          //Calendario
@@ -145,7 +145,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         //Central de Atendimentos 
         $attendtitle=get_string('attendtitle','theme_avadinte' );
-        $attendurl= new moodle_url('/my');
+        $attendurl= "http://atendimento.nead.ufma.br/view.php";
 
         //Private File
         $privatefilestitle = get_string('privatefilestitle','theme_avadinte' );
@@ -157,6 +157,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $contentbankurl = new \moodle_url('/contentbank/index.php', ['contextid' => $contextid]);
         $contentbankisactive = $PAGE->url->compare($contentbankurl, URL_MATCH_BASE);
 
+        //Courses Page
+        $coursespagetitle=get_string('coursespagetitle','theme_avadinte' );
+        $coursespageurl= new moodle_url('/course/index.php');
+        $coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
+
 
 
   
@@ -165,11 +170,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
         // Send to template.
         $dashmenu = [  'hasadminlink' => $hasadminlink, 'siteadmintitle' => $siteadmintitle, 'siteadminurl' => $siteadminurl, 'siteadminisactive' => $siteadminisactive,
                         'homepagetitle'=>$homepagetitle, 'homepageurl'=>$homepageurl, 'homepageisactive' => $homepageisactive,
-                        'coursespagetitle' => $coursespagetitle, 'coursespageurl' => $coursespageurl, 'coursespageisactive' => $coursespageisactive,
+                        'mycoursespagetitle' => $mycoursespagetitle, 'mycoursespageurl' => $mycoursespageurl, 'mycoursespageisactive' => $mycoursespageisactive,
                         'calendartitle' => $calendartitle, 'calendarurl' => $calendarurl, 'calendarisactive' => $calendarisactive,
                         'attendtitle' => $attendtitle, 'attendurl' => $attendurl,
                         'privatefilestitle' => $privatefilestitle, 'privatefilesurl' => $privatefilesurl, 'privatefilesisactive' => $privatefilesisactive,
                         'contentbanktitle' => $contentbanktitle, 'contentbankurl' => $contentbankurl, 'contentbankisactive' => $contentbankisactive,
+                        'coursespagetitle' => $coursespagetitle, 'coursespageurl' => $coursespageurl, 'coursespageisactive' => $coursespageisactive,
 
 
 

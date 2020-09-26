@@ -3,8 +3,8 @@
     <span>{{{homepagetitle}}}</span>
 </a>
 
-<a   class=" nav-item nav-link {{#coursespageisactive}}active{{/coursespageisactive}} mx-3" href="{{{coursespageurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{coursespagetitle}}}" >
-{{{coursespagetitle}}}
+<a   class=" nav-item nav-link {{#mycoursespageisactive}}active{{/mycoursespageisactive}} mx-3" href="{{{mycoursespageurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{mycoursespagetitle}}}" >
+{{{mycoursespagetitle}}}
 </a>
 
 
@@ -13,7 +13,7 @@
 </a>
 
 
-<a   class=" nav-item nav-link mx-3 " href="{{{attendurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{attendtitle}}}" >
+<a   class=" nav-item nav-link mx-3 " href="{{{attendurl}}}" target="_blank" data-tooltip="tooltip" data-placement= "bottom" title="{{{attendtitle}}}" >
 {{{attendtitle}}}
 </a>
 
@@ -24,6 +24,12 @@
 <a  class="siteadminlink nav-item nav-link mx-3 {{#contentbankisactive}}active{{/contentbankisactive}}" href="{{{contentbankurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{contentbanktitle}}}" >
         <span>{{{contentbanktitle}}}</span>
         </a>
+
+{{#hasadminlink}}
+        <a   class=" nav-item nav-link {{#coursespageisactive}}active{{/coursespageisactive}} mx-3" href="{{{coursespageurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{coursespagetitle}}}" >
+        {{{coursespagetitle}}}
+        </a>
+{{/hasadminlink}}
 
 
 {{#hasadminlink}}
