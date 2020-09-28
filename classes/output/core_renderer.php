@@ -292,13 +292,25 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
 
         $courselinks =[];
+
         $courselinks[] =[
-            'key' => 'grades',
+            
             'action' =>  new moodle_url('/grade/report/grader/index.php', array(
                 'id' => $PAGE->course->id)),
+            'text' => 'Grades',
+            'shorttext' => 'Grades',
             'icon' => 'fa fa-table fa-fw',
-            'text' => 'Grades'
-
+            'type' => \navigation_node::TYPE_SETTING,
+            'key' => 'grades',
+            ];
+        $courselinks[] =[
+        
+            'action' =>  new moodle_url('/user/index.php', array('id' => $PAGE->course->id)),
+            'text' => 'Participants',
+            'shorttext' => 'participants',
+            'icon' => 'icon fa fa-users fa-fw',
+            'type' => \navigation_node::TYPE_SETTING,
+            'key' => 'participants',
             ];
 
 
@@ -334,7 +346,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     public function full_header() {
-        $pageheaders=array("mydashboard" => get_string('coursespagetitle', 'theme_avadinte'));
+        $pageheaders=array("my-index" => get_string('mycoursespagetitle', 'theme_avadinte'),
+                            "site-index" => get_string('homepagetitle', 'theme_avadinte'),
+                            );
 
         if ($this->page->include_region_main_settings_in_header_actions() &&
                 !$this->page->blocks->is_block_present('settings')) {
@@ -348,10 +362,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
             ));
         }
         $theme = theme_config::load('avadinte');
-        $pagelayout = $this->page->pagelayout;
+        $pagetype = $this->page->pagetype;
         $pageheader = '';
-        if(array_key_exists($pagelayout, $pageheaders)){
-            $pageheader= $pageheaders[$pagelayout];
+        if(array_key_exists($pagetype, $pageheaders)){
+            $pageheader= $pageheaders[$pagetype];
 
         }
         

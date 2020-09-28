@@ -28,23 +28,35 @@
         "courseheader": "course_header_html"
     }
 }}
+
+
 <header id="page-header" class="row">
     <div class="col-12 pt-3 pb-3">
         <div class="card {{^contextheader}}border-0 bg-transparent{{/contextheader}}">
             <div class="card-body {{^contextheader}}p-2{{/contextheader}} content-container">
                 <div class="d-sm-flex align-items-center ">
-                    <h1 id="pageheader"><strong>{{{pageheader}}}</strong></h1>
-                    {{#contextheader}}
+                    {{#pageheader}}
                     <div class="mr-auto">
-                        {{{contextheader}}}
-                    </div>
-                    {{/contextheader}}
+                        <h1 id="pageheader"><strong>{{{pageheader}}}</strong></h1>
+                        </div>
+                    {{/pageheader}}
+
+                    {{^pageheader}}
+                         {{#contextheader}}
+                        <div class="mr-auto">
+                            {{{contextheader}}}
+                        </div>
+                        {{/contextheader}}
+                    {{/pageheader}}
+                    
+                   
 
                     {{#settingsmenu}}
                     <div class="context-header-settings-menu">
                         {{{settingsmenu}}}
                     </div>
                     {{/settingsmenu}}
+                    
                     <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
                         {{#headeractions}}
                             <div class="header-action ml-2">{{{.}}}</div>
