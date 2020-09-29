@@ -90,6 +90,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $context = context_course::instance($course->id);
         $courseid = optional_param('course', SITEID, PARAM_INT);
         $courseid = $course->id;
+
+        $topmenucontext = [];
+
         
 
 
@@ -99,20 +102,31 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $siteadmintitle = get_string('siteadmintitle','theme_avadinte' );
         $siteadminurl = new moodle_url('/admin/search.php');
-        //$hasadminlink = has_capability('moodle/site:configview', $context);
+        $hasadminlink = has_capability('moodle/site:configview', $context);
         $hasadminlink = has_capability('moodle/site:configview', \context_system::instance());
         $siteadminisactive =$PAGE->url->compare($siteadminurl, URL_MATCH_BASE);
         $context = $this->page->context;
         $contextid = optional_param('contextid', \context_system::instance()->id, PARAM_INT);
 
+        $topmenucontext[] =[
+            'isadminlink' => $hasadminlink,
+            'isactive' => $PAGE->url->compare($siteadminurl, URL_MATCH_BASE),
+            'text' => get_string('siteadmintitle','theme_avadinte' ),
+            'action' => new moodle_url('/admin/search.php'),
+        ];
 
         //Pagina Inicial
-
         $homepagetitle = get_string('homepagetitle', 'theme_avadinte');
         $homepageurl = new moodle_url('/?redirect=0');
         $homepageisactive =$PAGE->url->compare($homepageurl, URL_MATCH_BASE);
 
-        
+        $topmenucontext[] =[
+            'isadminlink' => '',
+            'isactive' => $PAGE->url->compare($homepageurl, URL_MATCH_BASE),
+            'text' => get_string('homepagetitle', 'theme_avadinte'),
+            'action' => new moodle_url('/?redirect=0'),
+
+        ];
         //Disciplinas
         
 
@@ -123,7 +137,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
          $mycoursepageurl = new moodle_url('/course/view.php', array('id' => $courseid));
          $mycoursespageisactive = $PAGE->url->compare($mycoursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($mycoursepageurl, URL_MATCH_BASE) ? true : false ;
 
+         $topmenucontext[] =[
+            'isadminlink' => '',
+            'isactive' => $PAGE->url->compare($mycoursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($mycoursepageurl, URL_MATCH_BASE) ? true : false,
+            'text' => get_string('mycoursespagetitle','theme_avadinte' ),
+            'action' => new moodle_url('/my/'),
 
+        ];
          //Calendario
          $calendartitle = get_string('calendar','theme_avadinte' );
 
@@ -137,31 +157,65 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $calendarurl = new moodle_url('/calendar/view.php?view=month' );
         }
 
-
-
-        
-
         $calendarisactive =$PAGE->url->compare($calendarurl, URL_MATCH_BASE);
+
+        $topmenucontext[] =[
+            'isadminlink' =>'',
+            'isactive' => $PAGE->url->compare($calendarurl, URL_MATCH_BASE),
+            'text' => get_string('calendar','theme_avadinte' ),
+            'action' => $calendarurl,
+
+        ];
 
         //Central de Atendimentos 
         $attendtitle=get_string('attendtitle','theme_avadinte' );
         $attendurl= "http://atendimento.nead.ufma.br/view.php";
+
+        $topmenucontext[] =[
+            'isadminlink' =>'',
+            'isactive' =>'',
+            'text' => get_string('attendtitle','theme_avadinte' ),
+            'action' =>"http://atendimento.nead.ufma.br/view.php",
+
+        ];
 
         //Private File
         $privatefilestitle = get_string('privatefilestitle','theme_avadinte' );
         $privatefilesurl = new moodle_url('/user/files.php');
         $privatefilesisactive = $PAGE->url->compare($privatefilesurl, URL_MATCH_BASE);
 
+        $topmenucontext[] =[
+            'isadminlink' =>'',
+            'isactive' => $PAGE->url->compare($privatefilesurl, URL_MATCH_BASE),
+            'text' => get_string('privatefilestitle','theme_avadinte' ),
+            'action' => new moodle_url('/user/files.php'),
+
+        ];
+
         //Content bank
         $contentbanktitle = get_string('contentbanktitle','theme_avadinte' );
         $contentbankurl = new \moodle_url('/contentbank/index.php', ['contextid' => $contextid]);
         $contentbankisactive = $PAGE->url->compare($contentbankurl, URL_MATCH_BASE);
+        
+        $topmenucontext[] =[
+            'isadminlink' =>'',
+            'isactive' => $PAGE->url->compare($contentbankurl, URL_MATCH_BASE),
+            'text' => get_string('contentbanktitle','theme_avadinte' ),
+            'action' => new \moodle_url('/contentbank/index.php', ['contextid' => $contextid]),
 
+        ];
         //Courses Page
         $coursespagetitle=get_string('coursespagetitle','theme_avadinte' );
         $coursespageurl= new moodle_url('/course/index.php');
         $coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
 
+        $topmenucontext[] =[
+            'isadminlink' => $hasadminlink,
+            'isactive' => $PAGE->url->compare($coursespageurl, URL_MATCH_BASE),
+            'text' => get_string('coursespagetitle','theme_avadinte' ),
+            'action' => new moodle_url('/course/index.php'),
+
+        ];
 
 
   
@@ -251,6 +305,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
     public function coursenav(){
         global $PAGE, $COURSE, $CFG, $DB, $OUTPUT;
+
         $course = $this->page->course;
         $context = context_course::instance($course->id);
         $courseid = optional_param('course', SITEID, PARAM_INT);
@@ -271,24 +326,32 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         foreach($activities as $activity) {
             $dados[$activity->section][]=[
-                'text' => $activity->name,
                 'action' => $activity->url,
-                'key' => $activity->id,
+                'text' => $activity->name,
+                'shorttext' => $activity->name,
                 'icon' => $activity->icon,
+                'type' => $activity->nodetype,
+                'key' => $activity->id,
+                
             ];
 
         }
 
         foreach($sections as $section){
                 $data[] = [
+                    'action' => 'topic' . $section->section,
+                    'text' => 'semana' .  $section->name,
+                    'shorttext' => 'semana' .  $section->name,
+                    'icon' => 'fa fa-fw',
+                    'type' => \navigation_node::TYPE_SETTING,
                     'section'=> $section->section,
                     'issectionzero' => $section->section ==0?true: false, 
-                    'action' => 'topic' . $section->section, 
                     'key'=> $section->id,  
                    'hasactivites' => $section->hasactivites,
                     'activities' => $section->hasactivites ?$dados[$section->section]: false,
                 ];
         }
+
 
 
         $courselinks =[];
