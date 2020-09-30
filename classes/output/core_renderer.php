@@ -305,6 +305,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
     public function coursenav(){
         global $PAGE, $COURSE, $CFG, $DB, $OUTPUT;
+        $icons = array('url' => 'fa fa-file-text', 'resource' => 'fa fa-file-text', 'forum' => 'fa fa-comments-o', 'feedback' => 'fa fa-pencil-square-o');
 
         $course = $this->page->course;
         $context = context_course::instance($course->id);
@@ -319,7 +320,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
       
 
 
-     
 
         $dados=[];
 
@@ -329,7 +329,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 'action' => $activity->url,
                 'text' => $activity->name,
                 'shorttext' => $activity->name,
-                'icon' => $activity->icon,
+                'icon' => array_key_exists($activity->modname, $icons)? $icons[$activity->modname]:'',
                 'type' => $activity->nodetype,
                 'key' => $activity->id,
                 
