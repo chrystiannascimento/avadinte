@@ -32,14 +32,15 @@
 
 <header id="page-header" class="row">
     <div class="col-12 pt-3 pb-3">
-        <div class="card {{^contextheader}}border-0 bg-transparent{{/contextheader}}">
+        <div class="card ">
             <div class="card-body {{^contextheader}}p-2{{/contextheader}} content-container">
                 <div class="d-sm-flex align-items-center ">
                     {{#pageheader}}
                     <div class="mr-auto">
-                        <h1 id="pageheader"><strong>{{{pageheader}}}</strong></h1>
+                        <h2 id="pageheader">{{{pageheader}}}</h2>
                         </div>
                     {{/pageheader}}
+
 
                     {{^pageheader}}
                          {{#contextheader}}
@@ -50,13 +51,13 @@
                     {{/pageheader}}
                     
                    
-
+                    {{#hasadmincap}}
                     {{#settingsmenu}}
                     <div class="context-header-settings-menu">
                         {{{settingsmenu}}}
                     </div>
                     {{/settingsmenu}}
-                    
+                    {{/hasadmincap}}
                     <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
                         {{#headeractions}}
                             <div class="header-action ml-2">{{{.}}}</div>
@@ -69,12 +70,16 @@
                         {{{navbar}}}
                     </div>
                     {{/hasnavbar}}
+
+                    {{#hasadmincap}}
                     <div class="ml-auto d-flex">
                         {{{pageheadingbutton}}}
                     </div>
+                    {{/hasadmincap}}
                     <div id="course-header">
                         {{{courseheader}}}
                     </div>
+
                 </div>
             </div>
         </div>

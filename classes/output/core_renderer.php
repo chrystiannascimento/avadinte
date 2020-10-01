@@ -412,7 +412,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $pageheaders=array("my-index" => get_string('mycoursespagetitle', 'theme_avadinte'),
                             "site-index" => get_string('homepagetitle', 'theme_avadinte'),
                             );
-
+        $hasadmincap = has_capability('moodle/site:configview', \context_system::instance());
         if ($this->page->include_region_main_settings_in_header_actions() &&
                 !$this->page->blocks->is_block_present('settings')) {
             // Only include the region main settings if the page has requested it and it doesn't already have
@@ -434,6 +434,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         
 
         $header = new stdClass();
+        $header->hasadmincap = $hasadmincap;
         $header->pageheader = $pageheader;
         $header->settingsmenu = $this->context_header_settings_menu();
         $header->contextheader = $this->context_header();

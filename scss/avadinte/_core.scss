@@ -2699,8 +2699,7 @@ $picker-emojis-per-row: 7 !default;
 }
 
 #pageheader {
-    font-weight: 600;
-    font-size: 2.5rem;
+    font-weight: 700;
 }
 
 #coursesearch {
@@ -2731,7 +2730,7 @@ $picker-emojis-per-row: 7 !default;
     color: white!important;
 }
 
-#page-header .clearfix .navbar .nav .dropdown a {
+#page-header .clearfix .navbar .nav .dropdown .usertext {
     color: white!important;
 }
 
