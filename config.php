@@ -90,7 +90,8 @@ $THEME->layouts = [
     // Main course page.
     'course' => array(
         'file' => 'course.php',
-        'regions' => array(),
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
         'options' => array('nonavbar' => false, 'langmenu' => true),
     ),
     'coursecategory' => array(
@@ -114,7 +115,8 @@ $THEME->layouts = [
     // Server administration scripts.
     'admin' => array(
         'file' => 'columns2.php',
-        'regions' => array(),
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
     ),
     // My dashboard page.
     'mydashboard' => array(

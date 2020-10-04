@@ -143,8 +143,10 @@ a:not([class]),
     &:focus {
         outline: $btn-focus-width solid transparent;
         color: $gray-900;
-        background-color: lighten($primary, 50%);
-        box-shadow: 0 -#{$btn-focus-width} lighten($primary, 50%), 0 $btn-focus-width $gray-800;
+        background-color: rgba($color: #868e96, $alpha: 0.5);
+        //background-color: lighten($primary, 50%);
+        //box-shadow: 0 -#{$btn-focus-width} lighten($primary, 50%), 0 $btn-focus-width $gray-800;
+        box-shadow: 0 -#{$btn-focus-width} rgba($color: #868e96, $alpha: 0.5), 0 $btn-focus-width $gray-800;
     }
     &:focus:hover {
         text-decoration: none;
@@ -2791,3 +2793,13 @@ $picker-emojis-per-row: 7 !default;
         margin-right: auto!important;
     }
  }
+
+ a {
+color: black;
+    
+ }
+
+ a:hover {
+     color: black;
+    text-decoration: underline;
+}

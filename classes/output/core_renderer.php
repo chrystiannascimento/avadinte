@@ -227,8 +227,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
                         'mycoursespagetitle' => $mycoursespagetitle, 'mycoursespageurl' => $mycoursespageurl, 'mycoursespageisactive' => $mycoursespageisactive,
                         'calendartitle' => $calendartitle, 'calendarurl' => $calendarurl, 'calendarisactive' => $calendarisactive,
                         'attendtitle' => $attendtitle, 'attendurl' => $attendurl,
-                        'privatefilestitle' => $privatefilestitle, 'privatefilesurl' => $privatefilesurl, 'privatefilesisactive' => $privatefilesisactive,
-                        'contentbanktitle' => $contentbanktitle, 'contentbankurl' => $contentbankurl, 'contentbankisactive' => $contentbankisactive,
+                        //'privatefilestitle' => $privatefilestitle, 'privatefilesurl' => $privatefilesurl, 'privatefilesisactive' => $privatefilesisactive,
+                        //'contentbanktitle' => $contentbanktitle, 'contentbankurl' => $contentbankurl, 'contentbankisactive' => $contentbankisactive,
                         'coursespagetitle' => $coursespagetitle, 'coursespageurl' => $coursespageurl, 'coursespageisactive' => $coursespageisactive,
 
 
@@ -360,8 +360,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
             
             'action' =>  new moodle_url('/grade/report/grader/index.php', array(
                 'id' => $PAGE->course->id)),
-            'text' => 'Grades',
-            'shorttext' => 'Grades',
+            'text' =>get_string('gradebook', 'grades'),
+            'shorttext' => get_string('gradebook', 'grades'),
             'icon' => 'fa fa-table fa-fw',
             'type' => \navigation_node::TYPE_SETTING,
             'key' => 'grades',
@@ -369,8 +369,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $courselinks[] =[
         
             'action' =>  new moodle_url('/user/index.php', array('id' => $PAGE->course->id)),
-            'text' => 'Participants',
-            'shorttext' => 'participants',
+            'text' =>  get_string('participants', 'moodle'),
+            'shorttext' =>  get_string('participants', 'moodle'),
             'icon' => 'icon fa fa-users fa-fw',
             'type' => \navigation_node::TYPE_SETTING,
             'key' => 'participants',
