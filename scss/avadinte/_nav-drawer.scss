@@ -108,8 +108,8 @@ body.drawer-ease {
 
 body.drawer-open-left {
     @include media-breakpoint-up(md) {
-       // margin-left: $drawer-width;
-       margin-left: 0;
+       margin-left: $drawer-width;
+       //margin-left: 0;
 
     }
 }

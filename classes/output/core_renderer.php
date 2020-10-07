@@ -356,10 +356,15 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $courselinks =[];
 
+        $admingrade = new moodle_url('/grade/report/grader/index.php', array(
+            'id' => $PAGE->course->id));
+        $studentgrade = new moodle_url('/grade/report/grader/index.php', array(
+                'id' => $PAGE->course->id));
+        $isstudent = !has_capability('moodle/course:viewhiddenactivities', $context);
+
         $courselinks[] =[
             
-            'action' =>  new moodle_url('/grade/report/grader/index.php', array(
-                'id' => $PAGE->course->id)),
+            'action' =>  $isstudent? $studentgrade : $admingrade,
             'text' =>get_string('gradebook', 'grades'),
             'shorttext' => get_string('gradebook', 'grades'),
             'icon' => 'fa fa-table fa-fw',
