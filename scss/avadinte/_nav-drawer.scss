@@ -106,12 +106,23 @@ body.drawer-ease {
     transition: margin-left 0.5s ease, margin-right 0.5s ease;
 }
 
-body.drawer-open-left {
+body.drawer-open-left.has-drawer {
     @include media-breakpoint-up(md) {
        margin-left: $drawer-width;
        //margin-left: 0;
 
     }
+}
+body.drawer-open-left.no-has-drawer {
+    @include media-breakpoint-up(md) {
+       //margin-left: $drawer-width;
+       margin-left: 0;
+
+    }
+}
+
+.no-has-drawer #header-toggle {
+    display: none!important;
 }
 
 

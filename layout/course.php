@@ -36,6 +36,12 @@ $extraclasses = [];
 if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
 }
+
+if ($PAGE->course->id > 1){
+    $extraclasses[] = 'has-drawer';
+} else {
+    $extraclasses[] = 'no-has-drawer';
+}
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockshtml = $OUTPUT->blocks('side-pre');
 $blockshtmlheader = $OUTPUT->blocks('header');
@@ -45,13 +51,13 @@ $hasheaderblockregion = true;
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
-
+ 
 $templatecontext = [
     'sitename' => format_string($PAGE->category->name, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
-    'headerblocks' => $blockshtmlheader,
     'hasblocks' => $hasblocks,
+    'headerblocks' => $blockshtmlheader,
     'hasheaderblockregion' => $hasheaderblockregion,
     'hascoursenav' => true,
     'bodyattributes' => $bodyattributes,
