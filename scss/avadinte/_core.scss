@@ -2028,7 +2028,7 @@ img#persona_signin {
 }
 
 /** Page header */
-#page-header {
+#site-header {
     .logo {
         margin: $spacer 0;
         img {
@@ -2728,11 +2728,11 @@ $picker-emojis-per-row: 7 !default;
 }
 
 
-#page-header .clearfix .navbar .nav  i {
+#site-header .clearfix .navbar .nav  i {
     color: white!important;
 }
 
-#page-header .clearfix .navbar .nav .dropdown .usertext {
+#site-header .clearfix .navbar .nav .dropdown .usertext {
     color: white!important;
 }
 

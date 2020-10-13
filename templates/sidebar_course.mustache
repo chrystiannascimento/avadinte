@@ -33,36 +33,16 @@
         
         {{#topics}}
 
-            {{#issectionzero}} 
-                {{#activities}}
-                    <li>
-                         {{#action}}   
-                        <a class="list-group-item list-group-item-action "    href="{{{action}}}"      aria-expanded="false"  data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
-                            <div class="ml-">
-                                <div class="media">
-                                    <span><i class="{{{icon}}}" aria-hidden="true"></i><span>
-                                        
-                                    <span class="media-body ">{{{text}}}   </span>
-                                    
-                                </div>
-                            </div>
-                        </a>
-                        {{/action}}   
-                    </li>
-
-                {{/activities}}
-                
-            {{/issectionzero}}
-            {{^issectionzero}}
+           
                 {{#hasactivites}}
 
                 <li>
 
-            <a class="list-group-item list-group-item-action dropdown-toggle"    href="#{{{action}}}" data-toggle="collapse" aria-expanded="false"  data-key="{{{key}}}" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+            <a class="list-group-item list-group-item-action "    href="#{{{action}}}" data-toggle="collapse" aria-expanded="false"  data-key="{{{key}}}" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
                 <div class="ml-">
-                    <div class="media">
-                            
-                        <span class="media-body ">Semana {{{section}}}  </span>
+                    <div class="media dropdown-toggle">
+                        <span><i class="{{{icon}}}" aria-hidden="true"></i><span>
+                        <span class="media-body "> {{{text}}}  </span>
                         
                     </div>
                 </div>
@@ -70,12 +50,14 @@
             
             <ul  class="collapse list-unstyled" id="{{{action}}}" data-parent="#accordion">
             {{#activities}}
-                <li>
+            {{^hidden}}
+            <li>
+
             {{#action}}
             <a class="list-group-item list-group-item-action " href="{{{action}}}" data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
                 <div class="ml-">
                     <div class="media">
-                            
+                        <span><i class="{{{icon}}}" aria-hidden="true"></i><span>
                         <span class="media-body "> {{{text}}}  </span>
                         
                     </div>
@@ -84,23 +66,33 @@
             {{/action}}
             </li>
                 
-
-                {{/activities}}
+            {{/hidden}}
+            {{/activities}}
 
               
             </ul>
             
         </li>
         {{/hasactivites}}
-
-            {{/issectionzero}}
-            
-
-
-        
-
-
         {{/topics}}
+
+        {{#contentbank}}
+            {{#hascontentbank}}
+            <li>
+                 <a class="list-group-item list-group-item-action " href="{{{action}}}" data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+                <div class="ml-">
+                    <div class="media">
+                        <span><i class="{{{icon}}}" aria-hidden="true"></i><span>
+                        <span class="media-body "> {{{text}}}  </span>
+                        
+                    </div>
+                </div>
+            </a>
+            
+            </li>
+            {{/hascontentbank}}
+
+        {{/contentbank}}
 
     </ul>
 </nav>

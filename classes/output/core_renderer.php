@@ -305,7 +305,20 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
     public function coursenav(){
         global $PAGE, $COURSE, $CFG, $DB, $OUTPUT;
-        $icons = array('url' => 'fa fa-file-text', 'resource' => 'fa fa-file-text', 'forum' => 'fa fa-comments-o', 'feedback' => 'fa fa-pencil-square-o');
+        $icons = array('url' => 'fa fa-file-text', 
+            'resource' => 'fa fa-file-text', 
+            'forum' => 'fa fa-comments-o', 
+            'feedback' => 'fa fa-pencil-square-o', 
+            'page' => 'fa fa-file-text-o',
+            'h5pactivity' => 'fa fa-file-text-o',
+            'folder' => 'fa fa-folder-open-o',
+            'assign' => 'fa fa-pencil-square-o',
+            'data' => 'fa fa-database',
+            'chat' => 'fa fa-commenting-o',
+            'choice' => 'fa fa-question',
+            'lti' => 'fa fa-puzzle-piece',
+            'glossary' => 'fa fa-sort-alpha-asc', 
+             );
 
         $course = $this->page->course;
         $context = context_course::instance($course->id);
@@ -332,16 +345,25 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 'icon' => array_key_exists($activity->modname, $icons)? $icons[$activity->modname]:'',
                 'type' => $activity->nodetype,
                 'key' => $activity->id,
+                'modname' => $activity->modname,
+                'hidden' => $activity->hidden,
                 
             ];
 
         }
 
         foreach($sections as $section){
+                $sectionname = 'Unidade ' . $section->section;
+                if($section->name){
+                    $sectionname = $section->name;
+                }
+                if($section->section==0){
+                    $sectionname = 'Informações gerais';
+                }
                 $data[] = [
                     'action' => 'topic' . $section->section,
-                    'text' => 'semana' .  $section->name,
-                    'shorttext' => 'semana' .  $section->name,
+                    'text' =>   $sectionname,
+                    'shorttext' =>   $sectionname,
                     'icon' => 'fa fa-fw',
                     'type' => \navigation_node::TYPE_SETTING,
                     'section'=> $section->section,
@@ -381,6 +403,16 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'key' => 'participants',
             ];
 
+            $contentbank =[
+                'hascontentbank' => has_capability('moodle/contentbank:access', $context),        
+                'action' =>  new moodle_url('/contentbank/index.php', ['contextid' => $context->id]),
+                'text' =>  get_string('contentbank'),
+                'shorttext' =>  get_string('contentbank'),
+                'icon' => 'fa fa-shopping-bag',
+                'type' => \navigation_node::TYPE_SETTING,
+                'key' => 'contentbank',
+            ];
+
 
 
       
@@ -394,7 +426,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $cncontext = [
             'courselinks' => $courselinks,
 
-            'topics' =>$data 
+            'topics' =>$data,
+            'contentbank' => $contentbank
+
 
         ];
         return $this->render_from_template('theme_avadinte/sidebar_course', $cncontext);

@@ -37,8 +37,11 @@ if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
 }
 
+$sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 if ($PAGE->course->id > 1){
     $extraclasses[] = 'has-drawer';
+    $sitename = format_string($PAGE->category->name, true, ['context' => context_course::instance(SITEID), "escape" => false]);
+
 } else {
     $extraclasses[] = 'no-has-drawer';
 }
@@ -53,7 +56,7 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
  
 $templatecontext = [
-    'sitename' => format_string($PAGE->category->name, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'sitename' => $sitename,
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
     'hasblocks' => $hasblocks,
