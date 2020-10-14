@@ -227,7 +227,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                         'mycoursespagetitle' => $mycoursespagetitle, 'mycoursespageurl' => $mycoursespageurl, 'mycoursespageisactive' => $mycoursespageisactive,
                         'calendartitle' => $calendartitle, 'calendarurl' => $calendarurl, 'calendarisactive' => $calendarisactive,
                         'attendtitle' => $attendtitle, 'attendurl' => $attendurl,
-                        //'privatefilestitle' => $privatefilestitle, 'privatefilesurl' => $privatefilesurl, 'privatefilesisactive' => $privatefilesisactive,
+                        'privatefilestitle' => $privatefilestitle, 'privatefilesurl' => $privatefilesurl, 'privatefilesisactive' => $privatefilesisactive,
                         //'contentbanktitle' => $contentbanktitle, 'contentbankurl' => $contentbankurl, 'contentbankisactive' => $contentbankisactive,
                         'coursespagetitle' => $coursespagetitle, 'coursespageurl' => $coursespageurl, 'coursespageisactive' => $coursespageisactive,
 
@@ -364,7 +364,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     'action' => 'topic' . $section->section,
                     'text' =>   $sectionname,
                     'shorttext' =>   $sectionname,
-                    'icon' => 'fa fa-fw',
+                    'icon' => 'fa fa-list',
                     'type' => \navigation_node::TYPE_SETTING,
                     'section'=> $section->section,
                     'issectionzero' => $section->section ==0?true: false, 
