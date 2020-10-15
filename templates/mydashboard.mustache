@@ -82,7 +82,7 @@
                 {{/hasregionmainsettingsmenu}}
 
                 
-                <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}} aria-label="{{#str}}content{{/str}}">
+                <section id="region-main"  aria-label="{{#str}}content{{/str}}">
 
                     {{#hasregionmainsettingsmenu}}
                         <div class="region_main_settings_menu_proxy"></div>
@@ -93,14 +93,29 @@
                     {{{ output.course_content_footer }}}
 
                 </section>
-                {{#hasblocks}}
-                <section id="blockregion" data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}" >
-                    {{{ sidepreblocks }}}
-                </section>
-                {{/hasblocks}}
+
+
+
+                
             </div>
+
         </div>
     </div>
+
+      {{#hasblocks}}
+        <i id="sidepreopen-control"
+            aria-expanded="{{#draweropenright}}true{{/draweropenright}}{{^draweropenright}}false{{/draweropenright}}"
+            aria-controls="sidepre-blocks"
+            data-action="toggle-drawer"
+            data-side="right"
+            data-preference="sidepre-open"
+            title="{{#str}} showhideblocks, theme_moove {{/str}}">
+        </i>
+
+        <section id="sidepre-blocks" data-region="blocks-column" class="hidden-print">
+            {{{ sidepreblocks }}}
+        </section>
+    {{/hasblocks}}
     {{{ output.standard_after_main_region_html }}}
     {{> theme_boost/footer }}
 </div>

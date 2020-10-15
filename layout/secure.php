@@ -23,17 +23,30 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
+user_preference_allow_ajax_update('sidepre-open', PARAM_ALPHA);
+
+
+if (isloggedin()) {
+    $draweropenright = (get_user_preferences('sidepre-open', 'true') == 'true');
+} else {
+    $draweropenright = false;
+}
 
 $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $bodyattributes = $OUTPUT->body_attributes();
+
+if ($draweropenright && $hasblocks) {
+    $extraclasses[] = 'drawer-open-right';
+}
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
     'bodyattributes' => $bodyattributes,
     'sidepreblocks' => $blockshtml,
-    'hasblocks' => $hasblocks
+    'hasblocks' => $hasblocks,
+    'draweropenright' => $draweropenright,
 ];
 
 echo $OUTPUT->render_from_template('theme_boost/secure', $templatecontext);

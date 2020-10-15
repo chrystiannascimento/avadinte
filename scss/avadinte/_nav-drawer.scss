@@ -123,6 +123,7 @@ body.drawer-open-left.has-drawer {
 
     }
 }
+
 body.drawer-open-left.no-has-drawer {
     @include media-breakpoint-up(md) {
        //margin-left: $drawer-width;
@@ -131,19 +132,19 @@ body.drawer-open-left.no-has-drawer {
     }
 }
 
+body.drawer-open-right { 
+    @include media-breakpoint-up(md) {
+        margin-right: $drawer-width;
+    }
+}
+
+
 .no-has-drawer #header-toggle {
     display: none!important;
 }
 
 
 
-
-body.drawer-open-right {
-    @include media-breakpoint-up(md) {
-        //margin-right: $drawer-width;
-        margin-right: 0;
-    }
-}
 
 $right-drawer-width: 320px;
 
@@ -271,3 +272,9 @@ $right-drawer-width: 320px;
 #btn-sidebar {
     background-color: transparent!important ;
 }
+
+
+
+
+
+
