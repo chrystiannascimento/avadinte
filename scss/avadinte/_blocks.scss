@@ -1,342 +1,5 @@
 $fixed-header-y: $navbar-height;
 
-.blockmovetarget .accesshide {
-    position: relative;
-    left: initial;
-}
-
-.block:target {
-    padding-top: 0 !important; /* stylelint-disable declaration-no-important */
-    margin-top: 0 !important;
-}
-
-.block_search_forums .searchform {
-    /* Override plugin's default. */
-    text-align: left;
-}
-
-.block.block_navigation .block_tree ul,
-.block_settings .block_tree ul {
-    margin-left: 0;
-}
-
-.block .block-controls {
-    .dropdown-toggle {
-        /* So that the caret takes the colour of the icon. */
-        color: $body-color;
-    }
-}
-
-$blocks-column-width: 360px !default;
-
-[data-region="blocks-column"] {
-    width: $blocks-column-width;
-    float: right;
-}
-
-$blocks-plus-gutter: $blocks-column-width + ( $grid-gutter-width / 2 );
-
-/* We put an absolutely positioned div in a relatively positioned div so it takes up no space */
-@include media-breakpoint-up(sm) {
-    #region-main-settings-menu {
-        position: relative;
-        float: left;
-        width: 100%;
-    }
-
-    #region-main-settings-menu > div {
-        position: absolute;
-        right: 0;
-        z-index: 100;
-        margin: 1rem;
-    }
-
-    .region_main_settings_menu_proxy {
-        width: 4rem;
-        height: 2rem;
-        background-color: $body-bg;
-        margin-left: $card-spacer-x / 2;
-        margin-bottom: $card-spacer-x / 2;
-        border-bottom-left-radius: 0.5rem;
-        float: right;
-    }
-}
-
-@include media-breakpoint-down(sm) {
-    #region-main-settings-menu .menubar {
-        justify-content: flex-end;
-    }
-}
-
-// Required for IE11 to prevent blocks being pushed under the content.
-#region-main-settings-menu.has-blocks,
-#region-main.has-blocks {
-    display: inline-block;
-    width: calc(100% - #{$blocks-plus-gutter});
-    @include media-breakpoint-down(lg) {
-        width: 100%;
-        /* MDL-63102 - Remove extra space at bottom.
-        If modifying make sure block-region is horizontally stacked when in full screen */
-        display: block;
-    }
-}
-
-.header-action {
-    #region-main-settings-menu {
-        position: unset;
-        float: none;
-        width: auto;
-
-        & > div {
-            position: unset;
-            right: auto;
-            margin: 0;
-        }
-    }
-}
-
-[data-region="blocks-column"] {
-    @include media-breakpoint-down(lg) {
-        width: 100%;
-    }
-}
-
-$card-gutter : $card-deck-margin * 2;
-
-.block .empty-placeholder-image-lg {
-    height: 5rem;
-}
-
-.block .block-cards {
-    .course-info-container {
-        padding: 0.8rem;
-    }
-    .progress {
-        height: 0.5rem;
-    }
-    .course-summaryitem {
-        border: $border-width solid $border-color;
-        background-color: $body-bg;
-    }
-    .icon {
-        margin-right: 0;
-    }
-    .card .coursemenubtn {
-        margin-top: -0.5rem;
-    }
-    a.coursename,
-    span.categoryname,
-    .btn-link {
-        color: inherit;
-    }
-    .multiline {
-        white-space: normal;
-    }
-    .btn.btn-link.btn-icon {
-        height: 36px;
-        width: 36px;
-        padding: 0;
-        border-radius: 50%;
-
-        @include hover-focus {
-            background-color: $gray-200;
-        }
-    }
-}
-
-.dashboard-card-deck.one-row {
-    flex-flow: nowrap;
-    overflow-x: scroll;
-}
-
-.summaryimage {
-    height: 5rem;
-    width: 5rem;
-    background-position: center;
-    background-size: cover;
-}
-
-.dashboard-card-deck {
-    .dashboard-card {
-        margin-bottom: $card-gutter;
-        flex-basis: auto;
-        width: 100%;
-        flex-grow: 0;
-        flex-shrink: 0;
-        border-radius: 15px;
-        
-        .dashboard-card-img {
-            height: 3rem;
-            background-position: center;
-            background-size: cover;
-            border-radius: 15px 15px 0px 0px;
-        }
-      
-        .dashboard-card-footer {
-            padding: 0.8rem;
-            background-color:#E9E9E9;
-        }
-
-        .card-body {
-            background-color:#E9E9E9;
-            border-radius: 0px 0px 15px 15px;
-        }
-        
-        
-    }
-
-    .dashboard-card:hover .dashboard-card-img {
-        opacity: 0.8;
-    }
-    .dashboard-card:hover .card-body {
-        opacity: 0.8;
-    }
-    .dashboard-card:hover {
-        background-color: rgba($color: #888888, $alpha: 1.0)
-    }
-    
-
-    &.fixed-width-cards {
-        .dashboard-card {
-            width: 300px;
-        }
-    }
-}
-
-
-.dashboard-card-deck:not(.fixed-width-cards) {
-    @media (min-width: 576px) {
-        .dashboard-card {
-            width: calc(50% - #{$card-gutter});
-        }
-    }
-    @media (min-width: 840px) {
-        .dashboard-card {
-            width: calc(33.33% - #{$card-gutter});
-        }
-    }
-    @media (min-width: 1100px) {
-        .dashboard-card {
-            width: calc(25% - #{$card-gutter});
-        }
-    }
-    @media (min-width: 1360px) {
-        .dashboard-card {
-            width: calc(20% - #{$card-gutter});
-        }
-    }
-}
-
-#region-main.has-blocks {
-    .dashboard-card-deck:not(.fixed-width-cards) {
-        @media (min-width: 1200px) {
-            .dashboard-card {
-                width: calc(33.33% - #{$card-gutter});
-            }
-        }
-        @media (min-width: 1470px) {
-            .dashboard-card {
-                width: calc(25% - #{$card-gutter});
-            }
-        }
-    }
-}
-
-body.drawer-open-left {
-    .dashboard-card-deck:not(.fixed-width-cards) {
-        @media (min-width: 768px) {
-            .dashboard-card {
-                width: calc(100% - #{$card-gutter});
-            }
-        }
-        @media (min-width: 861px) {
-            .dashboard-card {
-                width: calc(50% - #{$card-gutter});
-            }
-        }
-        @media (min-width: 1122px) {
-            .dashboard-card {
-                width: calc(33.33% - #{$card-gutter});
-            }
-        }
-        @media (min-width: 1381px) {
-            .dashboard-card {
-                width: calc(25% - #{$card-gutter});
-            }
-        }
-    }
-}
-
-body.drawer-open-left #region-main.has-blocks {
-    .dashboard-card-deck:not(.fixed-width-cards) {
-        @media (min-width: 1200px) {
-            .dashboard-card {
-                width: calc(100% - #{$card-gutter});
-            }
-        }
-        @media (min-width: 1236px) {
-            .dashboard-card {
-                width: calc(50% - #{$card-gutter});
-            }
-        }
-        @media (min-width: 1497px) {
-            .dashboard-card {
-                width: calc(33.33% - #{$card-gutter});
-            }
-        }
-    }
-}
-
-@media (min-width: 1200px) {
-    #block-region-side-pre {
-        .dashboard-card-deck:not(.fixed-width-cards) {
-            margin-left: 0;
-            margin-right: 0;
-            .dashboard-card {
-                width: calc(100% - #{$card-gutter}) !important;
-            }
-        }
-    }
-}
-
-.block_recentlyaccessedcourses {
-    .paging-bar-container {
-        margin-top: -2.4rem;
-        justify-content: flex-end;
-    }
-
-    @include media-breakpoint-down(xs) {
-        .paging-bar-container {
-            margin-top: 0;
-        }
-    }
-}
-
-#block-region-side-pre {
-    .block_recentlyaccessedcourses {
-        .paging-bar-container {
-            margin-top: 0;
-        }
-    }
-}
-
-.block_recentlyaccesseditems {
-    img.icon {
-        height: 24px;
-        width: 24px;
-        margin-right: 6px;
-    }
-}
-
-.block_myoverview {
-    .content {
-        min-height: 19.35rem;
-    }
-    .paged-content-page-container {
-        min-height: 13rem;
-    }
-}
-
 // Show expand collapse with font-awesome.
 .block_settings .block_tree [aria-expanded="true"],
 .block_settings .block_tree [aria-expanded="true"].emptybranch,
@@ -438,21 +101,11 @@ body.drawer-open-left #region-main.has-blocks {
     width: 40px;
     height: 40px;
     border-radius: 20px;
-    font-size: 20px;
-    padding: 8px 0 0 4px;
+    font-size: 1rem;
+    padding: 8px 4px 0 0;
     cursor: pointer;
 
-    &:before {
-        font-family: 'simple-line-icons';
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        content: "\e605";
-    }
+
 
     &:hover {
         box-shadow: 0 0 6px $brand-primary;
@@ -474,9 +127,7 @@ body.drawer-open-right {
     #sidepreopen-control {
         right: 305px;
 
-        &:before {
-            content: "\e606";
-        }
+      
     }
 
     [data-region="blocks-column"] {
@@ -487,6 +138,135 @@ body.drawer-open-right {
             border-radius: 0;
             -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
             box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
+        }
+    }
+}
+
+
+
+
+
+// Nav-drawer control
+
+
+
+#navdraweropen-control,
+[data-region="drawer"] {
+    -webkit-transition: right .5s ease, left .5s ease;
+    -moz-transition: right .5s ease, left .5s ease;
+    -o-transition: right .5s ease, left .5s ease;
+    transition: right .5s ease, left .5s ease;
+
+    .dropdown-menu {
+        min-width: 245px;
+
+        .dropdown-item {
+            white-space: initial;
+        }
+    }
+
+    .card-block .content {
+        h3 {
+            font-size: 1.143rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-top: 1px dashed $headings-color;
+            padding-top: 4px;
+            margin-top: 10px;
+        }
+    }
+}
+
+#navdraweropen-control {
+    background-color: $brand-primary;
+    position: fixed;
+    left: -15px;
+    top: 50%;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 1rem;
+    //padding: 8px 0 0 4px;
+    padding: 10px 0px 0px 14px;
+    cursor: pointer;
+    z-index: 1;
+
+
+
+    &:hover {
+        box-shadow: 0 0 6px $brand-primary;
+    }
+}
+
+
+
+body.drawer-open-left {
+    #navdraweropen-control {
+        left: 305px;
+    }
+   
+
+
+
+}
+
+@include media-breakpoint-down(md){
+    body.drawer-open-left.has-drawer {
+        #sidepreopen-control {
+            display: none;
+        }
+    }
+
+    body.drawer-open-right {
+        #navdraweropen-control {
+            display: none;
+        }
+    }
+
+}
+
+
+
+//Mudanças em blocks
+
+.dashboard-card-deck {
+    .dashboard-card {
+        border-radius: 15px;
+        
+        .dashboard-card-img {
+            height: 3rem;
+            border-radius: 15px 15px 0px 0px;
+        }
+      
+        .dashboard-card-footer {
+            background-color:#E9E9E9;
+        }
+
+        .card-body {
+            background-color:#E9E9E9;
+            border-radius: 0px 0px 15px 15px;
+        }
+        
+    }
+
+    .dashboard-card:hover .dashboard-card-img {
+        opacity: 0.8;
+    }
+    .dashboard-card:hover .card-body {
+        opacity: 0.8;
+    }
+    .dashboard-card:hover {
+        background-color: rgba($color: #888888, $alpha: 1.0)
+    }
+    
+
+    @include media-breakpoint-up(sm) {
+        &.fixed-width-cards {
+            .dashboard-card {
+                width: 300px;
+                max-width: 100%;
+            }
         }
     }
 }

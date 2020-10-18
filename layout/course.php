@@ -37,12 +37,19 @@ if (isloggedin()) {
     $navdraweropen = false;
     $draweropenright = false;
 }
-
+$blockshtml = $OUTPUT->blocks('side-pre');
+$blockshtmlheader = $OUTPUT->blocks('header');
+$hasblocks = strpos($blockshtml, 'data-block=') !== false;
+$hasheaderblockregion = true;
 
 $extraclasses = [];
 if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
+} 
+if ($draweropenright && $hasblocks) {
+    $extraclasses[] = 'drawer-open-right';
 }
+
 
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 if ($PAGE->course->id > 1){
@@ -53,18 +60,12 @@ if ($PAGE->course->id > 1){
     $extraclasses[] = 'no-has-drawer';
 }
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$blockshtml = $OUTPUT->blocks('side-pre');
-$blockshtmlheader = $OUTPUT->blocks('header');
-$hasblocks = strpos($blockshtml, 'data-block=') !== false;
-$hasheaderblockregion = true;
+
 
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
  
-if ($draweropenright && $hasblocks) {
-    $extraclasses[] = 'drawer-open-right';
-}
 
 
 $templatecontext = [
@@ -79,6 +80,7 @@ $templatecontext = [
     'bodyattributes' => $bodyattributes,
     'navdraweropen' => $navdraweropen,
     'headernavopen' => true,
+    'hasdrawer' =>  $PAGE->course->id >1 ? true: false,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
 ];
@@ -94,4 +96,4 @@ theme_avadinte_extend_flat_navigation($PAGE->flatnav);
 $nav = $PAGE->flatnav;
 $templatecontext['flatnavigation'] = $nav;
 $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
-echo $OUTPUT->render_from_template('theme_avadinte/course', $templatecontext);
+echo $OUTPUT->render_from_template('theme_avadinte/columns2', $templatecontext);

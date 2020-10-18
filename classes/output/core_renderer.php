@@ -484,7 +484,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
         $header->headeractions = $this->page->get_header_actions();
-        return $this->render_from_template('theme_avadinte/full_header', $header);
+        return $this->render_from_template('theme_avadinte/full_header', $header); 
     }
 
 

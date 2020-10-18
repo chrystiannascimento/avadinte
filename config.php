@@ -106,6 +106,8 @@ $THEME->layouts = [
         'defaultregion' => 'side-pre',
     ),
     // The site home page.
+    //aaaa
+    
     'frontpage' => array(
         'file' => 'frontpage.php',
         'regions' => array('side-pre', 'frontpage'),

@@ -77,6 +77,7 @@ $templatecontext = [
     'bodyattributes' => $bodyattributes,
     'navdraweropen' => $navdraweropen,
     'headernavopen' => true,
+    'hasdrawer' =>  $PAGE->course->id >1 ? true: false,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
 ];
@@ -92,4 +93,4 @@ theme_avadinte_extend_flat_navigation($PAGE->flatnav);
 $nav = $PAGE->flatnav;
 $templatecontext['flatnavigation'] = $nav;
 $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
-echo $OUTPUT->render_from_template('theme_avadinte/course', $templatecontext);
+echo $OUTPUT->render_from_template('theme_avadinte/columns2', $templatecontext);
