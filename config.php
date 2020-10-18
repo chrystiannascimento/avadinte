@@ -181,6 +181,8 @@ $THEME->layouts = [
         'defaultregion' => 'side-pre',
     ),
     // The pagelayout used for safebrowser and securewindow.
+    //comentario
+    //comentarios exemplo 2
     'secure' => array(
         'file' => 'secure.php',
         'regions' => array('side-pre'),
