@@ -95,22 +95,7 @@
             </div>
         </div>
     </div>
-    {{{ output.standard_after_main_region_html }}}
-    {{> theme_boost/footer }}
-     {{#hasblocks}}
-        <i id="sidepreopen-control"
-            aria-expanded="{{#draweropenright}}true{{/draweropenright}}{{^draweropenright}}false{{/draweropenright}}"
-            aria-controls="sidepre-blocks"
-            data-action="toggle-drawer"
-            data-side="right"
-            data-preference="sidepre-open"
-            title="{{#str}} showhideblocks, theme_moove {{/str}}">
-        </i>
-
-        <section id="sidepre-blocks" data-region="blocks-column" class="hidden-print">
-            {{{ sidepreblocks }}}
-        </section>
-    {{/hasblocks}}
+    {{> theme_avadinte/wrapper-footer}}
 </div>
 
 </body>
