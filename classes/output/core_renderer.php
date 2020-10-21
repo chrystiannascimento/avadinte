@@ -304,7 +304,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
 
     public function coursenav(){
-        global $PAGE, $COURSE, $CFG, $DB, $OUTPUT;
+        global $PAGE, $COURSE, $CFG, $DB, $OUTPUT, $USER;
         $icons = array('url' => 'fa fa-file-text', 
             'resource' => 'fa fa-file-text', 
             'forum' => 'fa fa-comments-o', 
@@ -330,6 +330,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $secandact = $this->generate_sections_and_activities($COURSE);
         $sections = $secandact[0];
         $activities = $secandact[1];
+
+        $completioninfo = new \completion_info($course);
+        $courserenderer = $this->page->get_renderer('core', 'course');
+
+        //$courserenderer->course_section_cm_completion($course, $completioninfo,, $displayoptions = array());
       
 
 
@@ -347,8 +352,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 'key' => $activity->id,
                 'modname' => $activity->modname,
                 'hidden' => $activity->hidden,
+                'completion_state' => $completioninfo->get_data($activity, true, $USER->id)->completionstate,
                 
-            ];
+            ];  
 
         }
 
