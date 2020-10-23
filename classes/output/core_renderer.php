@@ -331,8 +331,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $sections = $secandact[0];
         $activities = $secandact[1];
 
+        $modinfo = get_fast_modinfo($course);
         $completioninfo = new \completion_info($course);
         $courserenderer = $this->page->get_renderer('core', 'course');
+        $displayoptions = array();
 
         //$courserenderer->course_section_cm_completion($course, $completioninfo,, $displayoptions = array());
       
@@ -340,9 +342,19 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
 
         $dados=[];
+        $activesection=0;
+        $activeactivity=false;
 
 
+ 
         foreach($activities as $activity) {
+            if($PAGE->url->compare( new moodle_url($activity->url), URL_MATCH_EXACT)){
+                $activesection=$activity->section;
+                $activeactivity = true;
+            }
+            else{
+                $activeactivity = false  ;
+            }
             $dados[$activity->section][]=[
                 'action' => $activity->url,
                 'text' => $activity->name,
@@ -353,6 +365,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 'modname' => $activity->modname,
                 'hidden' => $activity->hidden,
                 'completion_state' => $completioninfo->get_data($activity, true, $USER->id)->completionstate,
+                'modicon' => $courserenderer->course_section_cm_completion($course, $completioninfo,$modinfo->cms[$activity->id], $displayoptions ),
+                'isactive' => $activeactivity,
+                
                 
             ];  
 
@@ -373,10 +388,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     'icon' => 'fa fa-list',
                     'type' => \navigation_node::TYPE_SETTING,
                     'section'=> $section->section,
-                    'issectionzero' => $section->section ==0?true: false, 
+                    'issectionzero' => $section->section ==0?true: false,                     
                     'key'=> $section->id,  
                    'hasactivites' => $section->hasactivites,
                     'activities' => $section->hasactivites ?$dados[$section->section]: false,
+                    'issectionactive' => $activesection==$section->section?true:false,
                 ];
         }
 
