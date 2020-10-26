@@ -38,7 +38,7 @@
     color: #690000;
 }
 #mainNav > a {
-    font-size: 1rem;
+    font-size: $font-size-base;
     color: black;
     font-weight: 400;
     padding-left: 12px;
@@ -64,7 +64,7 @@
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) and (max-width: 991.98px) { 
     #mainNav > a {
-        font-size: 1rem;
+        font-size: $font-size-base;
         color: black;
         font-weight: 400;
         padding-left: 0.5rem;
@@ -76,7 +76,7 @@
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) and (max-width: 1199.98px) { 
     #mainNav > a {
-        font-size: 1rem;
+        font-size: $font-size-base;
         color: black;
         font-weight: 400;
         padding-left: 0.5rem;
@@ -98,7 +98,7 @@
  // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1400px) {
     #mainNav > a {
-        font-size: 1rem;
+        font-size: $font-size-base;
         color: black;
         font-weight: 400;
         padding-left: 1rem;

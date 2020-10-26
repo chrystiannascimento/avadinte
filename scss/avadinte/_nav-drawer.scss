@@ -105,3 +105,11 @@ body.drawer-open-left.no-has-drawer {
 #sidepre-blocks {
     width: $drawer-width;
 }
+
+body.drawer-open-right.path-grade-report-grader {
+    @include media-breakpoint-up(md) {
+       //margin-left: $drawer-width;
+       margin-right: 0;
+
+    }
+}

@@ -90,3 +90,36 @@ $string['privatefilestitle'] = 'Private files';
 $string['contentbanktitle'] = 'Content bank';
 $string['siteadmintitle'] = 'Site administration';
 $string['region-frontpage'] = 'Frontpage';
+
+
+// Theme settings.
+$string['themesettingstitle'] = 'Accessibility settings';
+$string['themesettingsfonttype'] = 'Font type';
+$string['themesettingsdefaultfont'] = 'Default font';
+$string['themesettingsdyslexicfont'] = 'Dyslexic font';
+$string['themesettingsenableaccessibilitytoolbar'] = 'Enable accessibility toolbar';
+$string['themesettinggsavedsuccessfully'] = 'Accessibility settings saved successfully';
+
+// Accessibility features.
+$string['accessibilityfontsize'] = 'Font size';
+$string['accessibilitydecreasefont'] = 'Decrease font size';
+$string['accessibilityresetfont'] = 'Reset font size';
+$string['accessibilityincreasefont'] = 'Increase font size';
+$string['accessibilitysitecolor'] = 'Site color';
+$string['accessibilityresetsitecolor'] = 'Reset site color';
+$string['accessibilitysitecolor2'] = 'Low contrast 1';
+$string['accessibilitysitecolor3'] = 'Low contrast 2';
+$string['accessibilitysitecolor4'] = 'High contrast';
+
+// Data privacy.
+$string['privacy:metadata:preference:accessibilitystyles_fontsizeclass'] = 'The user\'s preference for font size.';
+$string['privacy:metadata:preference:accessibilitystyles_sitecolorclass'] = 'The user\'s preference for site color.';
+$string['privacy:metadata:preference:themeavadintesettings_fonttype'] = 'The user\'s preference for font type.';
+$string['privacy:metadata:preference:themeavadintesettings_enableaccessibilitytoolbar'] = 'The user\'s preference for enable the accessibility toolbar.';
+
+$string['privacy:accessibilitystyles_fontsizeclass'] = 'The current preference for the font size is: {$a}.';
+$string['privacy:accessibilitystyles_sitecolorclass'] = 'The current preference for the site color is: {$a}.';
+$string['privacy:themeavadintesettings_fonttype'] = 'The current preference for the font type is: {$a}.';
+$string['privacy:themeavadintesettings_enableaccessibilitytoolbar'] = 'The current preference for enable accessibility toolbar is to show it.';
+
+$string['login'] = 'Already have an account?';

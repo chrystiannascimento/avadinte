@@ -91,7 +91,6 @@ if (!is_siteadmin() && $PAGE->pagetype == 'course') {
 
 
 }
-theme_avadinte_extend_flat_navigation($PAGE->flatnav);
 
 $nav = $PAGE->flatnav;
 $templatecontext['flatnavigation'] = $nav;

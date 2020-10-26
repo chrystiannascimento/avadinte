@@ -17,7 +17,7 @@
 /**
  * Overriden theme boost core renderer.
  *
- * @package    theme_moove
+ * @package    theme_avadinte
  * @copyright  2017 Willian Mano - http://conecti.me
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -58,7 +58,7 @@ require_once ($CFG->dirroot . "/course/renderer.php");
 /**
  * Renderers to align Moodle's HTML with that expected by Bootstrap
  *
- * @package    theme_moove
+ * @package    theme_avadinte
  * @copyright  2017 Willian Mano - http://conecti.me
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -509,7 +509,33 @@ class core_renderer extends \theme_boost\output\core_renderer {
         return $this->render_from_template('theme_avadinte/full_header', $header); 
     }
 
+    public function body_attributes($additionalclasses = array()) {
+        $hasaccessibilitybar = get_user_preferences('themeavadintesettings_enableaccessibilitytoolbar', '');
+        if ($hasaccessibilitybar) {
+            $additionalclasses[] = 'hasaccessibilitybar';
 
+            $currentfontsizeclass = get_user_preferences('accessibilitystyles_fontsizeclass', '');
+            if ($currentfontsizeclass) {
+                $additionalclasses[] = $currentfontsizeclass;
+            }
+
+            $currentsitecolorclass = get_user_preferences('accessibilitystyles_sitecolorclass', '');
+            if ($currentsitecolorclass) {
+                $additionalclasses[] = $currentsitecolorclass;
+            }
+        }
+
+        $fonttype = get_user_preferences('themeavadintesettings_fonttype', '');
+        if ($fonttype) {
+            $additionalclasses[] = $fonttype;
+        }
+
+        if (!is_array($additionalclasses)) {
+            $additionalclasses = explode(' ', $additionalclasses);
+        }
+
+        return ' id="'. $this->body_id().'" class="'.$this->body_css_classes($additionalclasses).'"';
+    }
   
 
 

@@ -75,3 +75,37 @@ $string['privatefilestitle'] = 'Arquivos privados';
 $string['contentbanktitle'] = 'Banco de conteúdo';
 $string['siteadmintitle'] = 'Administração do site';
 $string['region-frontpage'] = 'Blocos da página Inicial ';
+
+
+
+// Theme settings.
+$string['themesettingstitle'] = 'Acessibilidade';
+$string['themesettingsfonttype'] = 'Tipo de fonte';
+$string['themesettingsdefaultfont'] = 'Fonte padrão';
+$string['themesettingsdyslexicfont'] = 'Fonte para dislexicos';
+$string['themesettingsenableaccessibilitytoolbar'] = 'Habilitar barra de acessibilidade';
+$string['themesettinggsavedsuccessfully'] = 'Configurações de acessibilidade salvas com sucesso';
+
+// Accessibility features.
+$string['accessibilityfontsize'] = 'Tamanho da fonte';
+$string['accessibilityincreasefont'] = 'Aumentar tamanho da fonte';
+$string['accessibilityresetfont'] = 'Redefinir tamanho da fonte';
+$string['accessibilitydecreasefont'] = 'Diminuir tamanho da fonte';
+$string['accessibilitysitecolor'] = 'Cor do site';
+$string['accessibilityresetsitecolor'] = 'Redefinir cor do site';
+$string['accessibilitysitecolor2'] = 'Baixo contraste 1';
+$string['accessibilitysitecolor3'] = 'Baixo contraste 2';
+$string['accessibilitysitecolor4'] = 'Alto contraste';
+
+// Data privacy.
+$string['privacy:metadata:preference:accessibilitystyles_fontsizeclass'] = 'Preferências do usuário para tamanho da fonte.';
+$string['privacy:metadata:preference:accessibilitystyles_sitecolorclass'] = 'Preferências do usuário para cor do site.';
+$string['privacy:metadata:preference:themeavadintesettings_fonttype'] = 'Preferências do usuário para tipo de fonte.';
+$string['privacy:metadata:preference:themeavadintesettings_enableaccessibilitytoolbar'] = 'Preferências do usuário para habilitar a barra de acessibilidade.';
+
+$string['privacy:accessibilitystyles_fontsizeclass'] = 'A preferência atual para o tamanho da fonte é: {$a}.';
+$string['privacy:accessibilitystyles_sitecolorclass'] = 'A preferência atual para a cor do site é: {$a}.';
+$string['privacy:themeavadintesettings_fonttype'] = 'A preferência atual para o tipo de fonte é: {$a}.';
+$string['privacy:themeavadintesettings_enableaccessibilitytoolbar'] = 'A preferência atual para habilitar a barra de acessibilidade é para exibi-lá';
+
+$string['login'] = 'Você possui uma conta?';

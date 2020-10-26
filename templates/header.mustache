@@ -17,6 +17,7 @@
 {{!
     Page navbar.
 }}
+    
 
   <header id="page-wrapper-header" class="fixed-top ">
     <div id="site-header">
@@ -80,7 +81,7 @@
     
     <div class="navwrap container-fluid">
         <div class="row ">
-            <nav id="navwrapper" class=" col navbar navbar-expand-lg navbar-light bg-light text-dark"   style="position: relative;">
+            <nav id="navwrapper" class="col-md col-lg-12  navbar navbar-expand-lg navbar-light bg-light text-dark"   style="position: relative;">
 
                         <button class="navbar-toggler navbar-toggler-right d-none d-md-inline d-sm-inline d-lg-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -91,13 +92,28 @@
                             <div class="nav navbar-nav" id="mainNav">
                             
                                 {{{ output.topmenu }}}
+
+
+
+                            <a id="themesettings-control" class="nav-item nav-link">
+                                <i title="{{#str}}themesettingstitle, theme_avadinte{{/str}}"
+                                class="fa fa-universal-access">
+                                </i>
+                                <span class="text">{{#str}}themesettingstitle, theme_avadinte{{/str}}</span>
+                            </a>
                             </div> 
-                        
+                                                   
 
 
 
                         </div>
+                         
+                        
                     </nav>
+                    <div class="col-md-10 col-lg-12">
+                        {{> theme_avadinte/accessibilitybar }}
+                    </div>
+                    
         </div>
 
     </div>

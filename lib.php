@@ -59,7 +59,7 @@ function theme_avadinte_get_main_scss_content($theme) {
     // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.
     $post = file_get_contents($CFG->dirroot . '/theme/avadinte/scss/post.scss');
 
-    // Moove scss.
+    // avadinte scss.
     $avadintevariables = file_get_contents($CFG->dirroot . '/theme/avadinte/scss/avadinte/_variables.scss');
     $avadinte = file_get_contents($CFG->dirroot . '/theme/avadinte/scss/avadinte.scss');
      // Combine them together.
@@ -128,98 +128,11 @@ function theme_avadinte_update_settings_images($settingname) {
 
 
 
-/**
- * Extend the Moove navigation
- *
- * @param flat_navigation $flatnav
- */
-function theme_avadinte_extend_flat_navigation(\flat_navigation $flatnav) {
-    
-
-    theme_avadinte_delete_menuitems($flatnav);
-    theme_avadinte_add_coursesections_to_navigation($flatnav);
-
-}
-
-
-/**
- * Remove items from navigation
- *
- * @param flat_navigation $flatnav
- */
-function theme_avadinte_delete_menuitems(\flat_navigation $flatnav) {
-
-    $itemstodelete = [
-        'coursehome',
-        'calendar',
-        'home',
-        'myhome',
-        'contentbank'
-    ];
-
-    foreach ($flatnav as $item) {
-        if (in_array($item->key, $itemstodelete)) {
-            $flatnav->remove($item->key);
-
-            continue;
-        }
-
-        if (isset($item->parent->key) && $item->parent->key == 'mycourses' &&
-            isset($item->type) && $item->type == \navigation_node::TYPE_COURSE) {
-
-            $flatnav->remove($item->key, \navigation_node::TYPE_COURSE);
-        }
-    }
-}
 
 
 
 
-function theme_avadinte_add_coursesections_to_navigation(\flat_navigation $flatnav) {
-    global $PAGE;
 
-    $participantsitem = $flatnav->find('participants', \navigation_node::TYPE_CONTAINER);
 
-    if (!$participantsitem) {
-        return;
-    }
-
-    if ($PAGE->course->format != 'singleactivity') {
-        $coursesectionsoptions = [
-            'text' => get_string('coursesections', 'theme_moove'),
-            'shorttext' => get_string('coursesections', 'theme_moove'),
-            'icon' => new pix_icon('t/viewdetails', ''),
-            'type' => \navigation_node::COURSE_CURRENT,
-            'key' => 'course-sections',
-            'parent' => $participantsitem->parent
-        ];
-
-        $coursesections = new \flat_navigation_node($coursesectionsoptions, 0);
-
-        foreach ($flatnav as $item) {
-            if ($item->type == \navigation_node::TYPE_SECTION) {
-                $coursesections->add_node(new \navigation_node([
-                    'text' => $item->text,
-                    'shorttext' => $item->shorttext,
-                    'icon' => $item->icon,
-                    'type' => $item->type,
-                    'key' => $item->key,
-                    'parent' => $coursesections,
-                    'action' => $item->action
-                ]));
-            }
-        }
-
-        $flatnav->add($coursesections, $participantsitem->key);
-    }
-
-    $mycourses = $flatnav->find('mycourses', \navigation_node::NODETYPE_LEAF);
-
-    if ($mycourses) {
-        $flatnav->remove($mycourses->key);
-
-        $flatnav->add($mycourses, 'privatefiles');
-    }
-}
 
 

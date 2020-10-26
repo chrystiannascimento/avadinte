@@ -1,4 +1,10 @@
-// Import all scss moove files
+// Import all scss files
+
+
+
+@import "avadinte/accessibilitybar";
+@import "avadinte/mixins/accessibilityfontsize";
+@import "avadinte/accessibilitystyles";
 
 @import "avadinte/header-navbar";
 @import "avadinte/nav-drawer";
@@ -6,3 +12,8 @@
 @import "avadinte/core";
 @import "avadinte/calendar";
 @import "extras/montserrat";
+
+
+
+
+

@@ -15,3 +15,31 @@
 {{/hasblocks}}
 {{{ output.standard_after_main_region_html }}}
 {{> theme_boost/footer }}
+
+     
+</div>
+
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+    M.util.js_complete('theme_boost/loader');
+});
+
+M.util.js_pending('theme_boost/drawer');
+require(['theme_boost/drawer'], function(drawer) {
+    drawer.init();
+    M.util.js_complete('theme_boost/drawer');
+});
+
+require(['theme_avadinte/accessibilitybar'], function(bar) {
+    bar.init();
+});
+
+require(['theme_avadinte/themesettings'], function(themesettings) {
+    themesettings.init();
+});
+
+
+{{/js}}
