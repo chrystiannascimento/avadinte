@@ -402,7 +402,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $admingrade = new moodle_url('/grade/report/grader/index.php', array(
             'id' => $PAGE->course->id));
-        $studentgrade = new moodle_url('/grade/report/grader/index.php', array(
+        $studentgrade = new moodle_url('/grade/report/user/index.php', array(
                 'id' => $PAGE->course->id));
         $isstudent = !has_capability('moodle/course:viewhiddenactivities', $context);
 

@@ -37,6 +37,8 @@
     font-weight: bold;
     color: #690000;
 }
+
+
 #mainNav > a {
     font-size: $font-size-base;
     color: black;
@@ -45,6 +47,14 @@
     padding-right: 12px;
 }
 
+
+#rightNav > a {
+    font-size: $font-size-base;
+    color: black;
+    font-weight: 400;
+    padding-left: 12px;
+    padding-right: 12px;
+}
 #mainNav > a:hover {
     background: #e9e9e9;
 }
@@ -64,9 +74,7 @@
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) and (max-width: 991.98px) { 
     #mainNav > a {
-        font-size: $font-size-base;
-        color: black;
-        font-weight: 400;
+    
         padding-left: 0.5rem;
         padding-right: 0.5rem;
     }
@@ -76,9 +84,7 @@
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) and (max-width: 1199.98px) { 
     #mainNav > a {
-        font-size: $font-size-base;
-        color: black;
-        font-weight: 400;
+
         padding-left: 0.5rem;
         padding-right: 0.5rem;
     }
@@ -87,9 +93,7 @@
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) and (max-width: 1399.98px){
     #mainNav > a {
-        font-size: 1rem;
-        color: black;
-        font-weight: 400;
+
         padding-left: 1rem;
         padding-right: 1rem;
     }
@@ -98,9 +102,7 @@
  // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1400px) {
     #mainNav > a {
-        font-size: $font-size-base;
-        color: black;
-        font-weight: 400;
+   
         padding-left: 1rem;
         padding-right: 1rem;
     }
