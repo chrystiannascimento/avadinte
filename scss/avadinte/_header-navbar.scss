@@ -126,3 +126,13 @@
 #site-header a.dropdown-toggle::after {
     color: white!important;
 }
+
+body.hasaccessibilitybar {
+    @media only screen and (max-width: 576px){
+        
+    #page {
+        margin-top: 90px;
+        }
+    }
+
+}
