@@ -61,7 +61,7 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
 if ($draweropenright && $hasblocks) {
-    $extraclasses[] = 'drawer-open-right';
+    //$extraclasses[] = 'drawer-open-right';
 }
 
 

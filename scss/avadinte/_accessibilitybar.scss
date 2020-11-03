@@ -86,3 +86,16 @@ body.hasaccessibilitybar {
         top: -30px;
     }
 }
+
+
+
+//mudanças aqui
+body.hasaccessibilitybar {
+    @media only screen and (max-width: 576px){
+        
+    #page {
+        margin-top: 90px;
+        }
+    }
+
+}

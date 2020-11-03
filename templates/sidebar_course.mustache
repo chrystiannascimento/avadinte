@@ -5,7 +5,6 @@
     </ul>
 </nav>
 
-
 <nav class="list-group mt-1" aria-label="">
     
     <ul id="accordion">
@@ -34,48 +33,74 @@
         {{#topics}}
 
            
-                {{#hasactivites}}
 
                 <li>
 
-            <a class="list-group-item list-group-item-action section  {{#issectionactive}}active {{/issectionactive}}"    href="#{{{action}}}" data-toggle="collapse" aria-expanded="false"  data-key="{{{key}}}" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+            <div class="list-group-item 
+            
+            {{#dimmed}}dimmed dimmed_text{{/dimmed}}  {{^dimmed}}list-group-item-action{{/dimmed}}              
+
+            {{#issectionactive}}active {{/issectionactive}}  section"   data-target="#topic{{{section}}}"
+             data-toggle="collapse" aria-expanded="false"  data-key="{{{key}}}" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" 
+             data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
                 <div class="ml-1">
-                    <div class="media dropdown-toggle">
+                        
+                        <div class="media dropdown-toggle" data-toggle="tooltip" data-placement="right" title="{{{tooltip}}}">
+                        
                         <span><i class="{{{icon}}}" aria-hidden="true"></i><span>
-                        <span class="media-body "> {{{text}}}  </span>
+                        {{#uservisible}}<a {{#action}}href="{{{action}}}"{{/action}}>{{{text}}} </a>{{/uservisible}}
+                        {{^uservisible}}<span>{{{text}}} </span>{{/uservisible}}
+
+
+                        
+                        {{#dimmed}}<i class="fa fa-lock" aria-hidden="true"></i> {{/dimmed}} 
+                        
+
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            
+            <ul  class="collapse list-unstyled {{#issectionactive}}show {{/issectionactive}}" id="topic{{{section}}}" data-parent="#accordion">
+            
+            {{#activities}}
+            {{^hiddentouser}}
+            
+            <li>
+            {{#action}}
+            <a class=" list-group-item 
+            {{#dimmed}}dimmed dimmed_text{{/dimmed}}  {{^dimmed}}list-group-item-action{{/dimmed}}
+             {{#isactive}}active{{/isactive}}  " 
+            {{^noaction}}href="{{{action}}}" {{/noaction}} data-key="" data-isexpandable="" data-indent="" data-showdivider="" 
+            data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" 
+            data-preceedwithhr="" >
+                <div class="ml-2">
+                    <div class="media" data-toggle="tooltip" data-placement="right" title="{{{tooltip}}}">
+                        {{{icon}}}
+                        <span class="media-body "> {{{text}}}   </span>
+                        {{{modicon}}}
                         
                     </div>
                 </div>
             </a>
-            
-            <ul  class="collapse list-unstyled {{#issectionactive}}show {{/issectionactive}}" id="{{{action}}}" data-parent="#accordion">
-            
-            {{#activities}}
-            {{^hidden}}
-            <li>
 
-            {{#action}}
-            <a class="list-group-item list-group-item-action  {{#isactive}}active{{/isactive}}" href="{{{action}}}" data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
-                <div class="ml-2">
-                    <div class="media">
-                        <span><i class="{{{icon}}}" aria-hidden="true"></i></span>
-                        <span class="media-body "> {{{text}}}   </span>
-                        {{{modicon}}}
-                         
-                    </div>
-                </div>
-            </a>
             {{/action}}
+
+            
             </li>
                 
-            {{/hidden}}
+            {{/hiddentouser}}
             {{/activities}}
 
               
             </ul>
             
         </li>
-        {{/hasactivites}}
         {{/topics}}
 
 

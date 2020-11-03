@@ -354,26 +354,66 @@ class core_renderer extends \theme_boost\output\core_renderer {
             }
             else{
                 $activeactivity = false  ;
+            } 
+
+            
+            $fullactivity = $modinfo->cms[$activity->id];
+            $hiddentouser = ($activity->hidden and !has_capability('moodle/course:viewhiddenactivities', $context));
+            $restricttouser = (!$fullactivity->available and has_capability('moodle/course:ignoreavailabilityrestrictions', $context));
+            $ignoreavailabilityrestrictions = has_capability('moodle/course:ignoreavailabilityrestrictions', $context);
+
+            //define tooltip
+            $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $context);
+            $ignorerestrictions = has_capability('moodle/course:ignoreavailabilityrestrictions', $context);
+            $tooltip = '';
+            //atividade oculta
+            if(!$fullactivity->visible) {
+                if ($canviewhidden){
+                    $tooltip = get_string('hiddenfromstudents');
+
+                }
+                else {
+                    $tooltip = get_string('notavailable');
+
+                }
+            //atividade restrita
+            } else if ($fullactivity->availableinfo) {
+                    $tooltip = strip_tags($fullactivity->availableinfo);
+                
             }
+
+
+
             $dados[$activity->section][]=[
                 'action' => $activity->url,
                 'text' => $activity->name,
                 'shorttext' => $activity->name,
-                'icon' => array_key_exists($activity->modname, $icons)? $icons[$activity->modname]:'',
+                'icon' => $OUTPUT->image_icon('icon', get_string('pluginname', $activity->modname), $activity->modname), //array_key_exists($activity->modname, $icons)? $icons[$activity->modname]:'',
                 'type' => $activity->nodetype,
                 'key' => $activity->id,
                 'modname' => $activity->modname,
                 'hidden' => $activity->hidden,
+                'hiddentouser' => $hiddentouser,//$activity->hidden,
                 'completion_state' => $completioninfo->get_data($activity, true, $USER->id)->completionstate,
-                'modicon' => $courserenderer->course_section_cm_completion($course, $completioninfo,$modinfo->cms[$activity->id], $displayoptions ),
+                'modicon' => $courserenderer->course_section_cm_completion($course, $completioninfo,$fullactivity, $displayoptions ),
                 'isactive' => $activeactivity,
+                'available' => $fullactivity->available,
+                'availableinfo' => strip_tags($fullactivity->availableinfo),
+                'restricttouser' => $restricttouser,
+                'ignoreavailabilityrestrictions' => $ignoreavailabilityrestrictions,
+                'dimmed' => !$fullactivity->available or !$fullactivity->visible?true:false, 
+                'noaction' => !$fullactivity->available and !$ignorerestrictions ? true:false,
                 
+                'tooltip' => $tooltip ,
+
+
                 
             ];  
 
         }
 
         foreach($sections as $section){
+
                 $sectionname = 'Unidade ' . $section->section;
                 if($section->name){
                     $sectionname = $section->name;
@@ -381,8 +421,34 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 if($section->section==0){
                     $sectionname = 'Informações gerais';
                 }
+                $action='';
+                if($course->format=='topics'){
+                    $action = new moodle_url('/course/view.php', array('id' => $PAGE->course->id, 'section' => $section->section));
+                }
+                //define tooltip
+                $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $context);
+                $tooltip = '';
+                //seção oculta
+                if(!$section->visible) {
+                    if ($canviewhidden){
+                        $tooltip = get_string('hiddenfromstudents');
+
+                    }
+                    else {
+                        $tooltip = get_string('notavailable');
+
+                    }
+                //seção restrita
+                } else if ($section->availableinfo) {
+                        $tooltip = strip_tags($section->availableinfo);
+                    
+
+
+                }
+
+
                 $data[] = [
-                    'action' => 'topic' . $section->section,
+                    'action' => $action,//'topic' . $section->section,
                     'text' =>   $sectionname,
                     'shorttext' =>   $sectionname,
                     'icon' => 'fa fa-list',
@@ -393,6 +459,14 @@ class core_renderer extends \theme_boost\output\core_renderer {
                    'hasactivites' => $section->hasactivites,
                     'activities' => $section->hasactivites ?$dados[$section->section]: false,
                     'issectionactive' => $activesection==$section->section?true:false,
+                    'sectionavailable' => $section->available,
+                    'availableinfo' => strip_tags($section->availableinfo),
+                    'available' => $section->available,
+                    'visible' => $section->visible,
+                    'availability' => $section->availability,
+                    'uservisible' =>  $section->uservisible,
+                    'dimmed' => !$section->available or !$section->visible?true:false,
+                    'tooltip' => $tooltip,
                 ];
         }
 
