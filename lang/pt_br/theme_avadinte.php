@@ -109,3 +109,5 @@ $string['privacy:themeavadintesettings_fonttype'] = 'A preferência atual para o
 $string['privacy:themeavadintesettings_enableaccessibilitytoolbar'] = 'A preferência atual para habilitar a barra de acessibilidade é para exibi-lá';
 
 $string['login'] = 'Você possui uma conta?';
+
+$string['board'] = 'Mural';

@@ -419,11 +419,17 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     $sectionname = $section->name;
                 }
                 if($section->section==0){
-                    $sectionname = 'Informações gerais';
+                    $sectionname = get_string( "board","theme_avadinte");
                 }
                 $action='';
                 if($course->format=='topics'){
-                    $action = new moodle_url('/course/view.php', array('id' => $PAGE->course->id, 'section' => $section->section));
+                    $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id, 'section' => $section->section));
+                    $action = 'href= ' . $url;
+                }
+                if($course->format == 'buttons' && $section->section==0) {
+                    $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id));
+
+                    $action =  'href=' .'"'. $url . '"' ;
                 }
                 //define tooltip
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $context);

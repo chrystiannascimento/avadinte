@@ -123,3 +123,6 @@ $string['privacy:themeavadintesettings_fonttype'] = 'The current preference for 
 $string['privacy:themeavadintesettings_enableaccessibilitytoolbar'] = 'The current preference for enable accessibility toolbar is to show it.';
 
 $string['login'] = 'Already have an account?';
+
+
+$string['board'] = 'Board';
