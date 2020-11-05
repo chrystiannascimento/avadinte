@@ -8,7 +8,7 @@ $navbar-header-color: #fff !default;
 
 
 $body-bg: #fff !default;
-
+//$body-color:                $gray-900 !default;
 
 
 //navbar
@@ -27,6 +27,12 @@ $font-weight-bold:            700 !default;
 
 $headings-font-weight:        700;
 $font-weight-base:            400;
+$topnavbar-bg: #690000 !default;
 
-
+//DRawer
 $drawer-width: 315px;
+$drawer-bg: darken($body-bg, 5%) !default;
+
+
+
+$primary: #690000 !default;

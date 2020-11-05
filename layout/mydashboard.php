@@ -60,6 +60,10 @@ if ($draweropenright && $hasblocks) {
     $extraclasses[] = 'drawer-open-right';
 }
 
+$showbanner = $PAGE->theme->settings->showbanner;
+$bannertext=(empty($PAGE->theme->settings->bannertextbox && isloggedin())) ? false : $PAGE->theme->settings->bannertextbox;
+$bannertitle = (empty($PAGE->theme->settings->bannertitle && isloggedin())) ? false:$PAGE->theme->settings->bannertitle;
+ 
 
 $templatecontext = [
     'sitename' => $sitename,
@@ -70,7 +74,10 @@ $templatecontext = [
     'draweropenright' => $draweropenright,
     'headernavopen' => true,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
-    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
+    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+    'showbanner' => $showbanner,
+    'bannertextbox'=> $bannertext, 
+    'bannertitle' => $bannertitle,
 ];
 
 $nav = $PAGE->flatnav;

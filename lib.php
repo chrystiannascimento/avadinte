@@ -69,6 +69,64 @@ function theme_avadinte_get_main_scss_content($theme) {
     // Combine them together.
     return $pre . "\n" . $avadintevariables . "\n" .  $scss . "\n" . $avadinte  . "\n" . $post;
 }
+ 
+function theme_avadinte_get_pre_scss($theme) {
+    global $CFG, $PAGE;
+
+    $prescss = '';
+
+    $configurable = [
+    // Config key => variableName,
+    'brandprimary' => ['primary'],
+    'brandsuccess' => ['success'],
+    'brandinfo' => ['info'],
+    'brandwarning' => ['warning'],
+    'branddanger' => ['danger'],
+    'bodybackground' => ['body-bg'],
+    'breadcrumbbkg' => ['breadcrumb-bg'],
+    'cardbkg' => ['card-bg'],
+    'drawerbkg' => ['drawer-bg'],
+    'footerbkg' => ['footer-bg'],
+    'fploginform' => ['fploginform'],
+    'headerimagepadding' => ['headerimagepadding'],
+    'markettextbg' => ['markettextbg'],
+    'iconwidth' => ['fpicon-width'],
+    'courseboxheight' => ['courseboxheight'],
+    'learningcontentpadding' => ['learningcontentpadding'],
+    'blockwidthfordson' => ['blockwidthfordson'],
+    'slideshowheight' => ['slideshowheight'],
+    'activityiconsize' => ['activityiconsize'],
+    'gutterwidth' => ['gutterwidth'],
+    'topnavbarbg' => ['topnavbar-bg'],
+    'topnavbarteacherbg' => ['teachernavbarcolor'],
+    'slideshowspacer' => ['slideshowspacer'],
+    ];
+
+    // Add settings variables.
+    foreach ($configurable as $configkey => $targets) {
+        $value = $theme->settings->{$configkey};
+        if (empty($value)) {
+            continue;
+        }
+        array_map(function ($target) use (&$prescss, $value) {
+            $prescss .= '$' . $target . ': ' . $value . ";\n";
+        }
+        , (array)$targets);
+    }
+
+    // Prepend pre-scss.
+    if (!empty($theme->settings->scsspre)) {
+        $prescss .= $theme->settings->scsspre;
+    }
+
+
+
+    return $prescss;
+}
+
+
+
+
 
 /**
  * Copy the updated theme image to the correct location in dataroot for the image to be served

@@ -126,3 +126,86 @@ $string['login'] = 'Already have an account?';
 
 
 $string['board'] = 'Board';
+
+
+//Settings
+//colour_settings
+$string['colours_settings'] = 'Colours';
+$string['colours_headingsub'] = 'Colour Settings';
+$string['colours_desc'] = 'Colour choosers will allow you to customize the look and feel of the main elements on the page.  If you are using a Preset other than the default, you will need to remove any custom colors below for best results as these will over-ride the Preset with undesireable results.  Generally, the Preset will have default colors that you will want to see before customizing them here.';
+
+$string['brandColour'] = 'Brand Colour';
+$string['brandColour_desc'] = 'Your main brand colour';
+$string['brandprimary'] = 'Brand Primary';
+$string['brandprimary_desc'] = 'Your main brand colour';
+$string['brandsuccess'] = 'Brand Success';
+$string['brandsuccess_desc'] = 'Brand colour for succesful alerts, postive panels, buttons, etc';
+$string['brandinfo'] = 'Brand info';
+$string['brandinfo_desc'] = 'Brand colour information alerts and panels, etc';
+$string['brandwarning'] = 'Brand Warning';
+$string['brandwarning_desc'] = 'Brand colour for warning alerts and panels, etc';
+$string['branddanger'] = 'Brand Danger';
+$string['branddanger_desc'] = 'Brand colour for danger alerts and panels, etc';
+$string['breadcrumbbkg'] = 'Breadcrumb Background Colour';
+$string['breadcrumbbkg_desc'] = 'Breadcrumb background colour.';
+$string['drawerbkg'] = 'Side Drawer Background Colour';
+$string['drawerbkg_desc'] = 'Side Drawer background colour for the menu on the left side of the page.';
+$string['cardbkg'] = 'Content Background Colour';
+$string['cardbkg_desc'] = 'Content background colour for course content and blocks.';
+$string['bodybackground'] = 'Body Background Colour';
+$string['bodybackground_desc'] = 'The main colour to use for the background.';
+$string['footerbkg'] = 'Footer Background Colour';
+$string['footerbkg_desc'] = 'Footer background colour for the bottom of the page.';
+$string['topnavbarbg'] = 'Top Navigation Navbar Default';
+$string['topnavbarbg_desc'] = 'Content background colour for the top navigation bar.';
+
+
+$string['rawscss'] = 'Raw SCSS';
+$string['rawscss_desc'] = 'Use this field to provide SCSS code which will be injected at the end of the style sheet.';
+$string['rawscsspre'] = 'Raw initial SCSS';
+$string['rawscsspre_desc'] = 'In this field you can provide initialising SCSS code, it will be injected before everything else.
+    Most of the time you will use this setting to define variables.';
+
+//general_settings
+$string['general_headingsub'] = 'General Settings';
+$string['general_desc'] = 'Preset files are used to change the appearance of the theme. It is possible to send your own preset file to overwrite the default.';
+
+
+// Content settings.
+$string['contentsettings'] = 'Content areas';
+$string['coursetileinfo'] = 'Course Display Options';
+$string['coursetileinfodesc'] = 'These settings allow you to customize how courses will be displayed on the frontpage as well as course categories.';
+$string['textcontentinfo'] = 'Custom Content';
+$string['textcontentinfodesc'] = 'Use the textboxes below to add a customized information for users.';
+$string['generalcontentinfo'] = 'General Content Display Settings';
+$string['generalcontentinfodesc'] = 'The options below help you customize the way content is displayed and turn on additional features for Fordson.';
+$string['enrollcoursecard'] = 'Access';
+$string['layoutinfo'] = 'Layout Settings';
+$string['layoutinfodesc'] = 'Control page layout by chooseing a design.';
+
+
+
+$string['fptextbox'] = 'Homepage Textbox Authenticated User';
+$string['fptextbox_desc'] = 'This textbox appears on the homepage once a user authenticates. It is ideal for putting a welcome message and providing instructions for the learner.';
+
+
+//Banner
+$string['bannersettings'] = 'Banner';
+$string['showbanner'] = 'Show Banner';
+$string['showbanner_desc'] = 'These settings allow you to customize banner to be displayed on the frontpage.';
+$string['bannertextbox'] = 'Banner Textbox';
+$string['bannertextbox_desc'] = 'Banner textbox description';
+$string['bannertitle'] = 'Banner Title';
+$string['bannertitle_desc'] = 'Enter a title for the banner.';
+
+//Course Settings
+$string['course_settings'] = 'Course settings';
+$string['course_desc'] =' def...';
+$string['course_headingsub'] = 'Course settings';
+$string['sitetitle'] = 'Site title';
+$string['sitetitle_desc'] = 'Site title description';
+$string['default'] = 'Default';
+$string['category'] = 'Category';
+$string['course'] = 'Course';
+
+$string['presetadjustmentsettings'] = 'Preset Adjustments';

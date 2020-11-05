@@ -54,7 +54,13 @@ if ($draweropenright && $hasblocks) {
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 if ($PAGE->course->id > 1){
     $extraclasses[] = 'has-drawer';
-    $sitename = format_string($PAGE->category->name, true, ['context' => context_course::instance(SITEID), "escape" => false]);
+    $sname = array('1' => $SITE->shortname, '2' => $PAGE->category->name, '3' => $PAGE->course->shortname);
+    if($PAGE->theme->settings->sitetitle){
+
+        $sitename = format_string($sname[$PAGE->theme->settings->sitetitle], true, ['context' => context_course::instance(SITEID), "escape" => false]);
+
+    }
+    
 
 } else {
     $extraclasses[] = 'no-has-drawer';
