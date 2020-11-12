@@ -23,10 +23,19 @@
         {{#pix}} i/up, core, {{#str}} totop, theme_boost {{/str}}{{/pix}}
     </a>
 </div>
-<footer id="page-footer" class="py-3 bg-dark text-light">
-    avadinte
-    <div class="container">
-        <div id="course-footer">{{{ output.course_footer }}}</div>
+
+
+
+<footer id="page-footer" class="py-3 bg-ufma text-light  ">
+    <div class="container ">
+        <div class="row justify-content-md-center">
+        <div class="col-md-3 footer_area d-flex align-items-center vcenter">
+            {{{ output.social_icons }}}
+        </div>
+
+        <div class="col-md-4 footer_area vcenter">
+        
+             <div id="course-footer">{{{ output.course_footer }}}</div>
 
         {{# output.page_doc_link }}
             <p class="helplink">{{{ output.page_doc_link }}}</p>
@@ -44,6 +53,22 @@
         </nav>
         {{{ output.standard_footer_html }}}
         {{{ output.standard_end_of_body_html }}}
+        </div>
+        <div class="col-md-4 footer_area vcenter text_new">
+            {{#output.contacts_footer}}<h6>{{{output.contacts_footer}}}</h6>{{/output.contacts_footer}}
+            <ul class="list-unstyled text-left">
+                {{#output.phone1_footer}}<li><i class="fa fa-mobile-phone"></i>  {{output.phone1_footer}}</li>{{/output.phone1_footer}}
+                {{#output.phone2_footer}}<li><i class="fa fa-mobile-phone"></i>  {{output.phone2_footer}}</li>{{/output.phone2_footer}}
+                {{#output.phone3_footer}}<li><i class="fa fa-mobile-phone"></i>  {{output.phone3_footer}}</li>{{/output.phone3_footer}}
+                {{#output.phone4_footer}}<li><i class="fa fa-mobile-phone"></i>  {{output.phone4_footer}}</li>{{/output.phone4_footer}}
+                {{#output.phone5_footer}}<li><i class="fa fa-mobile-phone"></i>  {{output.phone5_footer}}</li>{{/output.phone5_footer}}
+                {{#output.phone6_footer}}<li><i class="fa fa-mobile-phone"></i>  {{output.phone6_footer}}</li>{{/output.phone6_footer}}
+                {{#output.phone7_footer}}<li><i class="fa fa-mobile-phone"></i>  {{output.phone7_footer}}</li>{{/output.phone7_footer}}
+               
+            </ul>
+        </div>
+        </div>
     </div>
+
+        
 </footer>
- 

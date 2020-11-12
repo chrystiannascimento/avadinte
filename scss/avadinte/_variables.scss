@@ -8,12 +8,12 @@ $navbar-header-color: #fff !default;
 
 
 $body-bg: #fff !default;
-
+//$body-color:                $gray-900 !default;
 
 
 //navbar
 $navbar-height: 150px !default;
-$navbar-height-sm: 55px !default;
+$sm-navbar-height: 55px !default;
 
 
 $navbar-bg: #272c33 !default;
@@ -27,6 +27,15 @@ $font-weight-bold:            700 !default;
 
 $headings-font-weight:        700;
 $font-weight-base:            400;
+$topnavbar-bg: #690000 !default;
 
-
+//DRawer
 $drawer-width: 315px;
+$drawer-bg: darken($body-bg, 5%) !default;
+
+//link
+$link-color: #000 !default;
+
+
+$primary: #690000 !default;
+

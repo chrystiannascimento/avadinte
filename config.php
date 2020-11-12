@@ -72,6 +72,7 @@ $THEME->scss = function($theme) {
     return theme_avadinte_get_main_scss_content($theme);
 };
 
+$THEME->prescsscallback = 'theme_avadinte_get_pre_scss';
 
 
 

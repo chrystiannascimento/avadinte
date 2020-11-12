@@ -5,6 +5,10 @@
 
 }
 
+#topnavbar {
+    background-color: $topnavbar-bg;
+}
+
 #site-header { 
     @media only screen and (min-width: 576px){
         .navbar{

@@ -16,7 +16,7 @@
 }}
 {{!
     Page navbar.
-}}
+}} 
     
 
   <header id="page-wrapper-header" class="fixed-top ">
@@ -26,7 +26,7 @@
 
 
             <!--above navbar-->
-           <nav class="navbar navbar-dark bg-ufma text-white navbar-expand moodle-has-zindex" aria-label="{{#str}}sitemenubar, admin{{/str}}">
+           <nav id="topnavbar" class="navbar navbar-dark text-white navbar-expand moodle-has-zindex" aria-label="{{#str}}sitemenubar, admin{{/str}}">
                  <button class="bg-ufma text-white border-0 d-inline d-sm-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -55,11 +55,17 @@
 
                 <ul class="navbar-nav d-none d-md-flex">
                     <!-- custom_menu -->
+
                     <!-- page_heading_menu -->
                     {{{ output.page_heading_menu }}}
                 </ul>
                 
                 <ul class=" nav navbar-nav ml-auto">
+                    <!-- 
+                    <li class="nav-item">
+                        {{{ output.custom_menu }}}
+                    </li>
+                     -->
                     <li class="d-none d-lg-block">
                         {{{ output.search_box }}}
                     </li>
@@ -75,6 +81,9 @@
                     <!-- search_box -->
             </nav>
 
+          
+     
+     
             
 
 
