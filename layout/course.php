@@ -46,9 +46,7 @@ $extraclasses = [];
 if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
 } 
-if ($draweropenright && $hasblocks) {
-    $extraclasses[] = 'drawer-open-right';
-}
+
 
 
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);

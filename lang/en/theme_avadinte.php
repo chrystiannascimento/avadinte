@@ -209,3 +209,64 @@ $string['category'] = 'Category';
 $string['course'] = 'Course';
 
 $string['presetadjustmentsettings'] = 'Preset Adjustments';
+
+//Footer Settings
+// Footer
+$string['footerheading'] = 'Footer';
+$string['organization'] = 'Organization Name';
+$string['organizationdesc'] = 'Organization name to appear in the footer.';
+$string['website'] = 'Organization Website';
+$string['websitedesc'] = 'Website address to appear in footer for organization.';
+$string['phone'] = 'Organization Phone';
+$string['phone1'] = 'Phone 1';
+$string['phone2'] = 'Phone 2';
+$string['phone3'] = 'Phone 3';
+$string['phone4'] = 'Phone 4';
+$string['phone5'] = 'Phone 5';
+$string['phone6'] = 'Phone 6';
+$string['phone7'] = 'Phone 7';
+
+
+$string['phonedesc'] = 'Phone number to appear in footer.';
+$string['mail'] = 'Organization Email';
+$string['maildesc'] = 'Email address for organization that appears in footer.';
+$string['footerheadingsub'] = 'Customize the footer of the homepage';
+$string['footerdesc'] = 'The items below allow you provide branding to the theme footer.';
+$string['footerheadingsocial'] ='Social Icons';
+$string['socialnetworks'] = 'Social Networks';
+$string['facebook'] = 'Facebook URL';
+$string['facebookdesc'] = 'Enter the URL of your Facebook page. (i.e http://www.facebook.com/)';
+$string['twitter'] = 'Twitter URL';
+$string['twitterdesc'] = 'Enter the URL of your Twitter feed. (i.e http://www.twitter.com/)';
+$string['googleplus'] = 'Google+ URL';
+$string['googleplusdesc'] = 'Enter the URL of your Google+ profile. (i.e https://google.com/)';
+$string['linkedin'] = 'LinkedIn URL';
+$string['linkedindesc'] = 'Enter the URL of your LinkedIn profile. (i.e http://www.linkedin.com/)';
+$string['youtube'] = 'YouTube URL';
+$string['youtubedesc'] = 'Enter the URL of your YouTube channel. (i.e http://www.youtube.com/)';
+$string['tumblr'] = 'Tumblr URL';
+$string['tumblrdesc'] = 'Enter the URL of your Tumblr. (i.e http://www.tumblr.com)';
+$string['vimeo'] = 'Vimeo URL';
+$string['vimeodesc'] = 'Enter the URL of your Vimeo channel. (i.e http://vimeo.com/)';
+$string['flickr'] = 'Flickr URL';
+$string['flickrdesc'] = 'Enter the URL of your Flickr page. (i.e http://www.flickr.com/)';
+$string['vk'] = 'VKontakte URL';
+$string['vkdesc'] = 'Enter the URL of your Vkontakte page. (i.e http://www.vk.com/)';
+$string['skype'] = 'Skype Account';
+$string['skypedesc'] = 'Enter the Skype username of your organisations Skype account';
+$string['pinterest'] = 'Pinterest URL';
+$string['pinterestdesc'] = 'Enter the URL of your Pinterest page. (i.e http://pinterest.com/)';
+$string['instagram'] = 'Instagram URL';
+$string['instagramdesc'] = 'Enter the URL of your Instagram page. (i.e http://instagram.com/)';
+$string['website'] = 'Website URL';
+$string['websitedesc'] = 'Enter the URL of your own website. (i.e http://dearbornschools.org)';
+$string['blog'] = 'Blog URL';
+$string['blogdesc'] = 'Enter the URL of your institution blog. (i.e http://dearbornschools.org)';
+$string['sociallink'] = 'Custom Social Link';
+$string['sociallinkdesc'] = 'Enter the URL of your your custom social media link. (i.e http://dearbornschools.org)';
+$string['sociallinkicon'] = 'Link Icon';
+$string['sociallinkicondesc'] = 'Enter the fontawesome name of the icon for your link<br />A full list of FontAwesome icons can be found at https://fontawesome.com/v4.7.0/icons/';
+$string['footnote'] = 'Footnote';
+$string['footnotedesc'] = 'Footnote content editor for main footer';
+$string['contacts'] = 'Contacts';
+$string['contactsdesc'] = 'Contacts content from site';

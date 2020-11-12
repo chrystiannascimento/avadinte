@@ -18,6 +18,8 @@ if ($ADMIN->fulltree) {
     require('settings/content_settings.php');
     require('settings/banner_settings.php');
     require('settings/course_settings.php');
+    require('settings/footer_settings.php');
+    
     
 
                                                                                                

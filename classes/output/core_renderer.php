@@ -299,11 +299,323 @@ class core_renderer extends \theme_boost\output\core_renderer {
         );
     }
 
+    //
+    protected function generate_topics(stdClass $course) {
+        global $CFG;
+        require_once ($CFG->dirroot . '/course/lib.php');
+        $modinfo = get_fast_modinfo($course);
+        $sections = $modinfo->get_section_info_all();
+        // For course formats using 'numsections' trim the sections list
+        $courseformatoptions = course_get_format($course)->get_format_options();
+        if (isset($courseformatoptions['numsections'])) {
+            $sections = array_slice($sections, 0, $courseformatoptions['numsections'] + 1, true);
+        }
+        $topics=array();
+        $activities = array();
+        foreach ($sections as $key => $section) {
+            // Clone and unset summary to prevent $SESSION bloat (MDL-31802).
+            $sections[$key] = clone ($section);
+            unset($sections[$key]->summary);
+            $sections[$key]->hasactivites = false;
+            $sections[$key]->activities = array();
+            if (!array_key_exists($section->section, $modinfo->sections)) {
+                continue;
+            }
+            foreach ($modinfo->sections[$section->section] as $cmid) {
+                $cm = $modinfo->cms[$cmid];
+                $activity = clone($cm);
+                $sections[$key]->activities[$cmid] = $activity;
+                if($cm->is_visible_on_course_page()){
+                    $sections[$key]->hasactivites = true;
+                }
+                
+            }
+            
+        }
 
 
+        return $sections;
 
+    }
 
     public function coursenav(){
+        global $PAGE, $COURSE, $CFG, $DB, $OUTPUT, $USER;
+        $icons = array('url' => 'fa fa-file-text', 
+            'resource' => 'fa fa-file-text', 
+            'forum' => 'fa fa-comments-o', 
+            'feedback' => 'fa fa-pencil-square-o', 
+            'page' => 'fa fa-file-text-o',
+            'h5pactivity' => 'fa fa-file-text-o',
+            'folder' => 'fa fa-folder-open-o',
+            'assign' => 'fa fa-pencil-square-o',
+            'data' => 'fa fa-database',
+            'chat' => 'fa fa-commenting-o',
+            'choice' => 'fa fa-question',
+            'lti' => 'fa fa-puzzle-piece',
+            'glossary' => 'fa fa-sort-alpha-asc', 
+             );
+
+        $course = $this->page->course;
+        $context = context_course::instance($course->id);
+        $courseid = optional_param('course', SITEID, PARAM_INT);
+        $courseid = $course->id;
+        $data = [];
+        $items = array($this->page->navigation);
+        $course  =  $DB -> get_record ( 'course' ,  array ( 'id'  =>  $courseid ) ) ; 
+        //get sections and modules information
+        $sections = $this->generate_topics($COURSE);
+
+        $modinfo = get_fast_modinfo($course);
+        $completioninfo = new \completion_info($course);
+        $courserenderer = $this->page->get_renderer('core', 'course');
+        
+
+        //$courserenderer->course_section_cm_completion($course, $completioninfo,, $displayoptions = array());
+      
+
+
+
+        $dados=[];
+        $activesection=0;
+        $activeactivity=false;
+        foreach($sections as $section){
+            $sectionname = 'Unidade ' . $section->section;
+            if($section->name){
+                $sectionname = $section->name;
+            }
+            if($section->section==0){
+                $sectionname = get_string( "board","theme_avadinte");
+            }
+            $action='';
+            if($course->format=='topics'){
+                $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id, 'section' => $section->section));
+                $action = 'href= ' . $url;
+            }
+            if($course->format == 'buttons' && $section->section==0) {
+                $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id));
+
+                $action =  'href=' .'"'. $url . '"' ;
+            }
+            //define tooltip
+            $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $context);
+            $tooltip = '';
+            //seção oculta
+            if(!$section->visible) {
+                if ($canviewhidden){
+                    $tooltip = get_string('hiddenfromstudents');
+
+                }
+                else {
+                    $tooltip = get_string('notavailable');
+
+                }
+            //seção restrita
+            } else if ($section->availableinfo) {
+                    $tooltip = strip_tags($section->availableinfo);
+                
+
+
+            }
+            foreach($section->activities as $activity){ 
+                if( !$activity->deletioninprogress){
+                    $dados[$activity->sectionnum][] = $this->get_activity_info( $activity, $completioninfo, $context,  $courserenderer, $course);
+ 
+                }
+                
+                
+    
+    
+               
+                
+            }
+
+
+
+            $data[] = [
+                'action' => $action,//'topic' . $section->section,
+                'text' =>   $sectionname,
+                'shorttext' =>   $sectionname,
+                'icon' => 'fa fa-list',
+                'type' => \navigation_node::TYPE_SETTING,
+                'section'=> $section->section,
+                'issectionzero' => $section->section ==0?true: false,                     
+                'key'=> $section->id,  
+               'hasactivites' => $section->hasactivites,
+                'activities' => $section->hasactivites ?$dados[$section->section]: false,
+                'issectionactive' => $activesection==$section->section?true:false,
+                'sectionavailable' => $section->available,
+                'availableinfo' => strip_tags($section->availableinfo),
+                'available' => $section->available,
+                'visible' => $section->visible,
+                'availability' => $section->availability,
+                'uservisible' =>  $section->uservisible,
+                'dimmed' => !$section->available or !$section->visible?true:false,
+                'tooltip' => $tooltip,
+            ];
+
+
+
+        }
+
+
+ 
+    
+
+
+        $courselinks =[];
+
+        $admingrade = new moodle_url('/grade/report/grader/index.php', array(
+            'id' => $PAGE->course->id));
+        $studentgrade = new moodle_url('/grade/report/user/index.php', array(
+                'id' => $PAGE->course->id));
+        $isstudent = !has_capability('moodle/course:viewhiddenactivities', $context);
+
+        $courselinks[] =[
+            
+            'action' =>  $isstudent? $studentgrade : $admingrade,
+            'text' =>get_string('gradebook', 'grades'),
+            'shorttext' => get_string('gradebook', 'grades'),
+            'icon' => 'fa fa-table fa-fw',
+            'type' => \navigation_node::TYPE_SETTING,
+            'key' => 'grades',
+            ];
+        $courselinks[] =[
+        
+            'action' =>  new moodle_url('/user/index.php', array('id' => $PAGE->course->id)),
+            'text' =>  get_string('participants', 'moodle'),
+            'shorttext' =>  get_string('participants', 'moodle'),
+            'icon' => 'icon fa fa-users fa-fw',
+            'type' => \navigation_node::TYPE_SETTING,
+            'key' => 'participants',
+            ];
+
+            $contentbank =[
+                'hascontentbank' => has_capability('moodle/contentbank:access', $context),        
+                'action' =>  new moodle_url('/contentbank/index.php', ['contextid' => $context->id]),
+                'text' =>  get_string('contentbank'),
+                'shorttext' =>  get_string('contentbank'),
+                'icon' => 'fa fa-shopping-bag',
+                'type' => \navigation_node::TYPE_SETTING,
+                'key' => 'contentbank',
+            ];
+
+
+
+      
+        
+
+
+
+       
+
+
+        $cncontext = [
+            'courselinks' => $courselinks,
+
+            'topics' =>$data,
+            'contentbank' => $contentbank
+
+
+        ];
+        return $this->render_from_template('theme_avadinte/sidebar_course', $cncontext);
+
+    }
+
+    protected function get_activity_info( $activity, $completioninfo, $context,  $courserenderer, $course){
+
+        global $PAGE, $COURSE, $CFG, $DB, $OUTPUT, $USER;
+        
+        
+        $displayoptions = array(); 
+        if($PAGE->url->compare( new moodle_url($activity->url), URL_MATCH_BASE)  ){
+            $pageparams= $PAGE->url->params();
+            $activityparams = $activity->url->params();
+                if ( $pageparams['id']==$activityparams['id']){
+                $activesection=$activity->sectionnum;
+        
+                $activeactivity = true;
+            }
+            else{
+                $activeactivity = false  ;
+            } 
+        } else{
+            $activeactivity = false  ;
+        } 
+        
+
+        
+        
+        if($activity->deletioninprogress){
+            return ;
+        }
+        $hiddentouser = (!$activity->visible and !has_capability('moodle/course:viewhiddenactivities', $context));
+        $restricttouser = (!$activity->available and has_capability('moodle/course:ignoreavailabilityrestrictions', $context));
+        $ignoreavailabilityrestrictions = has_capability('moodle/course:ignoreavailabilityrestrictions', $context);
+
+        //define tooltip
+        $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $context);
+        $ignorerestrictions = has_capability('moodle/course:ignoreavailabilityrestrictions', $context);
+        $tooltip = '';
+        //atividade oculta
+        if(!$activity->visible) {
+            if ($canviewhidden){
+                $tooltip = get_string('hiddenfromstudents');
+
+            }
+            else {
+                $tooltip = get_string('notavailable');
+
+            }
+        //atividade restrita
+        } else if ($activity->availableinfo) {
+                $tooltip = strip_tags($activity->availableinfo);
+            
+        }
+
+        $url = '';
+        if ($activity->url) {
+            $url = $activity->url->out();
+        }
+     
+
+
+        $activity_info=[
+            'action' => $url,
+            'text' => $activity->name,
+            'shorttext' => $activity->name,
+            'icon' => $OUTPUT->image_icon('icon', get_string('pluginname', $activity->modname), $activity->modname), //array_key_exists($activity->modname, $icons)? $icons[$activity->modname]:'',
+            'type' => navigation_node::NODETYPE_LEAF,
+            'key' => $activity->id,
+            'modname' => $activity->modname,
+            'hidden' => !$activity->visible,
+            'hiddentouser' => $hiddentouser,//$activity->hidden,
+            'completion_state' => $completioninfo->get_data($activity, true, $USER->id)->completionstate,
+            'modicon' => $courserenderer->course_section_cm_completion($course, $completioninfo,$activity, $displayoptions ),
+            'isactive' => $activeactivity,
+            'available' => $activity->available,
+            'availableinfo' => strip_tags($activity->availableinfo),
+            'restricttouser' => $restricttouser,
+            'ignoreavailabilityrestrictions' => $ignoreavailabilityrestrictions,
+            'dimmed' => !$activity->available or !$activity->visible?true:false, 
+            'noaction' => !$activity->available and !$ignorerestrictions ? true:false,
+            
+            'tooltip' => $tooltip ,
+
+
+            
+        ];
+        return $activity_info;
+
+
+    }
+
+
+
+
+
+
+
+    public function coursenav2(){
         global $PAGE, $COURSE, $CFG, $DB, $OUTPUT, $USER;
         $icons = array('url' => 'fa fa-file-text', 
             'resource' => 'fa fa-file-text', 
@@ -348,16 +660,32 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
  
         foreach($activities as $activity) {
-            if($PAGE->url->compare( new moodle_url($activity->url), URL_MATCH_EXACT)){
-                $activesection=$activity->section;
-                $activeactivity = true;
-            }
-            else{
+            $fullactivity = $modinfo->cms[$activity->id];
+            
+
+       
+
+            if($PAGE->url->compare( new moodle_url($fullactivity->url), URL_MATCH_BASE)  ){
+                $pageparams= $PAGE->url->params();
+                $activityparams = $fullactivity->url->params();
+                    if ( $pageparams['id']==$activityparams['id']){
+                    $activesection=$activity->section;
+            
+                    $activeactivity = true;
+                }
+                else{
+                    $activeactivity = false  ;
+                } 
+            } else{
                 $activeactivity = false  ;
             } 
+            
 
             
-            $fullactivity = $modinfo->cms[$activity->id];
+            
+            if($fullactivity->deletioninprogress){
+                continue;
+            }
             $hiddentouser = ($activity->hidden and !has_capability('moodle/course:viewhiddenactivities', $context));
             $restricttouser = (!$fullactivity->available and has_capability('moodle/course:ignoreavailabilityrestrictions', $context));
             $ignoreavailabilityrestrictions = has_capability('moodle/course:ignoreavailabilityrestrictions', $context);
@@ -615,6 +943,123 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         return ' id="'. $this->body_id().'" class="'.$this->body_css_classes($additionalclasses).'"';
+    }
+
+    public function contacts_footer() {
+        $theme = theme_config::load('avadinte');
+        $setting = $theme->settings->contacts;
+        return $setting != '' ? $setting : '';
+    }
+    public function phone1_footer() {
+        $theme = theme_config::load('avadinte');
+        $setting = $theme->settings->phone1;
+        return $setting != '' ? $setting : '';
+    }
+
+    public function phone2_footer() {
+        $theme = theme_config::load('avadinte');
+        $setting = $theme->settings->phone2;
+        return $setting != '' ? $setting : '';
+    }
+
+    public function phone3_footer() {
+        $theme = theme_config::load('avadinte');
+        $setting = $theme->settings->phone3;
+        return $setting != '' ? $setting : '';
+    }
+
+    public function phone4_footer() {
+        $theme = theme_config::load('avadinte');
+        $setting = $theme->settings->phone4;
+        return $setting != '' ? $setting : '';
+    }
+
+    public function phone5_footer() {
+        $theme = theme_config::load('avadinte');
+        $setting = $theme->settings->phone5;
+        return $setting != '' ? $setting : '';
+    }
+
+    public function phone6_footer() {
+        $theme = theme_config::load('avadinte');
+        $setting = $theme->settings->phone6;
+        return $setting != '' ? $setting : '';
+    }
+
+    public function phone7_footer() {
+        $theme = theme_config::load('avadinte');
+        $setting = $theme->settings->phone7;
+        return $setting != '' ? $setting : '';
+    }
+
+ 
+    public function mail_footer() {
+        $theme = theme_config::load('fordson');
+        $setting = $theme->settings->brandemail;
+        return $setting != '' ? $setting : '';
+    }
+
+
+    public function social_icons() {
+        global $PAGE;
+        $hasfacebook = (empty($PAGE->theme->settings->facebook)) ? false : $PAGE->theme->settings->facebook;
+        $hastwitter = (empty($PAGE->theme->settings->twitter)) ? false : $PAGE->theme->settings->twitter;
+        $hasyoutube = (empty($PAGE->theme->settings->youtube)) ? false : $PAGE->theme->settings->youtube;
+        $hasinstagram = (empty($PAGE->theme->settings->instagram)) ? false : $PAGE->theme->settings->instagram;
+        $hasskype = (empty($PAGE->theme->settings->skype)) ? false : $PAGE->theme->settings->skype;
+        $haswebsite = (empty($PAGE->theme->settings->website)) ? false : $PAGE->theme->settings->website;
+        $hasblog = (empty($PAGE->theme->settings->blog)) ? false : $PAGE->theme->settings->blog;
+        $hassocial1 = (empty($PAGE->theme->settings->social1)) ? false : $PAGE->theme->settings->social1;
+        $social1icon = (empty($PAGE->theme->settings->socialicon1)) ? 'globe' : $PAGE->theme->settings->socialicon1;
+        $hassocial2 = (empty($PAGE->theme->settings->social2)) ? false : $PAGE->theme->settings->social2;
+        $social2icon = (empty($PAGE->theme->settings->socialicon2)) ? 'globe' : $PAGE->theme->settings->socialicon2;
+        $hassocial3 = (empty($PAGE->theme->settings->social3)) ? false : $PAGE->theme->settings->social3;
+        $social3icon = (empty($PAGE->theme->settings->socialicon3)) ? 'globe' : $PAGE->theme->settings->socialicon3;
+        $socialcontext = [
+        // If any of the above social networks are true, sets this to true.
+        'hassocialnetworks' => ($hasfacebook || $hastwitter   || $hasinstagram    || $hasskype  || $haswebsite || $hasyoutube || $hasblog   || $hassocial1 || $hassocial2 || $hassocial3) ? true : false, 'socialicons' => array(
+            array(
+                'haslink' => $hasfacebook,
+                'linkicon' => 'facebook'
+            ) ,
+            array(
+                'haslink' => $hastwitter,
+                'linkicon' => 'twitter'
+            ) ,
+            array(
+                'haslink' => $hasyoutube,
+                'linkicon' => 'youtube'
+            ) ,
+            array(
+                'haslink' => $hasinstagram,
+                'linkicon' => 'instagram'
+            ) ,
+            array(
+                'haslink' => $hasskype,
+                'linkicon' => 'skype'
+            ) ,
+            array(
+                'haslink' => $haswebsite,
+                'linkicon' => 'globe'
+            ) ,
+            array(
+                'haslink' => $hasblog,
+                'linkicon' => 'bookmark'
+            ) ,
+            array(
+                'haslink' => $hassocial1,
+                'linkicon' => $social1icon
+            ) ,
+            array(
+                'haslink' => $hassocial2,
+                'linkicon' => $social2icon
+            ) ,
+            array(
+                'haslink' => $hassocial3,
+                'linkicon' => $social3icon
+            ) ,
+        ) ];
+        return $this->render_from_template('theme_avadinte/socialicons', $socialcontext);
     }
   
 

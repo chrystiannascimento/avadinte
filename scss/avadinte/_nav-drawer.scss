@@ -1,6 +1,5 @@
 $fixed-header-y: $navbar-height;
 
-$drawer-width: 315px;
 $drawer-padding-x: 20px !default;
 $drawer-padding-y: 20px !default;
 $drawer-offscreen-gutter: 20px !default;
@@ -121,3 +120,12 @@ body.drawer-open-right.path-grade-report-grader {
 
     }
 }
+
+@include media-breakpoint-down(md){ 
+    [data-region="drawer"] {
+        top: $sm-navbar-height;
+        height: calc(100% - #{$sm-navbar-height});
+    }
+
+}
+

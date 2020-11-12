@@ -123,6 +123,16 @@ $fixed-header-y: $navbar-height;
     z-index: 999;
 }
 
+@include media-breakpoint-down(sm){ 
+    [data-region="blocks-column"] {
+        top: $sm-navbar-height;
+        height: calc(100% - #{$sm-navbar-height});
+    }
+
+}
+
+
+
 body.drawer-open-right {
     #sidepreopen-control {
         right: 305px;
