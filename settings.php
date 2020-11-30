@@ -19,7 +19,12 @@ if ($ADMIN->fulltree) {
     require('settings/banner_settings.php');
     require('settings/course_settings.php');
     require('settings/footer_settings.php');
+    require('settings/buttons_settings.php');
+    require('settings/topnavbar_settings.php');
+    require('settings/drawer_settings.php');
+    require('settings/header_settings.php');
     
+
     
 
                                                                                                

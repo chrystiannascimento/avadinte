@@ -38,7 +38,7 @@
 
             <div class="list-group-item 
             
-            {{#dimmed}}dimmed dimmed_text{{/dimmed}}  {{^dimmed}}list-group-item-action{{/dimmed}}              
+            {{#dimmed}}dimmed {{/dimmed}}  {{^dimmed}}list-group-item-action{{/dimmed}}              
 
             {{#issectionactive}}active {{/issectionactive}}  section"   data-target="#topic{{{section}}}"
              data-toggle="collapse" aria-expanded="false"  data-key="{{{key}}}" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" 
@@ -74,7 +74,7 @@
             <a class=" list-group-item 
             {{#dimmed}}dimmed dimmed_text{{/dimmed}}  {{^dimmed}}list-group-item-action{{/dimmed}}
              {{#isactive}}active{{/isactive}}  " 
-            href="{{{action}}}"  data-key="" data-isexpandable="" data-indent="" data-showdivider="" 
+            {{^noaction}}href="{{{action}}}"{{/noaction}}  data-key="" data-isexpandable="" data-indent="" data-showdivider="" 
             data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" 
             data-preceedwithhr="" >
                 <div class="ml-2">

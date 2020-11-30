@@ -158,13 +158,64 @@ $string['footerbkg'] = 'Footer Background Colour';
 $string['footerbkg_desc'] = 'Footer background colour for the bottom of the page.';
 $string['topnavbarbg'] = 'Top Navigation Navbar Default';
 $string['topnavbarbg_desc'] = 'Content background colour for the top navigation bar.';
-
+$string['linkcolor'] = 'Link colour';
+$string['linkcolor_desc'] = 'Link color';
 
 $string['rawscss'] = 'Raw SCSS';
 $string['rawscss_desc'] = 'Use this field to provide SCSS code which will be injected at the end of the style sheet.';
 $string['rawscsspre'] = 'Raw initial SCSS';
 $string['rawscsspre_desc'] = 'In this field you can provide initialising SCSS code, it will be injected before everything else.
     Most of the time you will use this setting to define variables.';
+
+
+$string['maincolors'] = 'Main colors';
+$string['maincolors_desc']= 'Main colors description';
+$string['maincontentbackground'] = 'Main content background';
+$string['maincontentbackground_desc'] = 'Set the background colour for main content area';
+$string['linkhovercolor'] = 'Cor do link ao passar o mouse';
+$string['linkhovercolor_desc'] = 'Cor do link quando o ponteiro do mouse estiver sobre o link';
+$string['selectiontextcolor'] = 'Cor do texto selecionado';
+$string['selectiontextcolor_desc'] = 'Definir a cor do texto quando um texto for selecionado na tela.';
+$string['selectiontextbgcolor']= 'Cor de fundo do texto selecionado';
+$string['selectiontextbgcolor_desc']= 'Definir a cor de fundo do texto quando um texto for selecionado na tela.';
+$string['topnavbarcolors'] = 'Cores da barra de navegação superior';
+$string['topnavbarcolors_desc'] = 'define as cores da barra de navegação superior.';
+$string['topnavbartextcolor'] = 'Cor de texto e link da barra de navegação superior';
+$string['topnavbartextcolor_desc'] ='Definir a cor do texto e link da barra de navegação superior.';
+
+$string['breadcrumbcolors'] = 'Cores da trilha de navegação';
+$string['breadcrumbcolors_desc']='Cores da trilha de navegação descrição';
+$string['breadcrumbtextcolor'] = 'Cor do texto da trilha de navegação';
+$string['breadcrumbtextcolor_desc'] = 'Definir a cor do texto da trilha de navegação';
+
+$string['breadcrumbbgcolor'] = 'Cor do fundo da trilha de navegação';
+$string['breadcrumbbgcolor_desc'] = 'Definir a cor do fundo da trilha de navegação';
+
+$string['footercolors'] = 'Cores do rodapé';
+$string['footercolors_desc'] = 'Cores do rodapé descrição';
+
+$string['footertextcolor'] = 'Cor do texto do rodapé';
+$string['footertextcolor_desc'] = 'Definir a cor do texto do rodapé';
+$string['footerlinkcolor'] = 'Cor do link do rodapé';
+$string['footerlinkcolor_desc'] = 'Definir a cor do link do rodapé';
+
+$string['footerbgcolor'] = 'Cor do fundo do rodapé';
+$string['footerbgcolor_desc'] = 'Definir a cor do fundo do rodapé';
+
+$string['forumcolors'] = 'Forum';
+$string['forumcolors_desc'] = 'Cores do forum';
+$string['forumheadingbgcolor'] = 'Cor do fundo do titulo do forum';
+$string['forumheadingbgcolor_desc'] = 'definir a cor do fundo do título do forum' ;
+$string['forumbodybgcolor'] = 'Cor do fundo do corpo da postagem do forum' ;
+$string['forumbodybgcolor_desc'] = 'definir a cor do fundo do corpo da postagem do forum' ;
+
+$string['ativityboxcolors'] = 'Cor do a caixa de introdução da atividade';
+$string['ativityboxcolors_desc'] = 'definir a cor da caixa de introdução da atividade' ;
+$string['ativityboxbgcolor'] = 'Cor de fundo da caixa de introdução da atividade';
+$string['ativityboxbgcolor_desc'] = 'definir a cor de fundo da caixa de itrodução da atividade';
+
+
+
 
 //general_settings
 $string['general_headingsub'] = 'General Settings';
@@ -270,3 +321,108 @@ $string['footnote'] = 'Footnote';
 $string['footnotedesc'] = 'Footnote content editor for main footer';
 $string['contacts'] = 'Contacts';
 $string['contactsdesc'] = 'Contacts content from site';
+
+// Buttons *********************************************************.
+$string['buttonsettings'] = 'Buttons';
+$string['buttonsettingsheading'] = 'Customize the buttons of this theme.';
+$string['buttondesc'] = 'Alter the appearance of buttons used in this theme.';
+
+$string['buttonradius'] = 'Set Button Radius';
+$string['buttonradiusdesc'] = 'Higher radius = curved buttons, lower radius = square buttons';
+
+$string['buttoncolor'] = 'Button colour';
+$string['buttoncolordesc'] = 'The colour of the main buttons used throughout the site.';
+
+$string['buttonhovercolor'] = 'Button colour (When hovering)';
+$string['buttonhovercolordesc'] = 'The colour that the button changes to when hovering over the button.';
+
+$string['buttontextcolor'] = 'Button text colour';
+$string['buttontextcolordesc'] = 'The colour of text used on buttons';
+
+$string['buttoncolorscnd'] = 'Secondary Button colour';
+$string['buttoncolordescscnd'] = 'The colour of the secondary buttons used throughout the site.';
+
+$string['buttonhovercolorscnd'] = 'Secondary Button colour (When hovering)';
+$string['buttonhovercolordescscnd'] = 'The colour that the secondary button changes to when hovering over the button.';
+
+$string['buttontextcolorscnd'] = 'Secondary Button text colour';
+$string['buttontextcolordescscnd'] = 'The colour of text used on secondary buttons.';
+
+$string['buttoncolorcancel'] = 'Cancel Button colour';
+$string['buttoncolordesccancel'] = 'Background colour for Cancel button.<br />Type transparent in the box for transparency.';
+
+$string['buttonhovercolorcancel'] = 'Cancel Button colour (When hovering)';
+$string['buttonhovercolordesccancel'] = 'The colour that the cancel button changes to when hovering over the button. <br />Type transparent in the box for transparency.';
+
+$string['buttontextcolorcancel'] = 'Cancel Button text colour';
+$string['buttontextcolordesccancel'] = 'The colour of text used on cancel buttons.';
+
+$string['editfont'] = 'Editing and Customize this page button font colour';
+$string['editfontdesc'] = 'Set the Editing and Customize this page button font colour';
+
+$string['editverticalpadding'] = 'Set vertical padding of editing buttons';
+$string['edithorizontalpadding'] = 'Set Horizontal padding of editing buttons';
+
+$string['buttondropshadow'] = 'Drop shadow decoration on bottom of button';
+$string['buttondropshadowdesc'] = 'Show a drop shadow (shading) on bottom of button.';
+
+$string['buttons_settings'] = 'Buttons settings';
+$string['buttons_headingsub'] = 'Buttons';
+$string['buttons_desc'] = 'Página para definir as configurações dos botões';
+
+//Top navbar settings
+$string['topnavbar_settings'] = 'Top navbar';
+$string['topnavbar_headingsub'] = 'Top navbar settings';
+$string['topnavbar_desc'] = 'desc...';
+$string['tnbnavbar'] = 'Navbar';
+$string['tnbnavbar_desc'] = 'Navbar desc';
+$string['topnavbarsticky'] = 'Fixa apenas a barra de navegação';
+$string['topnavbarsticky_desc'] = 'Fixa apena a barra de navegação, tendo mais area para o conteudo';
+$string['enablehome'] = 'Página inicial';
+$string['enablehome_desc'] = 'Mostra um link para a página inicial';
+$string['enablemyhome'] = 'Minhas disciplinas';
+$string['enablemyhome_desc'] = 'Mostra um link para a minhas disciplinas';
+$string['enablecalendar'] = 'Calendar';
+$string['enablecalendar_desc'] ='Mostra um link para o calendario';
+$string['enablecourses'] = 'Cursos';
+$string['enablecourses_desc'] = 'Mostra um link para a página de  cursos';
+$string['enablecallcenter'] ='Central de atendimento';
+$string['enablecallcenter_desc'] = 'Define link para a central de atendimento. Se Vazio será desabilitado';
+
+//Drawer settings right and left
+$string['drawer_settings'] = 'Drawer';
+$string['drawer_headingsub'] = 'Drawer settings';
+$string['drawer_desc'] = 'Drawer settings ...';
+$string['leftdrawer'] = 'Left drawer';
+$string['leftdrawer_desc']  = 'Left drawer settings';
+$string['shownavclosed'] = 'Nav Drawer Closed by Default';
+$string['shownavclosed_desc'] = 'Show the navigation drawer collapsed for all users by default on each page.';
+$string['leftdrawersize'] = 'Left drawer size';
+$string['leftdrawersize_desc'] = 'Left drawer size';
+$string['drawercolor'] = 'Drawer text color';
+$string['drawercolor_desc'] = 'Drawer text color';
+$string['drawerhover'] = 'Drawer hover color';
+$string['drawerhover_desc'] = 'Drawer hover color ';
+$string['drawerhoverbg'] = 'Drawer hover bg color';
+$string['drawerhoverbg_desc'] = 'Drawer hover bg color ';
+$string['draweractivel1'] = 'Drawer active level 1';
+$string['draweractivel1_desc'] = 'Drawer active level 1';
+$string['draweractivel2'] = 'Drawer active level 2';
+$string['draweractivel2_desc'] = 'Drawer active level 2';
+$string['drawerdimmed'] = 'Drawer dimmed color';
+$string['drawerdimmed_desc'] = 'Drawer dimmed  color';
+$string['drawerdimmedbg'] = 'Drawer dimmed bg color';
+$string['drawerdimmedbg_desc'] = 'Drawer dimmed bg color';
+
+
+
+//Header
+$string['header_settings'] = 'Header';
+$string['header_headingsub'] = 'Header  settings';
+$string['header_desc'] = 'Header settings...';
+$string['showcourseheader'] = 'Show course header';
+$string['showcourseheader_desc'] = 'Show course header desc';
+
+
+
+

@@ -90,15 +90,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $context = context_course::instance($course->id);
         $courseid = optional_param('course', SITEID, PARAM_INT);
         $courseid = $course->id;
+        $theme = $theme = theme_config::load('avadinte');
 
         $topmenucontext = [];
-
-        
-
-
-
-        
-
 
         $siteadmintitle = get_string('siteadmintitle','theme_avadinte' );
         $siteadminurl = new moodle_url('/admin/search.php');
@@ -109,7 +103,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $contextid = optional_param('contextid', \context_system::instance()->id, PARAM_INT);
 
         $topmenucontext[] =[
-            'isadminlink' => $hasadminlink,
+            'isadminlink' => true,
             'isactive' => $PAGE->url->compare($siteadminurl, URL_MATCH_BASE),
             'text' => get_string('siteadmintitle','theme_avadinte' ),
             'action' => new moodle_url('/admin/search.php'),
@@ -120,13 +114,16 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $homepageurl = new moodle_url('/?redirect=0');
         $homepageisactive =$PAGE->url->compare($homepageurl, URL_MATCH_BASE);
 
-        $topmenucontext[] =[
-            'isadminlink' => '',
-            'isactive' => $PAGE->url->compare($homepageurl, URL_MATCH_BASE),
-            'text' => get_string('homepagetitle', 'theme_avadinte'),
-            'action' => new moodle_url('/?redirect=0'),
-
-        ];
+        if($theme->settings->enablehome){
+            $topmenucontext[] =[
+                'isadminlink' => '',
+                'isactive' => $PAGE->url->compare($homepageurl, URL_MATCH_BASE),
+                'text' => get_string('homepagetitle', 'theme_avadinte'),
+                'action' => new moodle_url('/?redirect=0'),
+    
+            ];
+        }
+        
         //Disciplinas
         
 
@@ -137,13 +134,15 @@ class core_renderer extends \theme_boost\output\core_renderer {
          $mycoursepageurl = new moodle_url('/course/view.php', array('id' => $courseid));
          $mycoursespageisactive = $PAGE->url->compare($mycoursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($mycoursepageurl, URL_MATCH_BASE) ? true : false ;
 
-         $topmenucontext[] =[
-            'isadminlink' => '',
-            'isactive' => $PAGE->url->compare($mycoursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($mycoursepageurl, URL_MATCH_BASE) ? true : false,
-            'text' => get_string('mycoursespagetitle','theme_avadinte' ),
-            'action' => new moodle_url('/my/'),
-
-        ];
+         if($theme->settings->enablemyhome){
+            $topmenucontext[] =[
+                'isadminlink' => '',
+                'isactive' => $PAGE->url->compare($mycoursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($mycoursepageurl, URL_MATCH_BASE) ? true : false,
+                'text' => get_string('mycoursespagetitle','theme_avadinte' ),
+                'action' => new moodle_url('/my/'),
+            ];
+         }
+         
          //Calendario
          $calendartitle = get_string('calendar','theme_avadinte' );
 
@@ -159,63 +158,66 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $calendarisactive =$PAGE->url->compare($calendarurl, URL_MATCH_BASE);
 
-        $topmenucontext[] =[
-            'isadminlink' =>'',
-            'isactive' => $PAGE->url->compare($calendarurl, URL_MATCH_BASE),
-            'text' => get_string('calendar','theme_avadinte' ),
-            'action' => $calendarurl,
+        if($theme->settings->enablecalendar){
+            $topmenucontext[] =[
+                'isadminlink' =>'',
+                'isactive' => $PAGE->url->compare($calendarurl, URL_MATCH_BASE),
+                'text' => get_string('calendar','theme_avadinte' ),
+                'action' => $calendarurl,
+            ];
+        }
 
-        ];
+        
+
+
+
+
+        
 
         //Central de Atendimentos 
+
         $attendtitle=get_string('attendtitle','theme_avadinte' );
         $attendurl= "http://atendimento.nead.ufma.br/view.php";
+        if($theme->settings->enablecallcenter){
+            $topmenucontext[] =[
+                'isadminlink' =>'',
+                'isactive' =>'',
+                'text' => get_string('attendtitle','theme_avadinte' ),
+                'action' =>"http://atendimento.nead.ufma.br/view.php",
+                'attr' => ' target="_blank"',
+            ];
+        }
 
-        $topmenucontext[] =[
-            'isadminlink' =>'',
-            'isactive' =>'',
-            'text' => get_string('attendtitle','theme_avadinte' ),
-            'action' =>"http://atendimento.nead.ufma.br/view.php",
-
-        ];
+        
 
         //Private File
         $privatefilestitle = get_string('privatefilestitle','theme_avadinte' );
         $privatefilesurl = new moodle_url('/user/files.php');
         $privatefilesisactive = $PAGE->url->compare($privatefilesurl, URL_MATCH_BASE);
 
-        $topmenucontext[] =[
-            'isadminlink' =>'',
-            'isactive' => $PAGE->url->compare($privatefilesurl, URL_MATCH_BASE),
-            'text' => get_string('privatefilestitle','theme_avadinte' ),
-            'action' => new moodle_url('/user/files.php'),
-
-        ];
+    
 
         //Content bank
         $contentbanktitle = get_string('contentbanktitle','theme_avadinte' );
         $contentbankurl = new \moodle_url('/contentbank/index.php', ['contextid' => $contextid]);
         $contentbankisactive = $PAGE->url->compare($contentbankurl, URL_MATCH_BASE);
         
-        $topmenucontext[] =[
-            'isadminlink' =>'',
-            'isactive' => $PAGE->url->compare($contentbankurl, URL_MATCH_BASE),
-            'text' => get_string('contentbanktitle','theme_avadinte' ),
-            'action' => new \moodle_url('/contentbank/index.php', ['contextid' => $contextid]),
-
-        ];
+      
         //Courses Page
         $coursespagetitle=get_string('coursespagetitle','theme_avadinte' );
         $coursespageurl= new moodle_url('/course/index.php');
         $coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
 
-        $topmenucontext[] =[
-            'isadminlink' => $hasadminlink,
-            'isactive' => $PAGE->url->compare($coursespageurl, URL_MATCH_BASE),
-            'text' => get_string('coursespagetitle','theme_avadinte' ),
-            'action' => new moodle_url('/course/index.php'),
+        if($theme->settings->enablecourses){
+            $topmenucontext[] =[
+                'isadminlink' => true,
+                'isactive' => $PAGE->url->compare($coursespageurl, URL_MATCH_BASE),
+                'text' => get_string('coursespagetitle','theme_avadinte' ),
+                'action' => new moodle_url('/course/index.php'),
+            ];
+        }
 
-        ];
+        
 
 
   
@@ -230,6 +232,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
                         'privatefilestitle' => $privatefilestitle, 'privatefilesurl' => $privatefilesurl, 'privatefilesisactive' => $privatefilesisactive,
                         //'contentbanktitle' => $contentbanktitle, 'contentbankurl' => $contentbankurl, 'contentbankisactive' => $contentbankisactive,
                         'coursespagetitle' => $coursespagetitle, 'coursespageurl' => $coursespageurl, 'coursespageisactive' => $coursespageisactive,
+                        'topicos' => $topmenucontext,
+                        'admincap' => $hasadminlink,
 
 
 
@@ -340,121 +344,48 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
     public function coursenav(){
         global $PAGE, $COURSE, $CFG, $DB, $OUTPUT, $USER;
-        $icons = array('url' => 'fa fa-file-text', 
-            'resource' => 'fa fa-file-text', 
-            'forum' => 'fa fa-comments-o', 
-            'feedback' => 'fa fa-pencil-square-o', 
-            'page' => 'fa fa-file-text-o',
-            'h5pactivity' => 'fa fa-file-text-o',
-            'folder' => 'fa fa-folder-open-o',
-            'assign' => 'fa fa-pencil-square-o',
-            'data' => 'fa fa-database',
-            'chat' => 'fa fa-commenting-o',
-            'choice' => 'fa fa-question',
-            'lti' => 'fa fa-puzzle-piece',
-            'glossary' => 'fa fa-sort-alpha-asc', 
-             );
-
+ 
         $course = $this->page->course;
         $context = context_course::instance($course->id);
-        $courseid = optional_param('course', SITEID, PARAM_INT);
         $courseid = $course->id;
         $data = [];
-        $items = array($this->page->navigation);
         $course  =  $DB -> get_record ( 'course' ,  array ( 'id'  =>  $courseid ) ) ; 
+
         //get sections and modules information
         $sections = $this->generate_topics($COURSE);
 
-        $modinfo = get_fast_modinfo($course);
-        $completioninfo = new \completion_info($course);
-        $courserenderer = $this->page->get_renderer('core', 'course');
-        
-
-        //$courserenderer->course_section_cm_completion($course, $completioninfo,, $displayoptions = array());
-      
-
-
-
+    
         $dados=[];
         $activesection=0;
         $activeactivity=false;
         foreach($sections as $section){
-            $sectionname = 'Unidade ' . $section->section;
-            if($section->name){
-                $sectionname = $section->name;
-            }
-            if($section->section==0){
-                $sectionname = get_string( "board","theme_avadinte");
-            }
-            $action='';
-            if($course->format=='topics'){
-                $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id, 'section' => $section->section));
-                $action = 'href= ' . $url;
-            }
-            if($course->format == 'buttons' && $section->section==0) {
-                $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id));
-
-                $action =  'href=' .'"'. $url . '"' ;
-            }
-            //define tooltip
-            $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $context);
-            $tooltip = '';
-            //seção oculta
-            if(!$section->visible) {
-                if ($canviewhidden){
-                    $tooltip = get_string('hiddenfromstudents');
-
-                }
-                else {
-                    $tooltip = get_string('notavailable');
-
-                }
-            //seção restrita
-            } else if ($section->availableinfo) {
-                    $tooltip = strip_tags($section->availableinfo);
+            $activesection=0;
+            foreach($section->activities as $activity){
+                if($PAGE->url->compare( new moodle_url($activity->url), URL_MATCH_BASE)  ){
+                    $pageparams= $PAGE->url->params();
+                    $activityparams = $activity->url->params();
+                        if ( $pageparams['id']==$activityparams['id']){
+                        $activesection=$activity->sectionnum;
                 
-
-
-            }
-            foreach($section->activities as $activity){ 
+                        $activeactivity = true;
+                    }
+                    else{
+                        $activeactivity = false  ;
+                    } 
+                } else{
+                    $activeactivity = false  ;
+                } 
+                
                 if( !$activity->deletioninprogress){
-                    $dados[$activity->sectionnum][] = $this->get_activity_info( $activity, $completioninfo, $context,  $courserenderer, $course);
- 
+                    $dados[$activity->sectionnum][] = $this->get_activity_info( $activity, $activeactivity);
                 }
-                
-                
-    
-    
-               
-                
             }
-
-
-
-            $data[] = [
-                'action' => $action,//'topic' . $section->section,
-                'text' =>   $sectionname,
-                'shorttext' =>   $sectionname,
-                'icon' => 'fa fa-list',
-                'type' => \navigation_node::TYPE_SETTING,
-                'section'=> $section->section,
-                'issectionzero' => $section->section ==0?true: false,                     
-                'key'=> $section->id,  
-               'hasactivites' => $section->hasactivites,
-                'activities' => $section->hasactivites ?$dados[$section->section]: false,
-                'issectionactive' => $activesection==$section->section?true:false,
-                'sectionavailable' => $section->available,
-                'availableinfo' => strip_tags($section->availableinfo),
-                'available' => $section->available,
-                'visible' => $section->visible,
-                'availability' => $section->availability,
-                'uservisible' =>  $section->uservisible,
-                'dimmed' => !$section->available or !$section->visible?true:false,
-                'tooltip' => $tooltip,
-            ];
-
-
-
+            if($section->hasactivites){
+                $data[] = $this->get_section_info($section, $dados[$section->section], $activesection );
+            } else{
+                $data[] = $this->get_section_info($section, null, $activesection );
+            }
+            
         }
 
 
@@ -499,48 +430,115 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 'key' => 'contentbank',
             ];
 
-
-
-      
-        
-
-
-
-       
-
-
         $cncontext = [
             'courselinks' => $courselinks,
-
             'topics' =>$data,
             'contentbank' => $contentbank
-
-
         ];
+
         return $this->render_from_template('theme_avadinte/sidebar_course', $cncontext);
 
     }
 
-    protected function get_activity_info( $activity, $completioninfo, $context,  $courserenderer, $course){
+    
 
+    protected function get_section_info($section, $activities, $activesection) {
         global $PAGE, $COURSE, $CFG, $DB, $OUTPUT, $USER;
         
+        $course = $this->page->course;
+        $context = context_course::instance($course->id);
+        $icons = array('url' => 'fa fa-file-text', 
+            'resource' => 'fa fa-file-text', 
+            'forum' => 'fa fa-comments-o', 
+            'feedback' => 'fa fa-pencil-square-o', 
+            'page' => 'fa fa-file-text-o',
+            'h5pactivity' => 'fa fa-file-text-o',
+            'folder' => 'fa fa-folder-open-o',
+            'assign' => 'fa fa-pencil-square-o',
+            'data' => 'fa fa-database',
+            'chat' => 'fa fa-commenting-o',
+            'choice' => 'fa fa-question',
+            'lti' => 'fa fa-puzzle-piece',
+            'glossary' => 'fa fa-sort-alpha-asc', 
+             );
+
+
+
+        $sectionname = 'Unidade ' . $section->section;
+        if($section->name){
+            $sectionname = $section->name;
+        }
+        if($section->section==0){
+            $sectionname = get_string( "board","theme_avadinte");
+        }
+        $action='';
+        if($course->format=='topics'){
+            $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id, 'section' => $section->section));
+            $action = 'href= ' . $url;
+        }
+        if($course->format == 'buttons' && $section->section==0) {
+            $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id));
+
+            $action =  'href=' .'"'. $url . '"' ;
+        }
+        //define tooltip
+        $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $context);
+        $tooltip = '';
+        //seção oculta
+        if(!$section->visible) {
+            if ($canviewhidden){
+                $tooltip = get_string('hiddenfromstudents');
+
+            }
+            else {
+                $tooltip = get_string('notavailable');
+
+            }
+        //seção restrita
+        } else if ($section->availableinfo) {
+                $tooltip = strip_tags($section->availableinfo);
+            
+
+
+        }
+
+
+
+        $section_info = [
+            'action' => $action,//'topic' . $section->section,
+            'text' =>   $sectionname,
+            'shorttext' =>   $sectionname,
+            'icon' => 'fa fa-list',
+            'type' => \navigation_node::TYPE_SETTING,
+            'section'=> $section->section,
+            'issectionzero' => $section->section ==0?true: false,                     
+            'key'=> $section->id,  
+           'hasactivites' => $section->hasactivites,
+            'activities' => $section->hasactivites ? $activities : false,
+            'issectionactive' => $activesection==$section->section?true:false,
+            'sectionavailable' => $section->available,
+            'availableinfo' => strip_tags($section->availableinfo),
+            'available' => $section->available,
+            'visible' => $section->visible,
+            'availability' => $section->availability,
+            'uservisible' =>  $section->uservisible,
+            'dimmed' => !$section->available or !$section->visible?true:false,
+            'tooltip' => $tooltip,
+        ];
+        return $section_info;
+
+    }
+
+    protected function get_activity_info( $activity, $activeactivity){
+
+        global $PAGE, $COURSE, $CFG, $DB, $OUTPUT, $USER;
+        $course = $this->page->course;
+        $courserenderer = $this->page->get_renderer('core', 'course');
+        $context = context_course::instance($course->id);
+        $completioninfo = new \completion_info($course);
         
         $displayoptions = array(); 
-        if($PAGE->url->compare( new moodle_url($activity->url), URL_MATCH_BASE)  ){
-            $pageparams= $PAGE->url->params();
-            $activityparams = $activity->url->params();
-                if ( $pageparams['id']==$activityparams['id']){
-                $activesection=$activity->sectionnum;
-        
-                $activeactivity = true;
-            }
-            else{
-                $activeactivity = false  ;
-            } 
-        } else{
-            $activeactivity = false  ;
-        } 
+     
         
 
         
@@ -914,6 +912,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
         $header->headeractions = $this->page->get_header_actions();
+        $header->showcourseheader = $theme->settings->showcourseheader;
+
         return $this->render_from_template('theme_avadinte/full_header', $header); 
     }
 
@@ -930,7 +930,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $currentsitecolorclass = get_user_preferences('accessibilitystyles_sitecolorclass', '');
             if ($currentsitecolorclass) {
                 $additionalclasses[] = $currentsitecolorclass;
-            }
+            } 
         }
 
         $fonttype = get_user_preferences('themeavadintesettings_fonttype', '');
@@ -948,6 +948,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
     public function contacts_footer() {
         $theme = theme_config::load('avadinte');
         $setting = $theme->settings->contacts;
+
         return $setting != '' ? $setting : '';
     }
     public function phone1_footer() {
@@ -994,10 +995,18 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
  
     public function mail_footer() {
-        $theme = theme_config::load('fordson');
+        $theme = theme_config::load('avadinte');
         $setting = $theme->settings->brandemail;
         return $setting != '' ? $setting : '';
     }
+
+    public function sticky_top() {
+        $theme = theme_config::load('avadinte');
+        $setting = $theme->settings->topnavbarsticky;
+        return $setting != '' ? $setting : '';
+    }
+
+
 
 
     public function social_icons() {

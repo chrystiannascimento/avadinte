@@ -1,0 +1,28 @@
+.btn {
+    border-radius: $btna-border-radius;
+}
+
+.btn-primary {
+    color: $btn-prm-color;
+    background-color: $btn-prm-bg;
+
+    &:hover {
+        background-color: $btn-prm-hover-color;
+        border: 1px solid transparent;
+    
+    }
+
+}
+
+
+.btn-secondary {
+    color: $btn-snd-color;
+    background-color: $btn-snd-bg;
+
+    &:hover {
+        background-color: $btn-snd-hover-color;
+        border: 1px solid transparent;
+
+    }
+
+}

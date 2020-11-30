@@ -1,0 +1,40 @@
+<div class="navwrap container-fluid {{#output.sticky_top}}sticky-top{{/output.sticky_top}}">
+        <div class="row ">
+            <nav id="navwrapper" class="col-md col-lg-12  navbar navbar-expand-lg navbar-light bg-light text-dark"   style="position: relative;">
+
+                        <button class="navbar-toggler navbar-toggler-right d-none d-md-inline d-sm-inline d-lg-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse " id="navbarNav" style="background:white">
+
+                            <div class="nav navbar-nav" id="mainNav">
+                            
+                                {{{ output.topmenu }}}
+
+                                
+
+                                
+                            </div> 
+                            <div class="nav navbar-nav ml-auto" id="rightNav"> 
+                                <a id="themesettings-control" class="nav-item nav-link " href="#">
+                                    <i title="{{#str}}themesettingstitle, theme_avadinte{{/str}}"
+                                    class="fa fa-universal-access">
+                                    </i>
+                                    <span class="text">{{#str}}themesettingstitle, theme_avadinte{{/str}}</span>
+                                </a>
+                                
+                                </div>
+                                                   
+
+
+
+                        </div>
+                         
+                        
+                    </nav>
+                
+                    
+        </div>
+
+    </div>

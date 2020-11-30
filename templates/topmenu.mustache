@@ -1,36 +1,23 @@
 
-<a class=" nav-item nav-link {{#homepageisactive}}active{{/homepageisactive}} " href="{{{homepageurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{homepagetitle}}}" >
-    <span>{{{homepagetitle}}}</span>
-</a>
-
-<a   class=" nav-item nav-link {{#mycoursespageisactive}}active{{/mycoursespageisactive}} " href="{{{mycoursespageurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{mycoursespagetitle}}}" >
-{{{mycoursespagetitle}}}
-</a>
-
-
-<a   class=" nav-item nav-link {{#calendarisactive}}active{{/calendarisactive}} " href="{{{calendarurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{calendartitle}}}" >
-{{{calendartitle}}}
-</a>
-
-
-<a   class=" nav-item nav-link  " href="{{{attendurl}}}" target="_blank" data-tooltip="tooltip" data-placement= "bottom" title="{{{attendtitle}}}" >
-{{{attendtitle}}}
-</a>
-
-
-
-{{#hasadminlink}}
-        <a   class=" nav-item nav-link {{#coursespageisactive}}active{{/coursespageisactive}} " href="{{{coursespageurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{coursespagetitle}}}" >
-        {{{coursespagetitle}}}
+{{#topicos}}
+        {{^isadminlink}}
+        <a class=" nav-item nav-link {{#isactive}}active{{/isactive}} " href="{{{action}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{text}}}" {{{attr}}} >
+         <span>{{{text}}}</span>
         </a>
-{{/hasadminlink}}
+{{/isadminlink}}
 
+{{/topicos}}
 
-{{#hasadminlink}}
-        <a  class="siteadminlink nav-item nav-link {{#siteadminisactive}}active{{/siteadminisactive}}" href="{{{siteadminurl}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{siteadmintitle}}}" >
-        <span>{{{siteadmintitle}}}</span>
+{{#admincap}}
+        {{#topicos}}
+        {{#isadminlink}}
+        <a class=" nav-item nav-link {{#isactive}}active{{/isactive}} " href="{{{action}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{text}}}" {{{attr}}}  >
+         <span>{{{text}}}</span>
         </a>
-        
-        
-{{/hasadminlink}}
+                
+        {{/isadminlink}}
+        {{/topicos}}
+
+
+{{/admincap}}
 

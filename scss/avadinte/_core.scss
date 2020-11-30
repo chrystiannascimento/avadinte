@@ -19,6 +19,14 @@ a:not([class]),
     }
 }
 
+#page-footer{
+    background-color: $footer-bg;
+    color: $footer-text-color;
+    a {
+        color: $footer-link-color;
+    }
+}
+
 
 
 /** Page header */
@@ -133,4 +141,14 @@ color: black;
 #page-wrapper {
     margin-left: 10px;
     margin-right: 10px;
+}
+
+
+.path-mod-assign .generalbox {
+    border: 5px ;
+	border-style: solid;
+	border-color: #CCCCCC;
+	padding: 1em;
+	background: #fdfdfd;
+	padding: 20px;
 }

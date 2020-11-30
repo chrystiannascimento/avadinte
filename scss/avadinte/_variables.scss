@@ -32,10 +32,42 @@ $topnavbar-bg: #690000 !default;
 //DRawer
 $drawer-width: 315px;
 $drawer-bg: darken($body-bg, 5%) !default;
+$navdrawer-bg: #E9E9E9 !default;
+$navdrawer-color: #000!default;
+$navdrawer-hover-bg: #690000!default;
+$navdrawer-hover: #FFF!default;
+$navdrawer-activel1: #BEBFC1!default;
+$navdrawer-activel2: #D4D6D5!default;
+$navdrawerdimmed: #6c757d !default;
+$navdrawerdimmed-bg: #FFFFFF!default;
+ 
+
+
 
 //link
 $link-color: #000 !default;
-
+$link-hover-color: #000!default;
 
 $primary: #690000 !default;
 
+
+//settings variables
+$breadcrum-text-color: #000!default;
+$breadcrumb-bg: #000!default;
+$footer-text-color: #FFF!default;
+$footer-link-color: #FFF!default;
+$footer-bg: #690000!default;
+$forumheading-bg: #fff!default;
+$forumbody-bg: #fff!default;
+$introbox-bg: #FFF!default;
+
+$input-btn-focus-box-shadow: none;
+ 
+//buttons
+$btna-border-radius: 5px;
+$btn-prm-bg: #690000!default; 
+$btn-prm-hover-color:#690000!default; 
+$btn-prm-color: #FFF!default;
+$btn-snd-bg: #ced4da !default;
+$btn-snd-hover-color: #ced4da!default;
+$btn-snd-color:  #212529!default;
