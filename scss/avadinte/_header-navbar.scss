@@ -21,7 +21,7 @@
 
 #page {
     //margin-top: calc($fixed-header-y - 30px);
-    margin-top: 150px;
+    margin-top: $navbar-height;
 }
 
 @media only screen and (max-width: 576px){

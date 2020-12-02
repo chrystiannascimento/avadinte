@@ -91,11 +91,17 @@ body.hasaccessibilitybar {
 
 //mudanças aqui
 body.hasaccessibilitybar {
+    #page {
+        margin-top: calc(#{$navbar-height} + 30px);
+    }
+
     @media only screen and (max-width: 576px){
         
-    #page {
-        margin-top: 90px;
+        #page {
+            margin-top: 90px;
         }
     }
+
+    
 
 }

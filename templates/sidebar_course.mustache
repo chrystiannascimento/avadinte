@@ -80,7 +80,13 @@
                 <div class="ml-2">
                     <div class="media" data-toggle="tooltip" data-placement="right" title="{{{tooltip}}}">
                         {{{icon}}}
-                        <span class="media-body "> {{{text}}}   </span>
+                        <span class="media-body "> 
+                        {{{text}}} 
+                            {{#notfy}}
+                            <span class="badge badge-danger" title="{{{notfy}}}" aria-label="{{{notfy}}}"  >{{{numbernotfy}}} </span>  
+                            {{/notfy}}
+                        </span>
+                        
                         {{{modicon}}}
                         
                     </div>

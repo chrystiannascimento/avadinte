@@ -2,9 +2,7 @@
 
 
 
-@import "avadinte/accessibilitybar";
-@import "avadinte/mixins/accessibilityfontsize";
-@import "avadinte/accessibilitystyles";
+
 
 @import "avadinte/header-navbar";
 @import "avadinte/nav-drawer";
@@ -14,6 +12,10 @@
 @import "avadinte/modules";
 @import "extras/montserrat";
 @import "avadinte/buttons";
+
+@import "avadinte/accessibilitybar";
+@import "avadinte/mixins/accessibilityfontsize";
+@import "avadinte/accessibilitystyles";
 
 
 

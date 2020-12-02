@@ -287,13 +287,7 @@ $page->add(new admin_setting_heading('theme_avadinte_colours', get_string('colou
     
 
 
-    // @breadcrumbBackground setting.
-    $name = 'theme_avadinte/breadcrumbbkg';
-    $title = get_string('breadcrumbbkg', 'theme_avadinte');
-    $description = get_string('breadcrumbbkg_desc', 'theme_avadinte');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
+    
 
     // Card background
     $name = 'theme_avadinte/cardbkg';

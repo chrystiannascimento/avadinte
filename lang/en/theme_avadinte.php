@@ -422,7 +422,15 @@ $string['header_headingsub'] = 'Header  settings';
 $string['header_desc'] = 'Header settings...';
 $string['showcourseheader'] = 'Show course header';
 $string['showcourseheader_desc'] = 'Show course header desc';
-
+$string['breadcrumb'] = 'Breadcrumb';
+$string['breadcrumb_desc'] = 'Breadcrumb ...';
+$string['breadcrumbhome']= 'Breadcrumb Home';
+$string['breadcrumbhome_desc'] = 'Breadcrumb home desc';
+$string['breadcrumbhome_text'] = 'Text';
+$string['breadcrumbhome_icon'] = 'Icon';
+$string['breadcrumbseparator'] = 'Breadcrumb separator';
+$string['breadcrumbseparator_desc'] = 'Breadcrumb separator desc';
+ 
 
 
 

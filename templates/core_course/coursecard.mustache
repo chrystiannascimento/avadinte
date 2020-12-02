@@ -34,7 +34,7 @@
         ]
     }
 }}
-<div class="card dashboard-card " role="listitem"
+<div class="card dashboard-card mx-3" role="listitem"
     data-region="course-content"
     data-course-id="{{{id}}}">
         <div class="card-img dashboard-card-img" style='background-image: url("{{{courseimage}}}");'>
@@ -60,7 +60,7 @@
                     </div>
                     {{/showshortname}}
                 </div>
-                <a href="{{viewurl}}" class="aalink coursename mr-2 stretched-link">
+                <a href="{{viewurl}}" class="aalink coursename mr-2 stretched-link ">
                     {{> core_course/favouriteicon }}
                     <span class="sr-only">
                             {{#str}}aria:coursename, core_course{{/str}}
@@ -75,6 +75,7 @@
             </div>
             {{$menu}}{{/menu}}
         </div>
+        {{$progress}}{{/progress}}
     </div>
-    {{$progress}}{{/progress}}
+    
 </div>

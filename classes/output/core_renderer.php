@@ -574,6 +574,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if ($activity->url) {
             $url = $activity->url->out();
         }
+        $notfy = strip_tags($activity->afterlink);
+        $numbernotfy='';
+        preg_match_all('!\d+!', $notfy, $numbernotfy); 
+        
+        
+       
+
      
 
 
@@ -596,6 +603,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'ignoreavailabilityrestrictions' => $ignoreavailabilityrestrictions,
             'dimmed' => !$activity->available or !$activity->visible?true:false, 
             'noaction' => !$activity->available and !$ignorerestrictions ? true:false,
+            'alerta' =>strip_tags($activity->afterlink),
+            'numbernotfy' => $numbernotfy[0]?$numbernotfy[0][0] :'',
             
             'tooltip' => $tooltip ,
 
@@ -916,6 +925,67 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         return $this->render_from_template('theme_avadinte/full_header', $header); 
     }
+    
+     /**
+     * Render the navbar
+     *
+     * @return string
+     */
+    /*
+     public function navbar() {
+        $items = $this->page->navbar->get_items();
+        $breadcrumbseparator = $this->page->theme->settings->breadcrumbseparator;
+
+        $breadcrumbs = "";
+
+        if (empty($items)) {
+            return '';
+        }
+
+        $i = 0;
+
+        foreach ($items as $item) {
+            $item->hideicon = true;
+
+            // Text / Icon home.
+            if ($i++ == 0) {
+                $breadcrumbs .= '<li>';
+
+                if (get_config('theme_avadinte', 'enablehome') && get_config('theme_avadinte', 'enablemyhome')) {
+                    $breadcrumbs = html_writer::tag('i', '', array(
+                            'title' => get_string('home', 'theme_avadinte'),
+                            'class' => 'fa fa-folder-open fa-lg'
+                    )
+                            );
+                } else if (get_config('theme_avadinte', 'breadcrumbhome') == 'icon') {
+                    $breadcrumbs .= html_writer::link(new moodle_url('/'),
+                            // Adds in a title for accessibility purposes.
+                            html_writer::tag('i', '', array(
+                                    'title' => get_string('home', 'theme_avadinte'),
+                                    'class' => 'fa fa-home fa-lg')
+                                    )
+                            );
+                    $breadcrumbs .= '</li>';
+                } else {
+                    $breadcrumbs .= html_writer::link(new moodle_url('/'), get_string('home', 'theme_avadinte'));
+                    $breadcrumbs .= '</li>';
+                }
+                continue;
+            }
+
+            $breadcrumbs .= '<span class="separator"><i class="fa-'.$breadcrumbseparator.' fa"></i>
+                             </span><li>'.$this->render($item).'</li>';
+
+        } // End loop.
+
+        $classes = array();
+
+        return '<nav role="navigation" aria-label="'. get_string("breadcrumb", "theme_adaptable") .'">
+            <ol  class="breadcrumb ' . $classes . '">'.$breadcrumbs.'</ol>
+        </nav>';
+    }
+    */
+
 
     public function body_attributes($additionalclasses = array()) {
         $hasaccessibilitybar = get_user_preferences('themeavadintesettings_enableaccessibilitytoolbar', '');
