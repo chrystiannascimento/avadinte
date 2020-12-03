@@ -11,7 +11,7 @@
         {{#courselinks}}
         <li>
                 {{#action}}   
-            <a class="list-group-item list-group-item-action "    href="{{{action}}}"      aria-expanded="false"  data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+            <a class="list-group-item list-group-item-action {{#isactive}}active{{/isactive}}"    href="{{{action}}}"      aria-expanded="false"  data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
                 <div class="ml-">
                     <div class="media">
                         {{#icon}}
@@ -83,7 +83,7 @@
                         <span class="media-body "> 
                         {{{text}}} 
                             {{#notfy}}
-                            <span class="badge badge-danger" title="{{{notfy}}}" aria-label="{{{notfy}}}"  >{{{numbernotfy}}} </span>  
+                            <span class="badge badge-danger rounded-pill" title="{{{notfy}}}" aria-label="{{{notfy}}}"  >{{{numbernotfy}}} </span>  
                             {{/notfy}}
                         </span>
                         
@@ -112,7 +112,7 @@
         {{#contentbank}}
             {{#hascontentbank}}
             <li>
-                 <a class="list-group-item list-group-item-action " href="{{{action}}}" data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+                 <a class="list-group-item list-group-item-action {{#isactive}}active{{/isactive}} " href="{{{action}}}" data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
                 <div class="ml-">
                     <div class="media">
                         <span><i class="{{{icon}}}" aria-hidden="true"></i><span>

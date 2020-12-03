@@ -99,12 +99,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $hasadminlink = has_capability('moodle/site:configview', $context);
         $hasadminlink = has_capability('moodle/site:configview', \context_system::instance());
         $siteadminisactive =$PAGE->url->compare($siteadminurl, URL_MATCH_BASE);
+        $siteadminisactive = $this->page->pagelayout === 'admin' or strpos($this->page->pagetype, 'admin-') === 0 ? true: false;
         $context = $this->page->context;
         $contextid = optional_param('contextid', \context_system::instance()->id, PARAM_INT);
 
         $topmenucontext[] =[
             'isadminlink' => true,
-            'isactive' => $PAGE->url->compare($siteadminurl, URL_MATCH_BASE),
+            'isactive' => $siteadminisactive ,
             'text' => get_string('siteadmintitle','theme_avadinte' ),
             'action' => new moodle_url('/admin/search.php'),
         ];
@@ -128,16 +129,34 @@ class core_renderer extends \theme_boost\output\core_renderer {
         
 
          //Disciplinas
+
          $mycoursespagetitle=get_string('mycoursespagetitle','theme_avadinte' );
-         $mycoursespageurl= new moodle_url('/my/');
-         //$coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
-         $mycoursepageurl = new moodle_url('/course/view.php', array('id' => $courseid));
-         $mycoursespageisactive = $PAGE->url->compare($mycoursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($mycoursepageurl, URL_MATCH_BASE) ? true : false ;
+
+         $mycoursespages=[];
+         $mycoursespages[] = new moodle_url('/my/');
+         $mycoursespages[] = new moodle_url('/course/view.php', array('id' => $courseid));
+         $mycoursespages[] = $PAGE->cm ? new moodle_url('/mod/'.$PAGE->cm->modname.'/view.php', array('id' => $PAGE->cm->id)): new moodle_url('/my/');
+         $mycoursespages[] = new moodle_url('/user/index.php', array('id' => $course->id));
+         $mycoursespages[] = new moodle_url('/grade/report/grader/index.php', array('id'=>$course->id));
+
+         $mycoursespageisactive = false;
+         foreach($mycoursespages as $page){
+             if($PAGE->url->compare($page, URL_MATCH_BASE)){
+                 $mycoursespageisactive = true;
+             }
+         }
+         $mycoursespageisactive = false;
+         if($PAGE->url->compare(new moodle_url('/my/'), URL_MATCH_BASE) || $courseid>1 ){
+            $mycoursespageisactive = true;
+         }
+
+
+
 
          if($theme->settings->enablemyhome){
             $topmenucontext[] =[
                 'isadminlink' => '',
-                'isactive' => $PAGE->url->compare($mycoursespageurl, URL_MATCH_BASE) || $PAGE->url->compare($mycoursepageurl, URL_MATCH_BASE) ? true : false,
+                'isactive' => $mycoursespageisactive,
                 'text' => get_string('mycoursespagetitle','theme_avadinte' ),
                 'action' => new moodle_url('/my/'),
             ];
@@ -161,7 +180,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if($theme->settings->enablecalendar){
             $topmenucontext[] =[
                 'isadminlink' =>'',
-                'isactive' => $PAGE->url->compare($calendarurl, URL_MATCH_BASE),
+                'isactive' => $PAGE->url->compare($calendarurl, URL_MATCH_BASE) && $courseid==1?true: false,
                 'text' => get_string('calendar','theme_avadinte' ),
                 'action' => $calendarurl,
             ];
@@ -224,14 +243,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         
         
         // Send to template.
-        $dashmenu = [  'hasadminlink' => $hasadminlink, 'siteadmintitle' => $siteadmintitle, 'siteadminurl' => $siteadminurl, 'siteadminisactive' => $siteadminisactive,
-                        'homepagetitle'=>$homepagetitle, 'homepageurl'=>$homepageurl, 'homepageisactive' => $homepageisactive,
-                        'mycoursespagetitle' => $mycoursespagetitle, 'mycoursespageurl' => $mycoursespageurl, 'mycoursespageisactive' => $mycoursespageisactive,
-                        'calendartitle' => $calendartitle, 'calendarurl' => $calendarurl, 'calendarisactive' => $calendarisactive,
-                        'attendtitle' => $attendtitle, 'attendurl' => $attendurl,
-                        'privatefilestitle' => $privatefilestitle, 'privatefilesurl' => $privatefilesurl, 'privatefilesisactive' => $privatefilesisactive,
-                        //'contentbanktitle' => $contentbanktitle, 'contentbankurl' => $contentbankurl, 'contentbankisactive' => $contentbankisactive,
-                        'coursespagetitle' => $coursespagetitle, 'coursespageurl' => $coursespageurl, 'coursespageisactive' => $coursespageisactive,
+        $dashmenu = [  
                         'topicos' => $topmenucontext,
                         'admincap' => $hasadminlink,
 
@@ -356,10 +368,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
     
         $dados=[];
-        $activesection=0;
+        $activesection=-1;
         $activeactivity=false;
         foreach($sections as $section){
-            $activesection=0;
+            $activesection=-1;
+            if($PAGE->url->compare(new moodle_url('/course/view.php', array('id'=>$courseid)),URL_MATCH_BASE)){
+                $activesection = 0;
+            }
             foreach($section->activities as $activity){
                 if($PAGE->url->compare( new moodle_url($activity->url), URL_MATCH_BASE)  ){
                     $pageparams= $PAGE->url->params();
@@ -374,7 +389,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     } 
                 } else{
                     $activeactivity = false  ;
-                } 
+                }
                 
                 if( !$activity->deletioninprogress){
                     $dados[$activity->sectionnum][] = $this->get_activity_info( $activity, $activeactivity);
@@ -400,34 +415,39 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $studentgrade = new moodle_url('/grade/report/user/index.php', array(
                 'id' => $PAGE->course->id));
         $isstudent = !has_capability('moodle/course:viewhiddenactivities', $context);
+        $urlgrade = $isstudent? $studentgrade : $admingrade;
 
         $courselinks[] =[
             
-            'action' =>  $isstudent? $studentgrade : $admingrade,
+            'action' =>  $urlgrade,
             'text' =>get_string('gradebook', 'grades'),
             'shorttext' => get_string('gradebook', 'grades'),
             'icon' => 'fa fa-table fa-fw',
             'type' => \navigation_node::TYPE_SETTING,
             'key' => 'grades',
+            'isactive' => $PAGE->url->compare($urlgrade, URL_MATCH_BASE),
             ];
+        $urlparticipants = new moodle_url('/user/index.php', array('id' => $PAGE->course->id));
         $courselinks[] =[
         
-            'action' =>  new moodle_url('/user/index.php', array('id' => $PAGE->course->id)),
+            'action' => $urlparticipants  ,
             'text' =>  get_string('participants', 'moodle'),
             'shorttext' =>  get_string('participants', 'moodle'),
             'icon' => 'icon fa fa-users fa-fw',
             'type' => \navigation_node::TYPE_SETTING,
             'key' => 'participants',
+            'isactive' => $PAGE->url->compare($urlparticipants , URL_MATCH_BASE),
             ];
-
+            $urlcontentbank = new moodle_url('/contentbank/index.php', ['contextid' => $context->id]);
             $contentbank =[
                 'hascontentbank' => has_capability('moodle/contentbank:access', $context),        
-                'action' =>  new moodle_url('/contentbank/index.php', ['contextid' => $context->id]),
+                'action' =>  $urlcontentbank,
                 'text' =>  get_string('contentbank'),
                 'shorttext' =>  get_string('contentbank'),
                 'icon' => 'fa fa-shopping-bag',
                 'type' => \navigation_node::TYPE_SETTING,
                 'key' => 'contentbank',
+                'isactive' => $PAGE->url->compare($urlcontentbank , URL_MATCH_BASE),
             ];
 
         $cncontext = [
@@ -603,7 +623,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'ignoreavailabilityrestrictions' => $ignoreavailabilityrestrictions,
             'dimmed' => !$activity->available or !$activity->visible?true:false, 
             'noaction' => !$activity->available and !$ignorerestrictions ? true:false,
-            'alerta' =>strip_tags($activity->afterlink),
+            'notfy' =>strip_tags($activity->afterlink),
             'numbernotfy' => $numbernotfy[0]?$numbernotfy[0][0] :'',
             
             'tooltip' => $tooltip ,
@@ -931,6 +951,35 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @return string
      */
+    public function navbar() {
+        global $PAGE;
+        $items = $this->page->navbar->get_items();
+        if(empty($items)){
+            return '';
+        }
+        
+
+        $breadcrumbs=[];
+        if($PAGE->course->id>1){
+            $breadcrumbs[]=[
+                "has_action"=> true,
+                    "action"=> new moodle_url('/my/'),
+                    "get_title"=> "Meus Cursos",
+                    "get_content"=> "Meus Cursos",
+                    "is_hidden"=> false
+            ];
+        }
+        foreach($items as $item){
+            if($item->key == "home" || $item->key =="myhome") continue;
+            if($item->get_content()==get_string('mycourses')) continue;
+            $breadcrumbs[] = $item;
+
+
+        }
+        return $this->render_from_template('core/navbar', ['get_items' => $breadcrumbs]);
+    }
+
+
     /*
      public function navbar() {
         $items = $this->page->navbar->get_items();
