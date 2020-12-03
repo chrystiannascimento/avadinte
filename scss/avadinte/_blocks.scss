@@ -243,6 +243,7 @@ body.drawer-open-left {
 .dashboard-card-deck {
     .dashboard-card {
         border-radius: 15px;
+        box-shadow: 2px 2px 2px 3px rgb(0 0 0 / 36%);
         
         .dashboard-card-img {
             height: 3rem;
@@ -278,5 +279,9 @@ body.drawer-open-left {
                 max-width: 100%;
             }
         }
+    }
+    .card-deck .card {
+    margin-right: 1.25rem;
+    margin-left: .25rem;
     }
 }
