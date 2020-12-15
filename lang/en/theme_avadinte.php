@@ -1,26 +1,12 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
-//
-// Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Moodle is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Language file.
  *
  * @package   theme_avadinte
- * @copyright 2016 Damyon Wiese
+ * @copyright 2020 
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+ */ 
 
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
@@ -91,7 +77,6 @@ $string['contentbanktitle'] = 'Content bank';
 $string['siteadmintitle'] = 'Site administration';
 $string['region-frontpage'] = 'Frontpage';
 
-
 // Theme settings.
 $string['themesettingstitle'] = 'Accessibility settings';
 $string['themesettingsfonttype'] = 'Font type';
@@ -124,9 +109,7 @@ $string['privacy:themeavadintesettings_enableaccessibilitytoolbar'] = 'The curre
 
 $string['login'] = 'Already have an account?';
 
-
 $string['board'] = 'Board';
-
 
 //Settings
 //colour_settings
@@ -166,8 +149,7 @@ $string['rawscss_desc'] = 'Use this field to provide SCSS code which will be inj
 $string['rawscsspre'] = 'Raw initial SCSS';
 $string['rawscsspre_desc'] = 'In this field you can provide initialising SCSS code, it will be injected before everything else.
     Most of the time you will use this setting to define variables.';
-
-
+    
 $string['maincolors'] = 'Main colors';
 $string['maincolors_desc']= 'Main colors description';
 $string['maincontentbackground'] = 'Main content background';
@@ -214,13 +196,9 @@ $string['ativityboxcolors_desc'] = 'definir a cor da caixa de introdução da at
 $string['ativityboxbgcolor'] = 'Cor de fundo da caixa de introdução da atividade';
 $string['ativityboxbgcolor_desc'] = 'definir a cor de fundo da caixa de itrodução da atividade';
 
-
-
-
 //general_settings
 $string['general_headingsub'] = 'General Settings';
 $string['general_desc'] = 'Preset files are used to change the appearance of the theme. It is possible to send your own preset file to overwrite the default.';
-
 
 // Content settings.
 $string['contentsettings'] = 'Content areas';
@@ -234,16 +212,26 @@ $string['enrollcoursecard'] = 'Access';
 $string['layoutinfo'] = 'Layout Settings';
 $string['layoutinfodesc'] = 'Control page layout by chooseing a design.';
 
-
-
 $string['fptextbox'] = 'Homepage Textbox Authenticated User';
 $string['fptextbox_desc'] = 'This textbox appears on the homepage once a user authenticates. It is ideal for putting a welcome message and providing instructions for the learner.';
 
-
 //Banner
 $string['bannersettings'] = 'Banner';
-$string['showbanner'] = 'Show Banner';
-$string['showbanner_desc'] = 'These settings allow you to customize banner to be displayed on the frontpage.';
+$string['bannerenable'] = 'Enable Banner';
+$string['bannercontent'] = 'Conteudo do banner';
+$string['bannercontent_desc'] = 'Conteudo do banner';
+$string['bannershowonpages'] = 'Mostra na pagina';
+$string['bannershowonpages_desc'] = 'Mostrar na página';
+$string['bannerdismiss'] = 'Banner dispensavel';
+$string['bannerdismiss_desc']= 'Banner dispensavel';
+$string['bannerconfirm'] = 'Confirmar quando fechar Banner';
+$string['bannerconfirm_desc'] = 'Confirmar quando fechar banner';
+$string['bannerresetvisibility'] = 'Resetar visibilidade';
+$string['bannerresetvisibility_desc'] = 'Resetar a visibilidade';
+$string['resetperpetualinfobannersuccess'] = 'Visibilidade resetada com sucesso';
+$string['resetperpetualinfobannervisibilityerror'] = 'Erro ao resetar a visibilidade';
+
+$string['bannerenable_desc'] = 'These settings allow you to customize banner to be displayed on the frontpage.';
 $string['bannertextbox'] = 'Banner Textbox';
 $string['bannertextbox_desc'] = 'Banner textbox description';
 $string['bannertitle'] = 'Banner Title';
@@ -277,7 +265,6 @@ $string['phone5'] = 'Phone 5';
 $string['phone6'] = 'Phone 6';
 $string['phone7'] = 'Phone 7';
 
-
 $string['phonedesc'] = 'Phone number to appear in footer.';
 $string['mail'] = 'Organization Email';
 $string['maildesc'] = 'Email address for organization that appears in footer.';
@@ -289,30 +276,17 @@ $string['facebook'] = 'Facebook URL';
 $string['facebookdesc'] = 'Enter the URL of your Facebook page. (i.e http://www.facebook.com/)';
 $string['twitter'] = 'Twitter URL';
 $string['twitterdesc'] = 'Enter the URL of your Twitter feed. (i.e http://www.twitter.com/)';
-$string['googleplus'] = 'Google+ URL';
-$string['googleplusdesc'] = 'Enter the URL of your Google+ profile. (i.e https://google.com/)';
 $string['linkedin'] = 'LinkedIn URL';
 $string['linkedindesc'] = 'Enter the URL of your LinkedIn profile. (i.e http://www.linkedin.com/)';
 $string['youtube'] = 'YouTube URL';
 $string['youtubedesc'] = 'Enter the URL of your YouTube channel. (i.e http://www.youtube.com/)';
 $string['tumblr'] = 'Tumblr URL';
-$string['tumblrdesc'] = 'Enter the URL of your Tumblr. (i.e http://www.tumblr.com)';
-$string['vimeo'] = 'Vimeo URL';
-$string['vimeodesc'] = 'Enter the URL of your Vimeo channel. (i.e http://vimeo.com/)';
-$string['flickr'] = 'Flickr URL';
-$string['flickrdesc'] = 'Enter the URL of your Flickr page. (i.e http://www.flickr.com/)';
-$string['vk'] = 'VKontakte URL';
-$string['vkdesc'] = 'Enter the URL of your Vkontakte page. (i.e http://www.vk.com/)';
 $string['skype'] = 'Skype Account';
 $string['skypedesc'] = 'Enter the Skype username of your organisations Skype account';
-$string['pinterest'] = 'Pinterest URL';
-$string['pinterestdesc'] = 'Enter the URL of your Pinterest page. (i.e http://pinterest.com/)';
 $string['instagram'] = 'Instagram URL';
 $string['instagramdesc'] = 'Enter the URL of your Instagram page. (i.e http://instagram.com/)';
 $string['website'] = 'Website URL';
 $string['websitedesc'] = 'Enter the URL of your own website. (i.e http://dearbornschools.org)';
-$string['blog'] = 'Blog URL';
-$string['blogdesc'] = 'Enter the URL of your institution blog. (i.e http://dearbornschools.org)';
 $string['sociallink'] = 'Custom Social Link';
 $string['sociallinkdesc'] = 'Enter the URL of your your custom social media link. (i.e http://dearbornschools.org)';
 $string['sociallinkicon'] = 'Link Icon';
@@ -321,6 +295,8 @@ $string['footnote'] = 'Footnote';
 $string['footnotedesc'] = 'Footnote content editor for main footer';
 $string['contacts'] = 'Contacts';
 $string['contactsdesc'] = 'Contacts content from site';
+$string['blog'] = 'Blog URL';
+$string['blogdesc'] = 'Enter the URL of your institution blog. (i.e http://dearbornschools.org)';
 
 // Buttons *********************************************************.
 $string['buttonsettings'] = 'Buttons';
@@ -413,8 +389,6 @@ $string['drawerdimmed'] = 'Drawer dimmed color';
 $string['drawerdimmed_desc'] = 'Drawer dimmed  color';
 $string['drawerdimmedbg'] = 'Drawer dimmed bg color';
 $string['drawerdimmedbg_desc'] = 'Drawer dimmed bg color';
-
-
 
 //Header
 $string['header_settings'] = 'Header';

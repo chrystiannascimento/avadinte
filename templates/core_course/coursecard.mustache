@@ -43,7 +43,7 @@
 
     
     <div class="card-body pr-1 course-info-container" id="course-info-container-{{id}}-{{uniqid}}">
-        <div class="d-flex align-items-start">
+        <div class="d-flex align-items-start mb-2">
             <div class="w-100 text-truncate">
                 <div class="text-dark d-flex mb-1 flex-wrap text-uppercase">
                 
@@ -60,7 +60,7 @@
                     </div>
                     {{/showshortname}}
                 </div>
-                <a href="{{viewurl}}" class="aalink coursename mr-2 stretched-link ">
+                <a href="{{viewurl}}" class="aalink coursename mr-2 {{$stretched-link}}{{/stretched-link}} ">
                     {{> core_course/favouriteicon }}
                     <span class="sr-only">
                             {{#str}}aria:coursename, core_course{{/str}}
@@ -75,6 +75,7 @@
             </div>
             {{$menu}}{{/menu}}
         </div>
+
         {{$progress}}{{/progress}}
     </div>
     

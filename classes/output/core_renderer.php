@@ -105,8 +105,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $topmenucontext[] =[
             'isadminlink' => true,
+            'key' => 'siteadmin',
             'isactive' => $siteadminisactive ,
-            'text' => get_string('siteadmintitle','theme_avadinte' ),
+             'text' => get_string('siteadmintitle','theme_avadinte' ),
             'action' => new moodle_url('/admin/search.php'),
         ];
 
@@ -118,6 +119,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if($theme->settings->enablehome){
             $topmenucontext[] =[
                 'isadminlink' => '',
+                'key' => 'sitehome',
                 'isactive' => $PAGE->url->compare($homepageurl, URL_MATCH_BASE),
                 'text' => get_string('homepagetitle', 'theme_avadinte'),
                 'action' => new moodle_url('/?redirect=0'),
@@ -156,6 +158,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
          if($theme->settings->enablemyhome){
             $topmenucontext[] =[
                 'isadminlink' => '',
+                'key' => 'mycourses',
                 'isactive' => $mycoursespageisactive,
                 'text' => get_string('mycoursespagetitle','theme_avadinte' ),
                 'action' => new moodle_url('/my/'),
@@ -180,6 +183,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if($theme->settings->enablecalendar){
             $topmenucontext[] =[
                 'isadminlink' =>'',
+                'key' => 'calendar',
                 'isactive' => $PAGE->url->compare($calendarurl, URL_MATCH_BASE) && $courseid==1?true: false,
                 'text' => get_string('calendar','theme_avadinte' ),
                 'action' => $calendarurl,
@@ -200,6 +204,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if($theme->settings->enablecallcenter){
             $topmenucontext[] =[
                 'isadminlink' =>'',
+                'key' => 'callcenter',
                 'isactive' =>'',
                 'text' => get_string('attendtitle','theme_avadinte' ),
                 'action' =>"http://atendimento.nead.ufma.br/view.php",
@@ -230,6 +235,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if($theme->settings->enablecourses){
             $topmenucontext[] =[
                 'isadminlink' => true,
+                'key' => 'courses',
                 'isactive' => $PAGE->url->compare($coursespageurl, URL_MATCH_BASE),
                 'text' => get_string('coursespagetitle','theme_avadinte' ),
                 'action' => new moodle_url('/course/index.php'),
@@ -376,18 +382,16 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $activesection = 0;
             }
             foreach($section->activities as $activity){
-                if($PAGE->url->compare( new moodle_url($activity->url), URL_MATCH_BASE)  ){
-                    $pageparams= $PAGE->url->params();
-                    $activityparams = $activity->url->params();
-                        if ( $pageparams['id']==$activityparams['id']){
+
+                if(isset($PAGE->cm->id)){
+                    if($PAGE->cm->id == $activity->id){
                         $activesection=$activity->sectionnum;
-                
                         $activeactivity = true;
                     }
-                    else{
+                    else {
                         $activeactivity = false  ;
-                    } 
-                } else{
+                    }
+                }  else{
                     $activeactivity = false  ;
                 }
                 
@@ -945,6 +949,37 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         return $this->render_from_template('theme_avadinte/full_header', $header); 
     }
+
+
+    public function banner() {
+        $theme = theme_config::load('avadinte');
+        $bannerenable = $theme->settings->bannerenable;
+        $bannertitle = $theme->settings->bannertitle;
+        $bannercontent = $theme->settings->bannercontent;
+        $bannerdismiss = $theme->settings->bannerdismiss;
+        $bannershowonpages = $theme->settings->bannershowonpages;
+        $bannerconfirm = $theme->settings->bannerconfirm;
+        $banneruserprefdismissed =  get_user_preferences('theme_avadinte_infobanner_dismissed');
+
+        $templatecontext = [
+            'bannercontent' => $bannercontent,
+            'bannertitle' => $bannertitle
+        ];
+
+        if($bannerenable){
+            if($bannerdismiss && $banneruserprefdismissed){
+                return '';
+                 
+            } else {
+                return $this->render_from_template('theme_avadinte/banner', $templatecontext); 
+                set_user_preferences('theme_avadinte_infobanner_dismissed', true);
+            }
+            
+        } else {
+            return '';
+        }
+        
+    }
     
      /**
      * Render the navbar
@@ -978,6 +1013,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
         return $this->render_from_template('core/navbar', ['get_items' => $breadcrumbs]);
     }
+
+
 
 
     /*

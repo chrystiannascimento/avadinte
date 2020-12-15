@@ -26,6 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 user_preference_allow_ajax_update('sidepre-open', PARAM_ALPHA);
+user_preference_allow_ajax_update('theme_avadinte_infobanner_dismissed', PARAM_BOOL);
 
 require_once($CFG->libdir . '/behat/lib.php');
 
@@ -60,10 +61,11 @@ if ($draweropenright && $hasblocks) {
     $extraclasses[] = 'drawer-open-right';
 }
 
-$showbanner = $PAGE->theme->settings->showbanner;
+$showbanner = $PAGE->theme->settings->bannerenable;
 $bannertext=(empty($PAGE->theme->settings->bannertextbox && isloggedin())) ? false : $PAGE->theme->settings->bannertextbox;
 $bannertitle = (empty($PAGE->theme->settings->bannertitle && isloggedin())) ? false:$PAGE->theme->settings->bannertitle;
- 
+
+
 
 $templatecontext = [
     'sitename' => $sitename,

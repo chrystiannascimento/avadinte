@@ -1,7 +1,7 @@
 
 {{#topicos}}
         {{^isadminlink}}
-        <a class=" nav-item nav-link {{#isactive}}active{{/isactive}} " href="{{{action}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{text}}}" {{{attr}}} >
+        <a class=" nav-item nav-link {{#isactive}}active{{/isactive}} " data-key="{{{key}}}" href="{{{action}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{text}}}" {{{attr}}} >
          <span>{{{text}}}</span>
         </a>
 {{/isadminlink}}
@@ -11,7 +11,7 @@
 {{#admincap}}
         {{#topicos}}
         {{#isadminlink}}
-        <a class=" nav-item nav-link {{#isactive}}active{{/isactive}} " href="{{{action}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{text}}}" {{{attr}}}  >
+        <a class=" nav-item nav-link {{#isactive}}active{{/isactive}} " data-key="{{{key}}}" href="{{{action}}}" data-tooltip="tooltip" data-placement= "bottom" title="{{{text}}}" {{{attr}}}  >
          <span>{{{text}}}</span>
         </a>
                 

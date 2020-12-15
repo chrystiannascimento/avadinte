@@ -12,6 +12,7 @@ $page->add(new admin_setting_heading('theme_avadinte_drawer', get_string('drawer
     $page->add($setting);
 
     //
+    /*
     $name = 'theme_avadinte/shownavclosed';
     $title = get_string('shownavclosed', 'theme_avadinte');
     $description = get_string('shownavclosed_desc', 'theme_avadinte');
@@ -19,8 +20,9 @@ $page->add(new admin_setting_heading('theme_avadinte_drawer', get_string('drawer
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
-
+*/
     // Set size of left drawer
+    /*
     $name = 'theme_avadinte/leftdrawersize';
     $title = get_string('leftdrawersize','theme_avadinte');
     $description = get_string('leftdrawersize_desc', 'theme_avadinte');
@@ -33,7 +35,7 @@ $page->add(new admin_setting_heading('theme_avadinte_drawer', get_string('drawer
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
-
+*/
     // Drawer background
     $name = 'theme_avadinte/drawerbkg';
     $title = get_string('drawerbkg', 'theme_avadinte');

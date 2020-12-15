@@ -30,7 +30,7 @@ $font-weight-base:            400;
 $topnavbar-bg: #690000 !default;
 
 //DRawer
-$drawer-width: 315px;
+$drawer-width: 315px!default;
 $drawer-bg: darken($body-bg, 5%) !default;
 $navdrawer-bg: #E9E9E9 !default;
 $navdrawer-color: #000!default;

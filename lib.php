@@ -96,6 +96,7 @@ function theme_avadinte_get_pre_scss($theme) {
     'breadcrumbbkg' => ['breadcrumb-bg'],
     'cardbkg' => ['card-bg'],
     //drawer
+    //'leftdrawersize' => ['drawer-width'],
     'drawerbkg' => ['navdrawer-bg'],
     'drawercolor' => ['navdrawer-color'],
     'drawerhover' => ['navdrawer-hover'],
@@ -210,6 +211,42 @@ function theme_avadinte_update_settings_images($settingname) {
     theme_reset_all_caches();
 }
 
+
+function theme_avadinte_infobanner_reset_visibility() {
+    global $DB;
+
+    if (get_config('theme_avadinte', 'bannerresetvisibility') == 1) {
+        // Get all users that have dismissed the info banner once and therefore the user preference.
+        $whereclause = 'name = :name AND value = :value';
+        $params = ['name' => 'theme_avadinte_infobanner_dismissed', 'value' => '1'];
+        $users = $DB->get_records_select('user_preferences', $whereclause, $params, '', 'userid');
+
+        // Initialize variable for feedback messages.
+        $somethingwentwrong = false;
+        // Store coding exception.
+        $codingexception[] = array();
+
+        foreach ($users as $user) {
+            try {
+                unset_user_preference('theme_avadinte_infobanner_dismissed', $user->userid);
+            } catch (coding_exception $e) {
+                $somethingwentwrong = true;
+                $codingexception['message'] = $e->getMessage();
+                $codingexception['stacktrace'] = $e->getTraceAsString();
+            }
+        }
+
+        if (!$somethingwentwrong) {
+            \core\notification::success(get_string('resetperpetualinfobannersuccess', 'theme_avadinte'));
+        } else {
+            \core\notification::error(get_string('resetperpetualinfobannervisibilityerror',
+                    'theme_avadinte', $codingexception));
+        }
+ 
+        // Reset the checkbox.
+        set_config('bannerresetvisibility', 0, 'theme_avadinte');
+    }
+}
 
 
 

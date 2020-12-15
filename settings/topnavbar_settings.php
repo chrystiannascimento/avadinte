@@ -16,6 +16,7 @@ $page->add(new admin_setting_heading('theme_avadinte_topnavbar', get_string('top
     $choices = array('1'=>$title1, '2'=>$title2, '3'=>$title3);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
     
 
     // This is the main color descriptor
@@ -25,8 +26,10 @@ $page->add(new admin_setting_heading('theme_avadinte_topnavbar', get_string('top
     $setting = new admin_setting_heading($name, $heading, $information);
     $page->add($setting);
 
-    //Sticky Navbar at the top
+    
 
+    //Sticky Navbar at the top
+    /*
     $name = 'theme_avadinte/topnavbarsticky';
     $title = get_string('topnavbarsticky', 'theme_avadinte');
     $description = get_string('topnavbarsticky_desc', 'theme_avadinte');
@@ -34,6 +37,7 @@ $page->add(new admin_setting_heading('theme_avadinte_topnavbar', get_string('top
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
+    */
 
     $name = 'theme_avadinte/enablehome';
     $title = get_string('enablehome','theme_avadinte');

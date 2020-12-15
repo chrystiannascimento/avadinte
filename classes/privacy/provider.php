@@ -63,6 +63,7 @@ class provider implements
         $items->add_user_preference(self::SITECOLOR, 'privacy:metadata:preference:accessibilitystyles_sitecolorclass');
         $items->add_user_preference(self::FONTTYPE, 'privacy:metadata:preference:themeavadintesettings_fonttype');
         $items->add_user_preference(self::TOOLBAR, 'privacy:metadata:preference:themeavadintesettings_enableaccessibilitytoolbar');
+        $items->add_user_preference('theme_avadinte_infobanner_dismissed','privacy:metadata:preference:infobanner_dismissed');
         return $items;
     }
 
@@ -111,6 +112,23 @@ class provider implements
                 $fonttype,
                 get_string('privacy:themeavadintesettings_fonttype', 'theme_avadinte', $fonttype)
             );
+        }
+
+        $infobannerpref = get_user_preferences('theme_avadinte_infobanner_dismissed', null, $userid);
+        if ($infobannerpref !== null) {
+            switch ($infobannerpref) {
+                case 0:
+                default:
+                    $infobannerprefdesc = get_string('privacy:metadata:request:infobanner_dismissed_no',
+                            'theme_avadinte');
+                    break;
+                case 1:
+                    $infobannerprefdesc = get_string('privacy:metadata:request:infobanner_dismissed_yes',
+                            'theme_avadinte');
+                    break;
+            }
+            writer::export_user_preference('theme_avadinte', 'theme_avadinte_infobanner_dismissed',
+                    $infobannerpref, $infobannerprefdesc);
         }
     }
 }

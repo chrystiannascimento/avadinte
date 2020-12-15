@@ -37,13 +37,14 @@ if (isloggedin()) {
     $navdraweropen = false;
     $draweropenright = false;
 }
+
 $blockshtml = $OUTPUT->blocks('side-pre');
 $blockshtmlheader = $OUTPUT->blocks('header');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $hasheaderblockregion = true;
 
 $extraclasses = [];
-if ($navdraweropen) {
+if ($navdraweropen )  {
     $extraclasses[] = 'drawer-open-left';
 } 
 

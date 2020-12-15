@@ -6,9 +6,12 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-				{{{bannertextbox}}}
+				{{{bannercontent}}}
             </div>
              <div class="modal-footer">
+                <input type="checkbox" id="dismissbanner" name="dismissbanner" value="Bike">
+                <label for="vehicle1"> Do not show again</label><br>
+
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -16,11 +19,23 @@
 </div>
 
 
-
+ 
 {{#js}}
 
 require(['jquery', 'theme_boost/bootstrap/modal'], function($, modal) {
             $('#myModal').modal('show');
         })
+require(['jquery'], function($) {
+
+        $('#myModal').on('hidden.bs.modal', function () {
+  // do something…
+    if( $("#dismissbanner").is(":checked")  ){
+                M.util.set_user_preference('theme_avadinte_infobanner_dismissed', true);
+            }
+})
+    
+    
+
+    });
 
 {{/js}}

@@ -15,9 +15,8 @@ if ($ADMIN->fulltree) {
     require('settings/general_settings.php');  
     require('settings/presets_adjustments_settings.php');
     require('settings/colours_settings.php');  
-    require('settings/content_settings.php');
+    //require('settings/content_settings.php');
     require('settings/banner_settings.php');
-    require('settings/course_settings.php');
     require('settings/footer_settings.php');
     require('settings/buttons_settings.php');
     require('settings/topnavbar_settings.php');
