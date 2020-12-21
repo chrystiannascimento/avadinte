@@ -144,11 +144,7 @@ $string['topnavbarbg_desc'] = 'Content background colour for the top navigation 
 $string['linkcolor'] = 'Link colour';
 $string['linkcolor_desc'] = 'Link color';
 
-$string['rawscss'] = 'Raw SCSS';
-$string['rawscss_desc'] = 'Use this field to provide SCSS code which will be injected at the end of the style sheet.';
-$string['rawscsspre'] = 'Raw initial SCSS';
-$string['rawscsspre_desc'] = 'In this field you can provide initialising SCSS code, it will be injected before everything else.
-    Most of the time you will use this setting to define variables.';
+
     
 $string['maincolors'] = 'Main colors';
 $string['maincolors_desc']= 'Main colors description';

@@ -41,7 +41,7 @@ if (isloggedin()) {
 
 
 $extraclasses = [];
-if ($navdraweropen && !$PAGE->theme->settings->shownavclosed) {
+if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
 }
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);

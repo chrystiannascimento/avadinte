@@ -30,6 +30,10 @@ $page->add(new admin_setting_heading('theme_avadinte_buttons', get_string('butto
     $name = 'theme_avadinte/buttonradius';
     $title = get_string('buttonradius', 'theme_avadinte');
     $description = get_string('buttonradiusdesc', 'theme_avadinte');
+    $from0to6px = array();
+    for ($i = 0; $i < 7; $i++) {
+        $from0to6px[$i . 'px'] = $i . 'px';
+    }
     $radchoices = $from0to6px;
     $setting = new admin_setting_configselect($name, $title, $description, '5px', $radchoices);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -58,7 +62,7 @@ $page->add(new admin_setting_heading('theme_avadinte_buttons', get_string('butto
     $title = get_string('buttontextcolor', 'theme_avadinte');
     $description = get_string('buttontextcolordesc', 'theme_avadinte');
     $previewconfig = null;
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#ffffff', $previewconfig);
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#FFFFFF', $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
@@ -67,7 +71,7 @@ $page->add(new admin_setting_heading('theme_avadinte_buttons', get_string('butto
     $title = get_string('buttoncolorscnd', 'theme_avadinte');
     $description = get_string('buttoncolordescscnd', 'theme_avadinte');
     $previewconfig = null;
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#ced4da', $previewconfig);
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#CED4DA', $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
@@ -76,7 +80,7 @@ $page->add(new admin_setting_heading('theme_avadinte_buttons', get_string('butto
     $title = get_string('buttonhovercolorscnd', 'theme_avadinte');
     $description = get_string('buttonhovercolordescscnd', 'theme_avadinte');
     $previewconfig = null;
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#ced4da', $previewconfig);
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#CED4DA', $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 

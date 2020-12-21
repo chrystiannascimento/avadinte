@@ -144,11 +144,6 @@ $string['topnavbarbg_desc'] = 'Cor de fundo para o conteúdo da barra de navega�
 $string['linkcolor'] = 'Cor de link';
 $string['linkcolor_desc'] = 'Define a cor dos links do site';
 
-$string['rawscss'] = 'SCSS bruto';
-$string['rawscss_desc'] = 'Use este campo para prover código SCSS que será injetado ao final da folha de estilo.';
-$string['rawscsspre'] = 'SCSS bruto inicial';
-$string['rawscsspre_desc'] = 'Neste campo você pode fornecer o código SCSS de inicialização, ele será injetado antes de tudo.
-                    Na maioria das vezes, você usará essa configuração para define variáveis.';
 
 $string['maincolors'] = 'Cores principais';
 $string['maincolors_desc']= 'Principais cores do site';

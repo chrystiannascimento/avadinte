@@ -54,7 +54,8 @@ $page->add(new admin_setting_heading('theme_avadinte_colours', get_string('colou
     $name = 'theme_avadinte/brandsuccess';
     $title = get_string('brandsuccess', 'theme_avadinte');
     $description = get_string('brandsuccess_desc', 'theme_avadinte');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+    $previewconfig = null;
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#28a745', $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
@@ -62,7 +63,8 @@ $page->add(new admin_setting_heading('theme_avadinte_colours', get_string('colou
     $name = 'theme_avadinte/brandwarning';
     $title = get_string('brandwarning', 'theme_avadinte');
     $description = get_string('brandwarning_desc', 'theme_avadinte');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+    $previewconfig = null;
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#ffc107',$previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
@@ -70,7 +72,8 @@ $page->add(new admin_setting_heading('theme_avadinte_colours', get_string('colou
     $name = 'theme_avadinte/branddanger';
     $title = get_string('branddanger', 'theme_avadinte');
     $description = get_string('branddanger_desc', 'theme_avadinte');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+    $previewconfig = null;
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#dc3545', $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
@@ -78,7 +81,8 @@ $page->add(new admin_setting_heading('theme_avadinte_colours', get_string('colou
     $name = 'theme_avadinte/brandinfo';
     $title = get_string('brandinfo', 'theme_avadinte');
     $description = get_string('brandinfo_desc', 'theme_avadinte');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+    $previewconfig = null;
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#17a2b8', $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
@@ -88,7 +92,7 @@ $page->add(new admin_setting_heading('theme_avadinte_colours', get_string('colou
     $title = get_string('bodybackground', 'theme_avadinte');
     $description = get_string('bodybackground_desc', 'theme_avadinte');
     $previewconfig = null;
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '', $previewconfig);
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#FFFFFF', $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
@@ -96,7 +100,8 @@ $page->add(new admin_setting_heading('theme_avadinte_colours', get_string('colou
     $name = 'theme_avadinte/maincontentbackground';
     $title = get_string('maincontentbackground', 'theme_avadinte');
     $description = get_string('maincontentbackground_desc', 'theme_avadinte');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#fff');
+    $previewconfig = null;
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#fff', $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
@@ -306,12 +311,9 @@ $page->add(new admin_setting_heading('theme_avadinte_colours', get_string('colou
     $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
-
-    
-
-
+ 
     // Raw SCSS to include after the content.
-    $setting = new admin_setting_configtextarea('theme_avadinte/scss', get_string('rawscss', 'theme_fordson'),
+    $setting = new admin_setting_configtextarea('theme_avadinte/scss', get_string('rawscss', 'theme_avadinte'),
     get_string('rawscss_desc', 'theme_avadinte'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);

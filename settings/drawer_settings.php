@@ -95,7 +95,7 @@ $page->add(new admin_setting_heading('theme_avadinte_drawer', get_string('drawer
     $title = get_string('drawerdimmed', 'theme_avadinte');
     $description = get_string('drawerdimmed_desc', 'theme_avadinte');
     $previewconfig = null;
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, ' #6c757d',$previewconfig);
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, '#6c757d',$previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
