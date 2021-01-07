@@ -51,6 +51,24 @@ a:not([class]),
         border-radius: 0px 10px 10px 0px ;
     }
 }
+.simplesearchform {
+    margin-top: 1rem;
+
+    .form-control {
+        border-radius: 5px 0px 0px 5px ;
+    }
+    .input-group-append > .btn {
+        border-radius: 0px 5px 5px 0px ;
+    }
+
+    .input-group-append > .btn {
+        outline: rgba(0, 0, 0, 0);
+    }
+
+  
+
+    
+}
 
 
 #page-header {
@@ -151,4 +169,13 @@ color: black;
 	padding: 1em;
 	background: #fdfdfd;
 	padding: 20px;
+}
+
+
+
+
+
+.blockpanelbtn .btn:focus, .blockpanelbtn .btn-primary:focus {
+    outline: 0;
+    box-shadow: none !important;
 }
