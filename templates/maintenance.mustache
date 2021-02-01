@@ -43,7 +43,6 @@
 
 <body {{{ output.body_attributes }}}>
 {{> core/local/toast/wrapper}}
-
 <div id="page-wrapper">
 
     {{{ output.standard_top_of_body_html }}}
@@ -63,12 +62,7 @@
         </div>
 
     </div>
-    <footer id="page-footer" class="py-3 bg-dark text-light">
-        <div class="container">
-            {{{ output.standard_footer_html }}}
-            {{{ output.standard_end_of_body_html }}}
-        </div>
-    </footer>
+  {{> theme_avadinte/footer}}
 </div>
 
 </body>

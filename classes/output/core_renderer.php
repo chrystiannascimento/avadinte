@@ -70,7 +70,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @param mform $form
      * @return string
      */
-    public function render_login_signup_form($form) {
+    /*public function render_login_signup_form($form) {
         global $SITE;
 
         $context = $form->export_for_template($this);
@@ -81,7 +81,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             ['context' => \context_course::instance(SITEID), "escape" => false]);
 
         return $this->render_from_template('core/signup_form_layout', $context);
-    }
+    }*/
 
 
     public function topmenu() {

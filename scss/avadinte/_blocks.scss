@@ -279,9 +279,17 @@ body.drawer-open-left {
                 max-width: 100%;
             }
         }
+   
     }
+
+    
+
     .card-deck .card {
     margin-right: 1.25rem;
     margin-left: .25rem;
     }
+}
+
+.dashboard-card-deck.one-row {
+    padding-right: 0.3rem;
 }

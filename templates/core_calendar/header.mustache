@@ -31,21 +31,27 @@
     {
     }
 }}
-<div class="header  container-fluid row p-1">
-    <div class="col-12 py-2">
-        <div><h4 class="heading-calendar">Visualizar mês em detalhe para:</h4></div>
-        <div class="filter-selector">
-            {{#filter_selector}}
+<div class="header d-flex flex-column p-1">
+    <div><h4 class="heading-calendar">Visualizar mês em detalhe para:</h4></div>
+
+    <div class="filter-selector mb-2">
+        {{#filter_selector}}
             {{{filter_selector}}}
         {{/filter_selector}}
-        </div>
+    </div>
         
          
-    </div>
-    <div class="col-12">
+    <div class="d-flex flex-column ">
     <div><h4  class="heading-calendar" >Ver data:</h4></div>
+    <div class="d-flex flex-wrap mb-2">
+    <div class="mr-auto">
     {{> core_calendar/view_selector}}
+    </div>
+    
     {{> core_calendar/add_event_button}}
+
+    </div>
+    
     </div>
     
 </div>

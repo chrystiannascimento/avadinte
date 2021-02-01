@@ -31,4 +31,4 @@ $templatecontext = [
     'output' => $OUTPUT
 ];
 
-echo $OUTPUT->render_from_template('theme_boost/maintenance', $templatecontext);
+echo $OUTPUT->render_from_template('theme_avadinte/maintenance', $templatecontext);

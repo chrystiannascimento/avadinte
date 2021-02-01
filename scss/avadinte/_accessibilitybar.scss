@@ -88,6 +88,33 @@ body.hasaccessibilitybar {
 }
 
 
+body.hasaccessibilitybar {
+    [data-region="drawer"] {
+        top: $acc-navbar-height;
+        height: calc(100% - #{$acc-navbar-height});
+    }
+
+    [data-region="blocks-column"] {
+        top: $acc-navbar-height;
+        height: calc(100% - #{$acc-navbar-height});
+    }
+
+    @include media-breakpoint-down(sm){  
+        [data-region="drawer"] {
+            top: $acc-sm-navbar-height;
+            height: calc(100% - #{$acc-sm-navbar-height});
+        }
+    
+        [data-region="blocks-column"] {
+            top: $acc-sm-navbar-height;
+            height: calc(100% - #{$acc-sm-navbar-height});
+        }
+    }
+
+
+
+}
+
 
 //mudanças aqui
 body.hasaccessibilitybar {
@@ -101,7 +128,5 @@ body.hasaccessibilitybar {
             margin-top: 90px;
         }
     }
-
-    
-
 }
+
