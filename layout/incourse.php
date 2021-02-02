@@ -40,12 +40,13 @@ if (isloggedin()) {
 
 
 $extraclasses = [];
-if ($navdraweropen) {
-    $extraclasses[] = 'drawer-open-left';
-}
+
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 if ($PAGE->course->id > 1){
     $extraclasses[] = 'has-drawer';
+    if ($navdraweropen  ) {
+        $extraclasses[] = 'drawer-open-left';
+    }
     $sname = array('1' => $SITE->shortname, '2' => $PAGE->category->name, '3' => $PAGE->course->shortname);
     if($PAGE->theme->settings->sitetitle){
 
