@@ -76,16 +76,25 @@ body.drawer-open-left.no-has-drawer {
     cursor: pointer;
 }
 
+
+
+#nav-drawer  .list-group-item-action:hover{
+    background-color: $navdrawer-hover-bg;
+    color: $navdrawer-hover;
+    a {
+    color: $navdrawer-hover;
+    }
+
+}
+
 #nav-drawer .list-group-item-action.active {
     z-index: 2;
     color: $navdrawer-color;
     background-color: $navdrawer-activel2;
     border-color: $navdrawer-activel2;
-}
-
-#nav-drawer  .list-group-item-action:hover{
-    background-color: $navdrawer-hover-bg;
-    color: $navdrawer-hover;
+    a {
+        color:black;
+    }
 }
 
 .dimmed.active {
