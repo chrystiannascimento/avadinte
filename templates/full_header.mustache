@@ -55,13 +55,11 @@
                     {{/pageheader}}
                     
                    
-                    {{#hasadmincap}}
                     {{#settingsmenu}}
                     <div class="context-header-settings-menu">
                         {{{settingsmenu}}}
                     </div>
                     {{/settingsmenu}}
-                    {{/hasadmincap}}
                     <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
                         {{#headeractions}}
                             <div class="header-action ml-2">{{{.}}}</div>
@@ -75,11 +73,9 @@
                     </div>
                     {{/hasnavbar}}
 
-                    {{#hasadmincap}}
                     <div class="ml-auto d-flex">
                         {{{pageheadingbutton}}}
                     </div>
-                    {{/hasadmincap}}
                     <div id="course-header">
                         {{{courseheader}}}
                     </div>

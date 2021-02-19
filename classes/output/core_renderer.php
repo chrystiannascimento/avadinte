@@ -496,9 +496,18 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $sectionname = get_string( "board","theme_avadinte");
         }
         $action='';
+        $canviewhidden = has_capability('moodle/course:viewhiddensections', $context);
+
         if($course->format=='topics'){
             $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id, 'section' => $section->section));
-            $action = 'href= ' . $url;
+            if ($section->visible ){
+                $action = 'href= ' . $url;
+            }
+            else {
+                if ($canviewhidden){
+                    $action = 'href= ' . $url;
+                }
+            }
         }
         if($course->format == 'buttons' && $section->section==0) {
             $url = new moodle_url('/course/view.php', array('id' => $PAGE->course->id));
@@ -506,7 +515,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $action =  'href=' .'"'. $url . '"' ;
         }
         //define tooltip
-        $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $context);
+        
         $tooltip = '';
         //seção oculta
         if(!$section->visible) {
@@ -526,6 +535,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         }
 
+        $canviewsection = $section->visible || $canviewhidden;
 
 
         $section_info = [
@@ -537,7 +547,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'section'=> $section->section,
             'issectionzero' => $section->section ==0?true: false,                     
             'key'=> $section->id,  
-           'hasactivites' => $section->hasactivites,
+           'hasactivites' => $section->hasactivites && $canviewsection,
             'activities' => $section->hasactivites ? $activities : false,
             'issectionactive' => $activesection==$section->section?true:false,
             'sectionavailable' => $section->available,

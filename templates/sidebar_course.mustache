@@ -60,7 +60,7 @@
 
             
             <ul  class="collapse list-unstyled {{#issectionactive}}show {{/issectionactive}}" id="topic{{{section}}}" data-parent="#accordion">
-            
+            {{#hasactivites}}
             {{#activities}}
             {{^hiddentouser}}
             
@@ -95,6 +95,7 @@
                 
             {{/hiddentouser}}
             {{/activities}}
+            {{/hasactivites}}
 
               
             </ul>
