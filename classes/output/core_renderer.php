@@ -85,176 +85,134 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
 
     public function topmenu() {
-        global $PAGE, $COURSE, $CFG, $DB, $OUTPUT;
-        $course = $this->page->course;
-        $context = context_course::instance($course->id);
-        $courseid = optional_param('course', SITEID, PARAM_INT);
-        $courseid = $course->id;
-        $theme = $theme = theme_config::load('avadinte');
+        global $PAGE,  $CFG, $DB, $OUTPUT;
+        global $CFG, $USER, $COURSE, $SITE;
 
         $topmenucontext = [];
-
-        $siteadmintitle = get_string('siteadmintitle','theme_avadinte' );
-        $siteadminurl = new moodle_url('/admin/search.php');
-        $hasadminlink = has_capability('moodle/site:configview', $context);
-        $hasadminlink = has_capability('moodle/site:configview', \context_system::instance());
-        $siteadminisactive =$PAGE->url->compare($siteadminurl, URL_MATCH_BASE);
-        $siteadminisactive = $this->page->pagelayout === 'admin' or strpos($this->page->pagetype, 'admin-') === 0 ? true: false;
-        $context = $this->page->context;
-        $contextid = optional_param('contextid', \context_system::instance()->id, PARAM_INT);
-
-        $topmenucontext[] =[
-            'isadminlink' => true,
-            'key' => 'siteadmin',
-            'isactive' => $siteadminisactive ,
-             'text' => get_string('siteadmintitle','theme_avadinte' ),
-            'action' => new moodle_url('/admin/search.php'),
-        ];
+        $theme = $theme = theme_config::load('avadinte');
+        $course = $this->page->course;
+        $context = context_course::instance($course->id);
+        $courseid = $course->id;
+        $systemcontext = context_system::instance();
 
         //Pagina Inicial
-        $homepagetitle = get_string('homepagetitle', 'theme_avadinte');
-        $homepageurl = new moodle_url('/?redirect=0');
-        $homepageisactive =$PAGE->url->compare($homepageurl, URL_MATCH_BASE);
-
         if($theme->settings->enablehome){
+            $homepageurl = new moodle_url('/?redirect=0');
             $topmenucontext[] =[
-                'isadminlink' => '',
                 'key' => 'sitehome',
                 'isactive' => $PAGE->url->compare($homepageurl, URL_MATCH_BASE),
                 'text' => get_string('homepagetitle', 'theme_avadinte'),
-                'action' => new moodle_url('/?redirect=0'),
+                'action' => $homepageurl,
     
             ];
         }
-        
+
+
         //Disciplinas
-        
-
-         //Disciplinas
-
-         $mycoursespagetitle=get_string('mycoursespagetitle','theme_avadinte' );
-
-         $mycoursespages=[];
-         $mycoursespages[] = new moodle_url('/my/');
-         $mycoursespages[] = new moodle_url('/course/view.php', array('id' => $courseid));
-         $mycoursespages[] = $PAGE->cm ? new moodle_url('/mod/'.$PAGE->cm->modname.'/view.php', array('id' => $PAGE->cm->id)): new moodle_url('/my/');
-         $mycoursespages[] = new moodle_url('/user/index.php', array('id' => $course->id));
-         $mycoursespages[] = new moodle_url('/grade/report/grader/index.php', array('id'=>$course->id));
-
-         $mycoursespageisactive = false;
-         foreach($mycoursespages as $page){
-             if($PAGE->url->compare($page, URL_MATCH_BASE)){
-                 $mycoursespageisactive = true;
-             }
-         }
-         $mycoursespageisactive = false;
-         if($PAGE->url->compare(new moodle_url('/my/'), URL_MATCH_BASE) || $courseid>1 ){
-            $mycoursespageisactive = true;
-         }
-
-
-
-
-         if($theme->settings->enablemyhome){
-            $topmenucontext[] =[
-                'isadminlink' => '',
-                'key' => 'mycourses',
-                'isactive' => $mycoursespageisactive,
-                'text' => get_string('mycoursespagetitle','theme_avadinte' ),
-                'action' => new moodle_url('/my/'),
-            ];
-         }
-         
-         //Calendario
-         $calendartitle = get_string('calendar','theme_avadinte' );
-
-         $iscoursecalendar = $courseid != SITEID;
-
-        if ($iscoursecalendar) {
-            $calendarurl = new moodle_url('/calendar/view.php?view=month', array(
-                'course' => $PAGE->course->id
-            ));
-        } else {
-            $calendarurl = new moodle_url('/calendar/view.php?view=month' );
+        if($theme->settings->enablemyhome){
+            $mycoursesurl = new moodle_url('/my/');
+           $topmenucontext[] =[
+               'key' => 'mycourses',
+               'isactive' => $PAGE->url->compare($mycoursesurl, URL_MATCH_BASE) || $courseid>1,
+               'text' => get_string('mycoursespagetitle','theme_avadinte' ),
+               'action' => $mycoursesurl,
+           ];
         }
 
-        $calendarisactive =$PAGE->url->compare($calendarurl, URL_MATCH_BASE);
+        //Calendario
+       if($theme->settings->enablecalendar){
+           $calendarurl =  $courseid!=1?new moodle_url('/calendar/view.php?view=month', array('course' => $PAGE->course->id)): new moodle_url('/calendar/view.php?view=month' );
+           $params = array('view' => 'month');
+           if ($courseid != $SITE->id) {
+                $params['course'] = $courseid;
+           }
+           $calendarurl = new moodle_url('/calendar/view.php', $params);
 
-        if($theme->settings->enablecalendar){
-            $topmenucontext[] =[
-                'isadminlink' =>'',
-                'key' => 'calendar',
-                'isactive' => $PAGE->url->compare($calendarurl, URL_MATCH_BASE) && $courseid==1?true: false,
-                'text' => get_string('calendar','theme_avadinte' ),
-                'action' => $calendarurl,
-            ];
-        }
+           $topmenucontext[] =[
+               'key' => 'calendar',
+               'isactive' => $PAGE->url->compare($calendarurl, URL_MATCH_BASE) && $courseid==1?true: false,
+               'text' => get_string('calendar','theme_avadinte' ),
+               'action' => $calendarurl,
+           ];
+       }
 
-        
-
-
-
-
-        
-
-        //Central de Atendimentos 
-
-        $attendtitle=get_string('attendtitle','theme_avadinte' );
-        $attendurl= "http://atendimento.nead.ufma.br/view.php";
-        if($theme->settings->enablecallcenter){
-            $topmenucontext[] =[
-                'isadminlink' =>'',
-                'key' => 'callcenter',
-                'isactive' =>'',
-                'text' => get_string('attendtitle','theme_avadinte' ),
-                'action' =>"http://atendimento.nead.ufma.br/view.php",
-                'attr' => ' target="_blank"',
-            ];
-        }
-
-        
-
-        //Private File
-        $privatefilestitle = get_string('privatefilestitle','theme_avadinte' );
-        $privatefilesurl = new moodle_url('/user/files.php');
-        $privatefilesisactive = $PAGE->url->compare($privatefilesurl, URL_MATCH_BASE);
-
-    
+       //Central de Atendimentos 
+       if($theme->settings->enablecallcenter){
+            $attendurl= "http://atendimento.nead.ufma.br/view.php";
+           $topmenucontext[] =[
+               'hascap' =>true,
+               'key' => 'callcenter',
+               'isactive' =>'',
+               'text' => get_string('attendtitle','theme_avadinte' ),
+               'action' => $attendurl,
+               'attr' => ' target="_blank"',
+           ];
+       }
 
         //Content bank
-        $contentbanktitle = get_string('contentbanktitle','theme_avadinte' );
-        $contentbankurl = new \moodle_url('/contentbank/index.php', ['contextid' => $contextid]);
-        $contentbankisactive = $PAGE->url->compare($contentbankurl, URL_MATCH_BASE);
-        
-      
-        //Courses Page
-        $coursespagetitle=get_string('coursespagetitle','theme_avadinte' );
-        $coursespageurl= new moodle_url('/course/index.php');
-        $coursespageisactive = $PAGE->url->compare($coursespageurl, URL_MATCH_BASE);
 
-        if($theme->settings->enablecourses){
+        if (isloggedin()) {
+            $context = $this->page->context;
+
+            switch ($context->contextlevel) {
+                case CONTEXT_COURSECAT:
+                    // OK, expected context level.
+                    break;
+                case CONTEXT_COURSE:
+                    // OK, expected context level if not on frontpage.
+                    if ($COURSE->id != $SITE->id) {
+                        break;
+                    }
+                default:
+                    // If this context is part of a course (excluding frontpage), use the course context.
+                    // Otherwise, use the system context.
+                    $coursecontext = $context->get_course_context(false);
+                    if ($coursecontext && $coursecontext->instanceid !== $SITE->id) {
+                        $context = $coursecontext;
+                    } else {
+                        $context = $systemcontext;
+                    }
+            }
+            if (has_capability('moodle/contentbank:access', $context)) {
+                $urlcontentbank = new moodle_url('/contentbank/index.php', ['contextid' => $context->id,]);
+        
+                $topmenucontext[] =[
+                    'key' => 'contentbank',
+                    'isactive' => $PAGE->url->compare($urlcontentbank , URL_MATCH_BASE) && $courseid==1?true: false,
+                    'text' => get_string('contentbank'),
+                    'action' =>$urlcontentbank ,
+                ];
+            }
+            
+
+        }
+
+
+        //Courses Page
+        if($theme->settings->enablecourses && has_capability('moodle/site:configview', $context)){
+            $coursespageurl= new moodle_url('/course/index.php');
             $topmenucontext[] =[
-                'isadminlink' => true,
                 'key' => 'courses',
                 'isactive' => $PAGE->url->compare($coursespageurl, URL_MATCH_BASE),
                 'text' => get_string('coursespagetitle','theme_avadinte' ),
-                'action' => new moodle_url('/course/index.php'),
+                'action' => $coursespageurl,
             ];
         }
 
-        
-
-
-  
-        
-        
-        // Send to template.
+        //Site admin        
+        if(has_capability('moodle/site:configview', $context)){
+            $siteadminisactive = $this->page->pagelayout === 'admin' or strpos($this->page->pagetype, 'admin-') === 0 ? true: false;
+            $siteadminurl = new moodle_url('/admin/search.php');
+            $topmenucontext[] =[
+                'key' => 'siteadmin',
+                'isactive' => $siteadminisactive ,
+                'text' => get_string('siteadmintitle','theme_avadinte' ),
+                'action' => $siteadminurl,
+            ];
+        }
+ // Send to template.
         $dashmenu = [  
                         'topicos' => $topmenucontext,
-                        'admincap' => $hasadminlink,
-
-
-
                     ];
 
       
