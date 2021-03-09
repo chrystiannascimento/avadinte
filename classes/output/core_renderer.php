@@ -400,22 +400,14 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'key' => 'participants',
             'isactive' => $PAGE->url->compare($urlparticipants , URL_MATCH_BASE),
             ];
-            $urlcontentbank = new moodle_url('/contentbank/index.php', ['contextid' => $context->id]);
-            $contentbank =[
-                'hascontentbank' => has_capability('moodle/contentbank:access', $context),        
-                'action' =>  $urlcontentbank,
-                'text' =>  get_string('contentbank'),
-                'shorttext' =>  get_string('contentbank'),
-                'icon' => 'fa fa-shopping-bag',
-                'type' => \navigation_node::TYPE_SETTING,
-                'key' => 'contentbank',
-                'isactive' => $PAGE->url->compare($urlcontentbank , URL_MATCH_BASE),
-            ];
+
+            
+        
 
         $cncontext = [
             'courselinks' => $courselinks,
             'topics' =>$data,
-            'contentbank' => $contentbank
+///            'contentbank' => $contentbank
         ];
 
         return $this->render_from_template('theme_avadinte/sidebar_course', $cncontext);
@@ -967,8 +959,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $breadcrumbs[]=[
                 "has_action"=> true,
                     "action"=> new moodle_url('/my/'),
-                    "get_title"=> "Meus Cursos",
-                    "get_content"=> "Meus Cursos",
+                    "get_title"=> get_string('mycourses'),
+                    "get_content"=> get_string('mycourses'),
                     "is_hidden"=> false
             ];
         }
