@@ -2,6 +2,7 @@ $fixed-header-y: $navbar-height;
 $drawer-padding-x: 20px !default;
 $drawer-padding-y: 20px !default;
 $drawer-offscreen-gutter: 20px !default;
+$drawer-semi:76px;
 
 #nav-drawer {
     .custom-menu{
@@ -16,6 +17,21 @@ $drawer-offscreen-gutter: 20px !default;
   }
 }
 
+
+
+#nav-drawer[aria-hidden=true] .list-group-item {
+    display: inherit;
+}
+#nav-drawer.closed {
+    width: 70px;
+    left: 0;
+    overflow: visible;
+
+    .text {
+        display: none;
+    }
+}
+ 
 #page-wrapper-header >  #page-header.drawer-ease {
     -webkit-transition: margin-left 0.5s ease, margin-right 0.5s ease;
 -moz-transition: margin-left 0.5s ease, margin-right 0.5s ease;
@@ -180,3 +196,85 @@ body.drawer-open-right.path-grade-report-grader {
     transition: right 0.5s ease,left 0.5s ease;
 }
 */
+
+
+// Nav-drawer control
+
+
+
+#navdraweropen-control,
+[data-region="drawer"] {
+    -webkit-transition: right .5s ease, left .5s ease;
+    -moz-transition: right .5s ease, left .5s ease;
+    -o-transition: right .5s ease, left .5s ease;
+    transition: right .5s ease, left .5s ease;
+
+    .dropdown-menu {
+        min-width: 245px;
+
+        .dropdown-item {
+            white-space: initial;
+        }
+    }
+
+    .card-block .content {
+        h3 {
+            font-size: 1.143rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-top: 1px dashed $headings-color;
+            padding-top: 4px;
+            margin-top: 10px;
+        }
+    }
+}
+
+#navdraweropen-control {
+    background-color: $brand-primary;
+    position: fixed;
+    left: 56px;
+    top: 50%;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 1rem;
+    //padding: 8px 0 0 4px;
+    padding: 10px 0px 0px 14px;
+    cursor: pointer;
+    z-index: 1;
+
+
+
+    &:hover {
+        box-shadow: 0 0 6px $brand-primary;
+    }
+}
+
+
+
+body.drawer-open-left {
+    #navdraweropen-control {
+        left: 305px;
+    }
+   
+
+
+
+}
+
+@include media-breakpoint-down(md){
+    body.drawer-open-left.has-drawer {
+        #sidepreopen-control {
+            display: none;
+        }
+    }
+
+    body.drawer-open-right {
+        #navdraweropen-control {
+            display: none;
+        }
+    }
+
+}
+

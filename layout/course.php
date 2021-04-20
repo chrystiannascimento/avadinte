@@ -104,4 +104,4 @@ if (!is_siteadmin() && $PAGE->pagetype == 'course') {
 $nav = $PAGE->flatnav;
 $templatecontext['flatnavigation'] = $nav;
 $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
-echo $OUTPUT->render_from_template('theme_avadinte/columns2', $templatecontext);
+echo $OUTPUT->render_from_template('theme_avadinte/columns3', $templatecontext);
