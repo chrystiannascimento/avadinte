@@ -3,8 +3,32 @@
 <nav class="list-group mt-1" aria-label="">
     
     <ul id="accordion">
+
+        {{#navlinks}}
+        <li id="navlinks" class="site-links">
+                {{#action}}   
+            <a class=" list-group-item list-group-item-action {{#isactive}}active{{/isactive}}"    href="{{{action}}}"      aria-expanded="false"  data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
+                <div class="ml-">
+                    <div class="media">
+                        {{#icon}}
+                            <span class="media-left">
+                                <i class="{{{icon}}}"></i>
+                            </span>
+                        {{/icon}}    
+                        
+                        <span class=" text media-body ">{{{text}}}  </span>
+                        
+                    </div>
+                </div>
+            </a> 
+            {{/action}}   
+        </li>
+        {{/navlinks}}
+
+
+
         {{#courselinks}}
-        <li>
+        <li class="course-links">
                 {{#action}}   
             <a class="list-group-item list-group-item-action {{#isactive}}active{{/isactive}}"    href="{{{action}}}"      aria-expanded="false"  data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
                 <div class="ml-">
@@ -23,13 +47,14 @@
             {{/action}}   
         </li>
         {{/courselinks}}
+
         
         
         {{#topics}}
 
            
 
-                <li>
+        <li class="course-links">
 
             <div class="list-group-item 
             
@@ -107,7 +132,7 @@
 
         {{#contentbank}}
             {{#hascontentbank}}
-            <li>
+            <li class="site-links">
                  <a class="list-group-item list-group-item-action {{#isactive}}active{{/isactive}} " href="{{{action}}}" data-key="" data-isexpandable="" data-indent="" data-showdivider="" data-type="" data-nodetype="" data-collapse="" data-forceopen="" data-isactive="" data-hidden="" data-preceedwithhr="" >
                 <div class="ml-">
                     <div class="media">

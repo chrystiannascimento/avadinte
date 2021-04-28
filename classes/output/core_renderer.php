@@ -84,7 +84,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }*/
 
 
-    public function topmenu() {
+   
+
+    public function navlinks() {
         global $PAGE,  $CFG, $DB, $OUTPUT;
         global $CFG, $USER, $COURSE, $SITE;
 
@@ -99,6 +101,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if($theme->settings->enablehome){
             $homepageurl = new moodle_url('/?redirect=0');
             $topmenucontext[] =[
+                'icon' => 'fa fa-home',
                 'key' => 'sitehome',
                 'isactive' => $PAGE->url->compare($homepageurl, URL_MATCH_BASE),
                 'text' => get_string('homepagetitle', 'theme_avadinte'),
@@ -112,6 +115,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if($theme->settings->enablemyhome){
             $mycoursesurl = new moodle_url('/my/');
            $topmenucontext[] =[
+               'icon' => 'fa fa-dashboard',
                'key' => 'mycourses',
                'isactive' => $PAGE->url->compare($mycoursesurl, URL_MATCH_BASE) || $courseid>1,
                'text' => get_string('mycoursespagetitle','theme_avadinte' ),
@@ -129,6 +133,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
            $calendarurl = new moodle_url('/calendar/view.php', $params);
 
            $topmenucontext[] =[
+               'icon' => 'fa fa-calendar',
                'key' => 'calendar',
                'isactive' => $PAGE->url->compare($calendarurl, URL_MATCH_BASE) && $courseid==1?true: false,
                'text' => get_string('calendar','theme_avadinte' ),
@@ -138,8 +143,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
        //Central de Atendimentos 
        if($theme->settings->enablecallcenter){
-            $attendurl= "http://atendimento.nead.ufma.br/view.php";
+            $attendurl= $theme->settings->enablecallcenter;
            $topmenucontext[] =[
+               'icon' => 'fa fa-phone', 
                'hascap' =>true,
                'key' => 'callcenter',
                'isactive' =>'',
@@ -177,6 +183,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $urlcontentbank = new moodle_url('/contentbank/index.php', ['contextid' => $context->id,]);
         
                 $topmenucontext[] =[
+                    'icon' => 'fa fa-paint-brush',
                     'key' => 'contentbank',
                     'isactive' => $PAGE->url->compare($urlcontentbank , URL_MATCH_BASE) && $courseid==1?true: false,
                     'text' => get_string('contentbank'),
@@ -192,6 +199,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if($theme->settings->enablecourses && has_capability('moodle/site:configview', $context)){
             $coursespageurl= new moodle_url('/course/index.php');
             $topmenucontext[] =[
+                'icon' => 'fa fa-mortar-board',
                 'key' => 'courses',
                 'isactive' => $PAGE->url->compare($coursespageurl, URL_MATCH_BASE),
                 'text' => get_string('coursespagetitle','theme_avadinte' ),
@@ -204,12 +212,23 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $siteadminisactive = $this->page->pagelayout === 'admin' or strpos($this->page->pagetype, 'admin-') === 0 ? true: false;
             $siteadminurl = new moodle_url('/admin/search.php');
             $topmenucontext[] =[
+                'icon' => 'fa fa-wrench',
                 'key' => 'siteadmin',
                 'isactive' => $siteadminisactive ,
                 'text' => get_string('siteadmintitle','theme_avadinte' ),
                 'action' => $siteadminurl,
             ];
         }
+      
+        return $topmenucontext;
+    }
+
+    public function topmenu() {
+        global $PAGE,  $CFG, $DB, $OUTPUT;
+        global $CFG, $USER, $COURSE, $SITE;
+
+        $topmenucontext = $this->navlinks();
+        
  // Send to template.
         $dashmenu = [  
                         'topicos' => $topmenucontext,
@@ -218,6 +237,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
       
         return $this->render_from_template('theme_avadinte/topmenu', $dashmenu);
     }
+
+  
 
 
     public function has_compact_logo() {
@@ -402,9 +423,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
             ];
 
             
-        
+        $navlinks = $this->navlinks();
 
         $cncontext = [
+            'navlinks' => $navlinks,
             'courselinks' => $courselinks,
             'topics' =>$data,
 ///            'contentbank' => $contentbank
