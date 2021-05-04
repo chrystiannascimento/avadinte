@@ -150,7 +150,7 @@ body.drawer-open-right.path-grade-report-grader {
     }
 }
 
-@include media-breakpoint-down(sm){ 
+@include media-breakpoint-down(md){ 
     body {
         margin-left: 0px;
     }
@@ -179,43 +179,10 @@ body.drawer-open-right.path-grade-report-grader {
 
 
 
-//breno inserção
-/*
-#nav-drawer {
-    background-color: #E9E9E9;
-}
-#nav-drawer {
-    right: 0;
-    left: 0;
-}
 
-[data-region="drawer"] {
-    padding: 0;
-}
-
-[data-region="drawer"], [data-region="blocks-column"] {
-    padding: 20px 20px;
-}
-[data-region="drawer"] {
-    position: fixed;
-    width: 315px;
-    top: 140px;
-    height: calc(100% - 140px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    z-index: 999;
-    background-color: #f2f2f2;
-    -webkit-transition: right 0.5s ease,left 0.5s ease;
-    -moz-transition: right 0.5s ease,left 0.5s ease;
-    transition: right 0.5s ease,left 0.5s ease;
-}
-*/
 
 
 // Nav-drawer control
-
-
-
 
 [data-region="drawer"] {
     -webkit-transition: right .5s ease, left .5s ease;
@@ -271,6 +238,8 @@ body.drawer-open-left {
     }
 
 }
+
+
 
 .no-has-drawer {
     #navdraweropen-control {
@@ -356,4 +325,69 @@ body.drawer-open-left {
 
 
 
-//md+
+//tela site
+
+body.no-has-drawer{
+    #nav-drawer{
+        .course-links{
+            display: none;
+        }
+   }
+}
+
+@include media-breakpoint-down(md){
+
+    body.no-has-drawer{ 
+        margin-left: 0px;
+        #nav-drawer{
+            display: block;
+            top: $sm-navbar-height;
+            height: calc(100% - #{$sm-navbar-height});
+            .couse-links{
+                display: none;
+            }
+        }
+        #navdraweropen-control{
+            display: inherit;
+        }
+        
+    }
+}
+
+@include media-breakpoint-up(lg){
+    body.no-has-drawer{
+        #nav-drawer {
+            display: none;
+        }
+    }
+
+}
+
+//tela curso
+
+
+@include media-breakpoint-down(md){
+
+    body.has-drawer{ 
+        margin-left: 0px;
+        #nav-drawer{
+            display: block;
+            top: $sm-navbar-height;
+            height: calc(100% - #{$sm-navbar-height});
+        }
+
+        #navdraweropen-control{
+            display: inherit;
+        }
+        
+    }
+}
+
+@include media-breakpoint-up(lg){
+    body.no-has-drawer{
+        #nav-drawer {
+            display: none;
+        }
+    }
+
+}

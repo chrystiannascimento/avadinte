@@ -58,10 +58,7 @@
     {{{ output.standard_top_of_body_html }}}
 
     {{> theme_avadinte/header }}
-    
-    {{#hasdrawer}}
-        {{> theme_avadinte/course-sidebar}}
-    {{/hasdrawer}}
+    {{> theme_avadinte/course-sidebar}}
 
     <div id="page" class="container-fluid d-print-block row-md">
         {{> theme_avadinte/wrapper-header}}
@@ -77,7 +74,7 @@
 
                 <section id="region-main"  aria-label="{{#str}}content{{/str}}">
                 <div class="card border-0">
-                        <div class="card-body">
+                    <div class="card-body region-main">
 
                     {{#hasregionmainsettingsmenu}}
                         <div class="region_main_settings_menu_proxy"></div>
