@@ -195,6 +195,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
 
+
         //Courses Page
         if($theme->settings->enablecourses && has_capability('moodle/site:configview', $context)){
             $coursespageurl= new moodle_url('/course/index.php');
@@ -374,7 +375,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     $activeactivity = false  ;
                 }
                 
-                if( !$activity->deletioninprogress){
+                if( !$activity->deletioninprogress && isset($activity->url)){
                     $dados[$activity->sectionnum][] = $this->get_activity_info( $activity, $activeactivity);
                 }
             }
@@ -995,10 +996,28 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
         return $this->render_from_template('core/navbar', ['get_items' => $breadcrumbs]);
     }
+//link do footer para retorno a página inicial
 
+/**
+     * Return the 'back' link that normally appears in the footer.
+     *
+     * @return string HTML fragment.
+     */
+    public function home_link() {
+        global $CFG, $SITE;
+        if ($this->page->pagetype == 'site-index') {
+            return;
 
+        } else if ($this->page->course->id == $SITE->id || strpos($this->page->pagetype, 'course-view') === 0) {
+            return '<div class="homelink"><a href="' . $CFG->wwwroot . '/">' .
+                    get_string('mycoursespagetitle','theme_avadinte' ) . '</a></div>';
 
-
+        } else {
+            return '<div class="homelink"><a href="' . $CFG->wwwroot . '/course/view.php?id=' . $this->page->course->id . '">' .
+                    format_string($this->page->course->shortname, true, array('context' => $this->page->context)) . '</a></div>';
+        }
+    }
+  
     /*
      public function navbar() {
         $items = $this->page->navbar->get_items();
@@ -1213,5 +1232,3 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
 
 }
-
-

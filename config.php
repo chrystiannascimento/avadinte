@@ -24,6 +24,7 @@
 
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
+require_once(__DIR__ . '/lib.php');
 
 // $THEME is defined before this page is included and we can define settings by adding properties to this global object.
 
@@ -191,4 +192,10 @@ $THEME->layouts = [
     )
 ];
 
-$THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_DEFAULT;
+//$THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_DEFAULT;
+
+if (theme_avadinte_funcao()) {
+    $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
+} else {
+    $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_DEFAULT;
+}

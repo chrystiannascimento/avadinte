@@ -24,13 +24,34 @@
 
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
-
 /**
  * Returns the main SCSS content.
  *
  * @param theme_config $theme The theme config object.
  * @return string
  */
+
+
+function theme_avadinte_funcao() {
+    GLOBAL $PAGE;
+    $course = $PAGE->cm;
+    $course2 = $PAGE->course;
+
+    if($course2){
+        $bodyid =$PAGE->bodyid;
+
+        if (strpos(  $bodyid, "page-blocks-enrolsigaa" ) !== false){
+            return true;
+
+        }
+    
+    } 
+    
+    return false;
+        
+    
+}
+
 function theme_avadinte_get_main_scss_content($theme) {
     global $CFG;
 
@@ -151,10 +172,6 @@ function theme_avadinte_get_pre_scss($theme) {
 
     return $prescss;
 }
-
-
-
-
 
 /**
  * Copy the updated theme image to the correct location in dataroot for the image to be served

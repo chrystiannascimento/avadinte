@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A two column layout for the avadinte theme.
+ * A two column layout for the boost theme.
  *
- * @package   theme_avadinte
+ * @package   theme_boost
  * @copyright 2016 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,65 +25,36 @@
 defined('MOODLE_INTERNAL') || die();
 
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
-user_preference_allow_ajax_update('sidepre-open', PARAM_ALPHA);
-user_preference_allow_ajax_update('theme_avadinte_infobanner_dismissed', PARAM_BOOL);
-
 require_once($CFG->libdir . '/behat/lib.php');
 
 if (isloggedin()) {
     $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
-    $draweropenright = (get_user_preferences('sidepre-open', 'true') == 'true');
 } else {
     $navdraweropen = false;
-    $draweropenright = false;
 }
-
 $extraclasses = [];
-
-$sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
-if ($PAGE->course->id > 1){
-    $extraclasses[] = 'has-drawer';
-    $sitename = format_string($PAGE->category->name, true, ['context' => context_course::instance(SITEID), "escape" => false]);
-
-} else {
-    $extraclasses[] = 'no-has-drawer';
+if ($navdraweropen) {
+    $extraclasses[] = 'drawer-open-left';
 }
-
-
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
-
-if ($draweropenright && $hasblocks) {
-    $extraclasses[] = 'drawer-open-right';
-}
-
-$showbanner = $PAGE->theme->settings->bannerenable;
-$bannertext=(isset($PAGE->theme->settings->bannertextbox) &&  empty($PAGE->theme->settings->bannertextbox && isloggedin())) ? false : $PAGE->theme->settings->bannertextbox;
-$bannertitle = (empty($PAGE->theme->settings->bannertitle && isloggedin())) ? false:$PAGE->theme->settings->bannertitle;
-
-
-
 $templatecontext = [
-    'sitename' => $sitename,
+    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
     'hasblocks' => $hasblocks,
     'bodyattributes' => $bodyattributes,
-    'draweropenright' => $draweropenright,
-    'headernavopen' => true,
+    'navdraweropen' => $navdraweropen,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
-    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-    'showbanner' => $showbanner,
-    'bannertextbox'=> $bannertext, 
-    'bannertitle' => $bannertitle,
+    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
 ];
 
 $nav = $PAGE->flatnav;
+$templatecontext['flatnavigation'] = $nav;
 $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
-echo $OUTPUT->render_from_template('theme_avadinte/mydashboard', $templatecontext);
-
+echo $OUTPUT->render_from_template('theme_boost/columns2', $templatecontext);
 

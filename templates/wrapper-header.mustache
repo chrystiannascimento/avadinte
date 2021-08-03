@@ -16,3 +16,16 @@
 </header>
 
 
+  {{#hasdrawer}}
+<i id="navdraweropen-control"
+    aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}"
+    title = "Menu Lateral" 
+    aria-controls="nav-drawer" 
+    data-action="toggle-drawer"
+    data-side="left"
+    data-preference="drawer-open-nav"
+    class="fa fa-bars" 
+    aria-hidden="true">
+
+</i>
+{{/hasdrawer}}
